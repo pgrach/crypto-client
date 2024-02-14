@@ -1,4 +1,4 @@
-body.page-loading {margin: 0; height: 100%; overflow: hidden; }
+body.page-loading {margin: 0; height: 100%; overflow: hidden; background: #000; color: #fff;}
 
 .splash-screen {
     display: none;
@@ -14,15 +14,15 @@ body.page-loading {margin: 0; height: 100%; overflow: hidden; }
     justify-content: center;
     flex-direction: column;
     font-family: Inter, Helvetica, "sans-serif";
-    background-color: #F9F9F9;
-    color: #5E6278;
+    background-color: #000;
+    color: #fff;
     line-height: 1;
     font-size: 14px;
     font-weight: 400;
 }
 
 .page-loading .splash-screen span {
-    color: #5E6278;
+    color: #fff;
     transition: none !important;
     -webkit-font-smoothing: antialiased;
 }
