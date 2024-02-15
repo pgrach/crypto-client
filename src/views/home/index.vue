@@ -87,9 +87,7 @@ function handleScroll(e) {
     <h1 class="home-title">Welcome to <span class="home-title__name">AiDala</span></h1>
     <div class="home-description__container">
       <h2 class="home-description">
-        "Revolutionising" is often overused. "exclusive features" is vague. Suggest alternative copy: Refine Your Market Edge.
-        With custom AI analytics, navigate through market noise and pinpoint risk with precision. Our platform is your
-        ally—equipping you with intelligent tools tailored for strategic decision-making. Elevate your trades, join the ranks of elite traders
+        Your Financial Co-Pilot in Cryptoeconomics. Our platform is your ally—equipping you with intelligent tools tailored for strategic decision-making.
       </h2>
     </div>
 
@@ -135,8 +133,7 @@ function handleScroll(e) {
                     Personalized User Experience: Your Trading, Your Way
                   </h3>
                   <p class="home-benefits-text__description">
-                    AiDala goes beyond generic analysis, providing personalized insights and recommendations tailored to your
-                    preferences and trading style. Empower your decisions with information aligned precisely with your unique goals and risk tolerance.
+                    AiDala leverages intelligent algorithms to deliver insights and recommendations that resonate with your unique goals and risk preferences.
                   </p>
                 </div>
                 <div class="home-benefits-img">
@@ -199,7 +196,7 @@ function handleScroll(e) {
     <div class="home-graph" ref="refCapabilities">
       <div class="home-graph-title-container">
         <h2 class="home-graph-title">
-          Welcome to <span class="home-graph-title__name">AiDala</span>, where innovation meets personalized excellence in the world of crypto trading.
+          <span class="home-graph-title__name">AiDala</span>: Innovation meets personalized excellence in the world of cryptoeconomics
         </h2>
       </div>
       <div class="home-graph-main-container">
@@ -262,11 +259,12 @@ function handleScroll(e) {
               <div class="home-features-block-text">
                 <div>
                   <h3 class="home-features-block-text-title">
-                    Trading Platforms Integration: AiDala Meets MetaTrader, Charles Schwab, Interactive Brokers
+                    Personalized Insights & Recommendations
                   </h3>
                   <p class="home-features-block-text-content">
-                    Explore a seamless fusion of AIDALA with established trading platforms, bringing charting,
-                    technical analysis (TA) tools, live market data, and direct trading capabilities into one unified space.
+                    Gain insights with an AI-driven educational guide. 
+                    Stay informed with real-time news and market updates. 
+                    Understand the market with real-time cryptocurrency valuations.
                   </p>
                 </div>
               </div>
@@ -298,7 +296,7 @@ function handleScroll(e) {
               <div class="home-features-block-text">
                 <div>
                   <h3 class="home-features-block-text-title">
-                    Backtesting Confidence: AiDala 
+                    Gross Margin and other KPI Planning
                   </h3>
                   <p class="home-features-block-text-content">
                     Test your strategies against historical data with AiDala's backtesting software.
@@ -329,42 +327,6 @@ function handleScroll(e) {
               </div>
             </div>
           </swiper-slide>
-          <swiper-slide>
-            <div class="home-features-block">
-              <div class="home-features-block-text">
-                <div>
-                  <h3 class="home-features-block-text-title">
-                    Technical Analysis 
-                  </h3>
-                  <p class="home-features-block-text-content">
-                    Dive into the world of technical analysis with AiDala's tools, featuring indicators like moving averages,
-                    RSI, MACD, and Bollinger Bands. Tailor your analysis to align with your trading style.
-                  </p>
-                </div>
-              </div>
-              <div class="home-features-block-img">
-                <img src="../../assets/img/home-features-5.png" alt="Features Image">
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="home-features-block">
-              <div class="home-features-block-text">
-                <div>
-                  <h3 class="home-features-block-text-title">
-                    Market Scanners and Screeners: AiDala alongside Trade Ideas
-                  </h3>
-                  <p class="home-features-block-text-content">
-                    Effortlessly filter stocks and instruments based on specific criteria with AiDala's
-                    market scanners and screeners, adding an extra layer of precision to your trading decisions.
-                  </p>
-                </div>
-              </div>
-              <div class="home-features-block-img">
-                <img src="../../assets/img/home-features-6.png" alt="Features Image">
-              </div>
-            </div>
-          </swiper-slide>
         </swiper>
 
       </div>
@@ -374,11 +336,11 @@ function handleScroll(e) {
           <div class="home-features-block-text">
             <div>
               <h3 class="home-features-block-text-title">
-                Trading Platforms Integration: AiDala Meets MetaTrader, Charles Schwab, Interactive Brokers
+                Risk Management, and Market Insights
               </h3>
               <p class="home-features-block-text-content">
-                Explore a seamless fusion of AIDALA with established trading platforms, bringing charting,
-                technical analysis (TA) tools, live market data, and direct trading capabilities into one unified space.
+                Conduct risk assessments and strategise financial planning.
+                Tailored for miners seeking robust analytics and forecasting.
               </p>
             </div>
           </div>
