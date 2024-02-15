@@ -87,7 +87,7 @@ function handleScroll(e) {
     <h1 class="home-title">Welcome to <span class="home-title__name">AiDala</span></h1>
     <div class="home-description__container">
       <h2 class="home-description">
-        Your Financial Co-Pilot in Cryptoeconomics. Our platform is your ally—equipping you with intelligent tools tailored for strategic decision-making.
+        Your Financial Co-Pilot in Cryptoeconomics. Our platform is ally—equipping you with intelligent tools tailored for strategic decision-making.
       </h2>
     </div>
 
