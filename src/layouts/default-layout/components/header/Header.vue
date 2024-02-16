@@ -3,17 +3,20 @@
     <div class="header-brand">
       <!--begin::Logo-->
       <router-link to="/dashboard">
-        <img
-          alt="Logo"
-          :src="getAssetPath('media/logos/default-dark.svg')"
-          class="h-25px h-lg-25px"
-        />
+        <div class="header-container">
+          <img
+              alt="Logo"
+              :src="getAssetPath('media/img/logo_aidala.svg')"
+              class="h-25px h-lg-25px"
+          />
+          <span class="header-title">Aidala</span>
+        </div>
       </router-link>
       <!--end::Logo-->
 
       <!--begin::Aside minimize-->
       <div
-        v-if="asideDisplay"
+        v-if="false"
         id="kt_aside_toggle"
         class="btn btn-icon w-auto px-0 btn-active-color-primary aside-minimize"
         :class="{ active: asideMinimized }"
@@ -58,7 +61,7 @@
         id="kt_toolbar_container"
       >
         <PageTitle></PageTitle>
-        <KTTopbar />
+<!--        <KTTopbar />-->
       </div>
     </div>
   </div>
@@ -94,3 +97,21 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-title {
+  color: #fff;
+  margin-top: 5px;
+  margin-left: 4px;
+  font-size: 17.19px;
+  font-family: Inter;
+  font-weight: 600;
+  line-height: 14.33px;
+  word-wrap: break-word;
+}
+</style>

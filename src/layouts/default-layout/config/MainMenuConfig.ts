@@ -8,6 +8,19 @@ const MainMenuConfig: Array<MenuItem> = [
         route: "/dashboard",
         keenthemesIcon: "element-11",
         bootstrapIcon: "bi-app-indicator",
+      }
+    ]
+  }
+];
+
+const MainMenuConfigDefault: Array<MenuItem> = [
+  {
+    pages: [
+      {
+        heading: "dashboard",
+        route: "/dashboard",
+        keenthemesIcon: "element-11",
+        bootstrapIcon: "bi-app-indicator",
       },
       {
         heading: "layoutBuilder",

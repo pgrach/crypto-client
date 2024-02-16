@@ -3,12 +3,6 @@
   <div
     class="aside-user d-flex align-items-sm-center justify-content-center py-5"
   >
-    <!--begin::Symbol-->
-    <div class="symbol symbol-50px">
-      <img :src="getAssetPath('media/avatars/300-1.jpg?>')" alt="" />
-    </div>
-    <!--end::Symbol-->
-
     <!--begin::Wrapper-->
     <div class="aside-user-info flex-row-fluid flex-wrap ms-5">
       <!--begin::Section-->
@@ -20,15 +14,8 @@
             >Paul Melone</a
           >
           <!--end::Username-->
-
-          <!--begin::Description-->
-          <span class="text-gray-600 fw-semibold d-block fs-8 mb-1"
-            >Python Dev</span
-          >
-          <!--end::Description-->
-
           <!--begin::Label-->
-          <div class="d-flex align-items-center text-success fs-9">
+          <div class="d-flex align-items-center text-success fs-9 mt-2">
             <span class="bullet bullet-dot bg-success me-1"></span>online
           </div>
           <!--end::Label-->
@@ -48,7 +35,7 @@
             <KTIcon icon-name="setting-2" icon-class="text-muted fs-1" />
           </a>
 
-          <UserMenu />
+          <!--<UserMenu />-->
           <!--end::Action-->
         </div>
         <!--end::User menu-->

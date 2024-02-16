@@ -16,24 +16,24 @@
     <InlineForm />
 
     <!--begin::Menu-->
-    <div
-      data-kt-search-element="content"
-      class="menu menu-sub menu-sub-dropdown w-300px w-md-350px py-7 px-7 overflow-hidden"
-    >
-      <!--begin::Wrapper-->
-      <div data-kt-search-element="wrapper">
-        <Results />
+<!--    <div-->
+<!--      data-kt-search-element="content"-->
+<!--      class="menu menu-sub menu-sub-dropdown w-300px w-md-350px py-7 px-7 overflow-hidden"-->
+<!--    >-->
+<!--      &lt;!&ndash;begin::Wrapper&ndash;&gt;-->
+<!--      <div data-kt-search-element="wrapper">-->
+<!--        <Results />-->
 
-        <AsideMain />
+<!--        <AsideMain />-->
 
-        <Empty />
-      </div>
-      <!--end::Wrapper-->
+<!--        <Empty />-->
+<!--      </div>-->
+<!--      &lt;!&ndash;end::Wrapper&ndash;&gt;-->
 
-      <AdvancedOptions />
+<!--      <AdvancedOptions />-->
 
-      <Preferences />
-    </div>
+<!--      <Preferences />-->
+<!--    </div>-->
     <!--end::Menu-->
   </div>
   <!--end::Search-->
@@ -83,7 +83,7 @@ export default defineComponent({
 
         // Complete search
         search.complete();
-      }, 1500);
+      }, 0);
     };
 
     const clear = (search: SearchComponent) => {
