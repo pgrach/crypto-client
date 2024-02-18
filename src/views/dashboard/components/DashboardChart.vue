@@ -296,8 +296,7 @@ const chartOptions = (categories): ApexOptions => {
 
 .chart-options {
   display: flex;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 10px;
   padding: 0 2.25rem;
 }
 </style>

@@ -3,17 +3,15 @@
   <div class="row g-5 g-xl-8">
     <div class="col-xl-8">
       <DashboardChart
-          widget-classes="card-xl-stretch mb-xl-8"
-          :height="400"
+          widget-classes="card-xl-stretch"
+          :height="330"
       ></DashboardChart>
     </div>
 
-    <div class="col-xl-4">
-      <div class="d-flex flex-column flex-fill align-content-between">
-          <DashboardChartStats/>
+    <div class="col-xl-4 dashboard-stats">
+        <DashboardChartStats/>
 
-          <DashboardBtc />
-      </div>
+        <DashboardBtc class="mb-8" />
     </div>
   </div>
 
@@ -42,3 +40,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.dashboard-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+</style>
