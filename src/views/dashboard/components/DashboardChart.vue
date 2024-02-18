@@ -13,6 +13,15 @@
         <div class="btn me-2" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
         <div class="btn me-2" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
         <div class="btn me-2" @click="setTimeMode('daily')" :class="{'active': timeMode === 'daily'}">Day</div>
+<!--        <div>-->
+<!--          <el-date-picker-->
+<!--              v-model="dateRange"-->
+<!--              type="daterange"-->
+<!--              range-separator="To"-->
+<!--              start-placeholder="Start date"-->
+<!--              end-placeholder="End date"-->
+<!--          />-->
+<!--        </div>-->
       </div>
     </div>
 
@@ -57,6 +66,7 @@ export default defineComponent({
     const timeMode = ref("yearly");
     const activeOption = ref("cost");
 
+    const dateRange = ref('');
     const startDate = ref("2024-02-18T16:38:01.294Z");
     const endDate = ref("2024-02-18T16:38:01.294Z");
     const series = ref([])
@@ -67,6 +77,7 @@ export default defineComponent({
     }
 
     const setActiveOption = (option) => {
+      // console.log(moment(dateRange.value[0]).format('YYYY-MM-DDTHH:mm:ss'), moment(dateRange.value[1]).format('YYYY-MM-DDTHH:mm:ss'), ' DATE RANGE')
       activeOption.value = option;
       fetchChart();
     }
@@ -167,6 +178,7 @@ export default defineComponent({
     }
 
     return {
+      dateRange,
       chart,
       series,
       chartRef,
