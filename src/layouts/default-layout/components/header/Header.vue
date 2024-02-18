@@ -79,7 +79,7 @@
               :src="getAssetPath('media/img/header-avatar.png')"
           />
 
-          <span class="svg-icon svg-icon-primary svg-icon-2x">
+          <span @click="signOut()" class="svg-icon svg-icon-primary svg-icon-2x">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewBox="0 0 24 24" version="1.1">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <rect x="0" y="0" width="24" height="24"/>
@@ -109,6 +109,8 @@ import {
   headerLeft,
   headerWidthFluid,
 } from "@/layouts/default-layout/config/helper";
+import {useRouter} from "vue-router";
+import {useAuthStore} from "@/stores/auth";
 
 export default defineComponent({
   name: "KTHeader",
@@ -117,12 +119,21 @@ export default defineComponent({
     PageTitle,
   },
   setup() {
+    const router = useRouter();
+    const store = useAuthStore();
+
+    const signOut = () => {
+      store.logout();
+      router.push({ name: "sign-in" });
+    };
+
     return {
       headerWidthFluid,
       headerLeft,
       asideDisplay,
       asideMinimized,
       getAssetPath,
+      signOut
     };
   },
 });
