@@ -9,14 +9,15 @@
       </h3>
 
       <div class="card-toolbar chart-filters">
-        <div class="btn me-2" @click="setActiveFilter('year')" :class="{'active': activeFilter === 'year'}">Year</div>
-        <div class="btn me-2" @click="setActiveFilter('month')" :class="{'active': activeFilter === 'month'}">Month</div>
-        <div class="btn me-2" @click="setActiveFilter('week')" :class="{'active': activeFilter === 'week'}">Week</div>
+        <div class="btn me-2" @click="setTimeMode('yearly')" :class="{'active': timeMode === 'yearly'}">Year</div>
+        <div class="btn me-2" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
+        <div class="btn me-2" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
+        <div class="btn me-2" @click="setTimeMode('daily')" :class="{'active': timeMode === 'daily'}">Day</div>
       </div>
     </div>
 
     <div class="chart-options">
-      <DashboardChartOption @click="setActiveOption('costs')" :active="activeOption === 'costs'" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
+      <DashboardChartOption @click="setActiveOption('cost')" :active="activeOption === 'cost'" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
       <DashboardChartOption @click="setActiveOption('revenue')" :active="activeOption === 'revenue'" label="Revenue" :img="'media/img/chart_revenue.svg'"></DashboardChartOption>
       <DashboardChartOption @click="setActiveOption('profit')" :active="activeOption === 'profit'" label="Profit" :img="'media/img/chart_profit.svg'"></DashboardChartOption>
     </div>
@@ -26,7 +27,7 @@
         ref="chartRef"
         type="bar"
         :options="chart"
-        :series="series.value"
+        :series="series"
         :height="height"
       ></apexchart>
     </div>
@@ -41,6 +42,7 @@ import { getCSSVariableValue } from "@/assets/ts/_utils";
 import type VueApexCharts from "vue3-apexcharts";
 import DashboardChartOption from '@/views/dashboard/components/DashboardChartOption.vue';
 import axios from "axios";
+import moment from "moment";
 
 export default defineComponent({
   name: "dashboard-chart",
@@ -52,41 +54,63 @@ export default defineComponent({
   setup() {
     const chartRef = ref<typeof VueApexCharts | null>(null);
     const chart = ref<ApexOptions>({});
-    const activeFilter = ref("year");
-    const activeOption = ref("costs");
+    const timeMode = ref("yearly");
+    const activeOption = ref("cost");
 
     const startDate = ref("2024-02-18T16:38:01.294Z");
     const endDate = ref("2024-02-18T16:38:01.294Z");
-    const series = ref({})
+    const series = ref([])
 
-    const setActiveFilter = (val) => {
-      activeFilter.value = val;
+    const setTimeMode = (val) => {
+      timeMode.value = val;
+      fetchChart();
     }
 
     const setActiveOption = (option) => {
       activeOption.value = option;
+      fetchChart();
     }
 
     const response = [
       {
-        time: "2024-02-18T16:38:01.295Z",
+        time: "2024-02-10T16:38:01.295Z",
         value: 44,
       },
       {
-        time: "2024-02-17T16:38:01.295Z",
+        time: "2024-02-11T16:38:01.295Z",
         value: 54,
       },
       {
-        time: "2024-02-16T16:38:01.295Z",
+        time: "2024-02-12T16:38:01.295Z",
         value: 23,
       },
       {
-        time: "2024-02-15T16:38:01.295Z",
+        time: "2024-02-13T16:38:01.295Z",
         value: 77,
       },
       {
         time: "2024-02-14T16:38:01.295Z",
         value: 112,
+      },
+      {
+        time: "2024-02-15T16:38:01.295Z",
+        value: 34,
+      },
+      {
+        time: "2024-02-16T16:38:01.295Z",
+        value: 44,
+      },
+      {
+        time: "2024-02-17T16:38:01.295Z",
+        value: 13,
+      },
+      {
+        time: "2024-02-18T16:38:01.295Z",
+        value: 66,
+      },
+      {
+        time: "2024-02-19T16:38:01.295Z",
+        value: 92,
       },
     ]
 
@@ -100,13 +124,12 @@ export default defineComponent({
     });
 
     const fetchChart = () => {
-      const host = 'http://16.170.172.254:8000/';
-
-      const endpoint = 'cost';
+      const host = import.meta.env.VITE_APP_API_HOST;
+      const endpoint = activeOption.value;
 
       const body = {
         user_id: 0,
-        time_mode: "daily",
+        time_mode: timeMode.value,
         time_filter: {
           start_date: startDate.value,
           end_date: endDate.value
@@ -116,7 +139,7 @@ export default defineComponent({
       axios.post(`${host}${endpoint}`, body)
           .then(function (response) {
             console.log(response, ' Chart Response');
-            // setChart(response.data);
+            setChart(response.data);
           })
           .catch(function (error) {
             console.log(error, ' Chart Error');
@@ -128,35 +151,25 @@ export default defineComponent({
       const categories = [];
       response.forEach(item => {
         data.push(item.value);
-        categories.push(item.time)
+        categories.push(moment(item.time).format("DD/MM/YYYY HH:mm:ss"))
       })
 
-      series.value = {
+      series.value = [{
         name: activeOption.value,
         data
-      };
+      }];
 
-      console.log(series.value.data, ' SERIES')
-      console.log(categories, ' CATEGORIES')
       Object.assign(chart.value, chartOptions(categories));
     }
-
-    // const refreshChart = () => {
-    //   if (!chartRef.value) {
-    //     return;
-    //   }
-    //
-    //   chartRef.value.updateOptions(chartOptions(categories));
-    // };
 
     return {
       chart,
       series,
       chartRef,
-      activeFilter,
+      timeMode,
       activeOption,
       getAssetPath,
-      setActiveFilter,
+      setTimeMode,
       setActiveOption
     };
   },
