@@ -168,4 +168,10 @@ export default defineComponent({
   height: 36px;
   margin: 0 25px 0 28px;
 }
+
+@media (max-width: 992px) {
+  .header-settings {
+    margin-top: 20px;
+  }
+}
 </style>
