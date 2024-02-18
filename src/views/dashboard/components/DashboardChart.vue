@@ -15,6 +15,12 @@
       </div>
     </div>
 
+    <div class="chart-options">
+      <DashboardChartOption :active="true" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
+      <DashboardChartOption :active="false" label="Revenue" :img="'media/img/chart_revenue.svg'"></DashboardChartOption>
+      <DashboardChartOption :active="true" label="Profit" :img="'media/img/chart_profit.svg'"></DashboardChartOption>
+    </div>
+
     <div class="card-body">
       <apexchart
         ref="chartRef"
@@ -33,6 +39,7 @@ import { defineComponent, onBeforeMount, ref } from "vue";
 import type { ApexOptions } from "apexcharts";
 import { getCSSVariableValue } from "@/assets/ts/_utils";
 import type VueApexCharts from "vue3-apexcharts";
+import DashboardChartOption from '@/views/dashboard/components/DashboardChartOption.vue';
 
 export default defineComponent({
   name: "dashboard-chart",
@@ -40,7 +47,7 @@ export default defineComponent({
     widgetClasses: String,
     height: Number,
   },
-  components: {},
+  components: { DashboardChartOption },
   setup() {
     const chartRef = ref<typeof VueApexCharts | null>(null);
     const chart = ref<ApexOptions>({});
@@ -197,5 +204,12 @@ const chartOptions = (): ApexOptions => {
 .chart-filters .btn.active {
   color: #fff;
   background: #3E97FF;
+}
+
+.chart-options {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 0 2.25rem;
 }
 </style>
