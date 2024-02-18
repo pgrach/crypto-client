@@ -118,6 +118,10 @@ export default defineComponent({
       data: response
     }
 
+    const capitalizeFirstLetter = (str) => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     onBeforeMount(() => {
       fetchChart();
       setChart(responseData.data);
@@ -155,7 +159,7 @@ export default defineComponent({
       })
 
       series.value = [{
-        name: activeOption.value,
+        name: capitalizeFirstLetter(activeOption.value),
         data
       }];
 
