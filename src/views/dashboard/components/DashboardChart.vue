@@ -26,7 +26,7 @@
         ref="chartRef"
         type="bar"
         :options="chart"
-        :series="series"
+        :series="series.value"
         :height="height"
       ></apexchart>
     </div>
@@ -55,6 +55,10 @@ export default defineComponent({
     const activeFilter = ref("year");
     const activeOption = ref("costs");
 
+    const startDate = ref("2024-02-18T16:38:01.294Z");
+    const endDate = ref("2024-02-18T16:38:01.294Z");
+    const series = ref({})
+
     const setActiveFilter = (val) => {
       activeFilter.value = val;
     }
@@ -63,17 +67,36 @@ export default defineComponent({
       activeOption.value = option;
     }
 
-    const series = [
+    const response = [
       {
-        name: "Costs",
-        data: [44, 25, 105, 68, 61, 38, 34, 75, 117, 26, 11, 48],
+        time: "2024-02-18T16:38:01.295Z",
+        value: 44,
       },
-    ];
+      {
+        time: "2024-02-17T16:38:01.295Z",
+        value: 54,
+      },
+      {
+        time: "2024-02-16T16:38:01.295Z",
+        value: 23,
+      },
+      {
+        time: "2024-02-15T16:38:01.295Z",
+        value: 77,
+      },
+      {
+        time: "2024-02-14T16:38:01.295Z",
+        value: 112,
+      },
+    ]
+
+    const responseData = {
+      data: response
+    }
 
     onBeforeMount(() => {
       fetchChart();
-
-      Object.assign(chart.value, chartOptions());
+      setChart(responseData.data);
     });
 
     const fetchChart = () => {
@@ -82,30 +105,49 @@ export default defineComponent({
       const endpoint = 'cost';
 
       const body = {
-        "user_id": 0,
-        "time_mode": "daily",
-        "time_filter": {
-          "start_date": "2024-02-18T16:38:01.294Z",
-          "end_date": "2024-02-18T16:38:01.294Z"
+        user_id: 0,
+        time_mode: "daily",
+        time_filter: {
+          start_date: startDate.value,
+          end_date: endDate.value
         }
       }
 
       axios.post(`${host}${endpoint}`, body)
           .then(function (response) {
-            console.log(response, ' CHART 1');
+            console.log(response, ' Chart Response');
+            // setChart(response.data);
           })
           .catch(function (error) {
-            console.log(error, ' ERROR');
+            console.log(error, ' Chart Error');
           });
     }
 
-    const refreshChart = () => {
-      if (!chartRef.value) {
-        return;
-      }
+    const setChart = (response) => {
+      const data = [];
+      const categories = [];
+      response.forEach(item => {
+        data.push(item.value);
+        categories.push(item.time)
+      })
 
-      chartRef.value.updateOptions(chartOptions());
-    };
+      series.value = {
+        name: activeOption.value,
+        data
+      };
+
+      console.log(series.value.data, ' SERIES')
+      console.log(categories, ' CATEGORIES')
+      Object.assign(chart.value, chartOptions(categories));
+    }
+
+    // const refreshChart = () => {
+    //   if (!chartRef.value) {
+    //     return;
+    //   }
+    //
+    //   chartRef.value.updateOptions(chartOptions(categories));
+    // };
 
     return {
       chart,
@@ -120,7 +162,7 @@ export default defineComponent({
   },
 });
 
-const chartOptions = (): ApexOptions => {
+const chartOptions = (categories): ApexOptions => {
   const labelColor = getCSSVariableValue("--bs-gray-500");
   const borderColor = getCSSVariableValue("--bs-gray-200");
   const baseColor = getCSSVariableValue("--bs-primary");
@@ -153,7 +195,7 @@ const chartOptions = (): ApexOptions => {
       colors: ["transparent"],
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      categories: categories,
       axisBorder: {
         show: false,
       },
