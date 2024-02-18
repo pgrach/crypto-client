@@ -40,6 +40,7 @@ import type { ApexOptions } from "apexcharts";
 import { getCSSVariableValue } from "@/assets/ts/_utils";
 import type VueApexCharts from "vue3-apexcharts";
 import DashboardChartOption from '@/views/dashboard/components/DashboardChartOption.vue';
+import axios from "axios";
 
 export default defineComponent({
   name: "dashboard-chart",
@@ -70,8 +71,33 @@ export default defineComponent({
     ];
 
     onBeforeMount(() => {
+      fetchChart();
+
       Object.assign(chart.value, chartOptions());
     });
+
+    const fetchChart = () => {
+      const host = 'http://16.170.172.254:8000/';
+
+      const endpoint = 'cost';
+
+      const body = {
+        "user_id": 0,
+        "time_mode": "daily",
+        "time_filter": {
+          "start_date": "2024-02-18T16:38:01.294Z",
+          "end_date": "2024-02-18T16:38:01.294Z"
+        }
+      }
+
+      axios.post(`${host}${endpoint}`, body)
+          .then(function (response) {
+            console.log(response, ' CHART 1');
+          })
+          .catch(function (error) {
+            console.log(error, ' ERROR');
+          });
+    }
 
     const refreshChart = () => {
       if (!chartRef.value) {

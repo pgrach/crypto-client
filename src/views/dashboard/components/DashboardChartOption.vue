@@ -31,11 +31,11 @@ export default defineComponent({
 .chart-option {
   border: 1px solid rgba(225, 227, 234, 1);
   box-sizing: border-box;
-  padding: 15px 5px 20px;
+  padding: 17px 1px 25px;
   border-radius: 15px;
   position: relative;
   cursor: pointer;
-  width: 87px;
+  width: 80px;
   margin-right: 20px;
 }
 .chart-option::after {
@@ -56,6 +56,10 @@ export default defineComponent({
 .chart-option__img {
   display: flex;
   justify-content: center;
+}
+.chart-option__img img{
+  width: auto;
+  height: 25px;
 }
 .chart-option__label {
   color: #3F4254;
