@@ -16,9 +16,9 @@
     </div>
 
     <div class="chart-options">
-      <DashboardChartOption :active="true" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
-      <DashboardChartOption :active="false" label="Revenue" :img="'media/img/chart_revenue.svg'"></DashboardChartOption>
-      <DashboardChartOption :active="true" label="Profit" :img="'media/img/chart_profit.svg'"></DashboardChartOption>
+      <DashboardChartOption @click="setActiveOption('costs')" :active="activeOption === 'costs'" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
+      <DashboardChartOption @click="setActiveOption('revenue')" :active="activeOption === 'revenue'" label="Revenue" :img="'media/img/chart_revenue.svg'"></DashboardChartOption>
+      <DashboardChartOption @click="setActiveOption('profit')" :active="activeOption === 'profit'" label="Profit" :img="'media/img/chart_profit.svg'"></DashboardChartOption>
     </div>
 
     <div class="card-body">
@@ -52,9 +52,14 @@ export default defineComponent({
     const chartRef = ref<typeof VueApexCharts | null>(null);
     const chart = ref<ApexOptions>({});
     const activeFilter = ref("year");
+    const activeOption = ref("costs");
 
     const setActiveFilter = (val) => {
       activeFilter.value = val;
+    }
+
+    const setActiveOption = (option) => {
+      activeOption.value = option;
     }
 
     const series = [
@@ -81,8 +86,10 @@ export default defineComponent({
       series,
       chartRef,
       activeFilter,
+      activeOption,
       getAssetPath,
-      setActiveFilter
+      setActiveFilter,
+      setActiveOption
     };
   },
 });

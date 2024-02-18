@@ -38,15 +38,20 @@ export default defineComponent({
   width: 87px;
   margin-right: 20px;
 }
-.chart-option.chart-option__active::after {
+.chart-option::after {
   position: absolute;
   content: '';
-  width: calc(100% - 6px);
+  width: calc(100% - 12px);
   height: 3px;
-  bottom: 1px;
-  left: 3px;
-  background: rgba(62, 151, 255, 1);
+  bottom: -2px;
+  left: 6px;
+  background: rgba(62, 151, 255, 0);
   border-radius: 15px;
+  transition: .3s linear;
+}
+.chart-option.chart-option__active::after {
+  bottom: 0px;
+  background: rgba(62, 151, 255, 1);
 }
 .chart-option__img {
   display: flex;
