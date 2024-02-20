@@ -6,10 +6,11 @@ import { Pagination, Navigation, Autoplay, Mousewheel } from 'swiper/modules'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { useRouter } from 'vue-router';
 
 
 const modules = [Pagination, Navigation, Autoplay]
-const featuresModules = [Mousewheel, Pagination]
+const featuresModules = [Mousewheel, Navigation, Pagination, Autoplay]
 
 const refEra = ref<HTMLElement | null>(null)
 const refBenefits = ref<HTMLElement | null>(null)
@@ -52,6 +53,12 @@ function handleScroll(e) {
   } else {
     activeLink.value = 'join'
   }
+}
+
+const router = useRouter();
+
+const routeToDashboard = () => {
+  router.push({ name: "dashboard" });
 }
 </script>
 
@@ -242,16 +249,19 @@ function handleScroll(e) {
 
       <div class="home-features-container" ref="refSlides">
         <swiper
-          :direction="'vertical'"
+          :direction="'horizontal'"
+          :navigation="{
+              enabled: true,
+              nextEl: '.home-features-slider-next',
+              prevEl: '.home-features-slider-prev'
+            }"
           :height="1207"
           :speed="600"
           :slidesPerView="1"
           :spaceBetween="30"
-          :mousewheel="true"
+          :mousewheel="false"
+          :loop="true"
           :modules="featuresModules"
-          @beforeTransitionStart="scrollOnVerticalSwipe()"
-          @reachEnd="scrollToWithDelay(refJoin)"
-          @reachBeginning="scrollToWithDelay(refLine)"
           class="mySwiper"
         >
           <swiper-slide>
@@ -327,6 +337,14 @@ function handleScroll(e) {
               </div>
             </div>
           </swiper-slide>
+
+          <div class="home-features-slider-prev home-features-slider-arrow">
+            <img src="../../assets/img/swiper-prev.svg" alt="Swiper Prev">
+          </div>
+          <div class="home-features-slider-next home-features-slider-arrow">
+            <img src="../../assets/img/swiper-next.svg" alt="Swiper Next">
+          </div>
+
         </swiper>
 
       </div>
@@ -450,8 +468,8 @@ function handleScroll(e) {
       <div>
         <div class="home-join-btns-container">
           <div class="home-join-btns">
-            <button class="home-btn">Start</button>
-            <button class="home-btn home-btn__outline">Connect</button>
+            <button class="home-btn" @click="routeToDashboard()">Start</button>
+            <button class="home-btn home-btn__outline" @click="routeToDashboard()">Connect</button>
           </div>
         </div>
       </div>
