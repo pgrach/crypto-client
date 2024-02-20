@@ -145,10 +145,10 @@ export default defineComponent({
       const body = {
         user_id: 0,
         time_mode: timeMode.value,
-        time_filter: {
-          start_date: startDate.value,
-          end_date: endDate.value
-        }
+        // time_filter: {
+        //   start_date: startDate.value,
+        //   end_date: endDate.value
+        // }
       }
 
       axios.post(`${host}${endpoint}`, body)
