@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted } from 'vue'
 // import Sticky from 'sticky-js'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -12,21 +12,21 @@ import { useRouter } from 'vue-router';
 const modules = [Pagination, Navigation, Autoplay]
 const featuresModules = [Mousewheel, Navigation, Pagination, Autoplay]
 
-const refEra = ref<HTMLElement | null>(null)
-const refBenefits = ref<HTMLElement | null>(null)
-const refLine = ref<HTMLElement | null>(null)
-const refCapabilities = ref<HTMLElement | null>(null)
-const refFeatures = ref<HTMLElement | null>(null)
-const refJoin = ref<HTMLElement | null>(null)
-const refSlides = ref<HTMLElement | null>(null)
+const refEra = ref(null)
+const refBenefits = ref(null)
+const refLine = ref(null)
+const refCapabilities = ref(null)
+const refFeatures = ref(null)
+const refJoin = ref(null)
+const refSlides = ref(null)
 
-const burgerActive = ref<boolean>(false)
+const burgerActive = ref(false)
 
-function scrollTo(view: any) {
+function scrollTo(view) {
   view.scrollIntoView({ behavior: 'smooth' })
 }
 
-function scrollToWithDelay(view: any) {
+function scrollToWithDelay(view) {
   setTimeout(() => {
     view.scrollIntoView({behavior: 'smooth'})
   }, 1200)

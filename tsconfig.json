@@ -5,6 +5,10 @@
     "lib": ["es2017"],
     "ignoreDeprecations": "5.0",
     "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+    "allowJs": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

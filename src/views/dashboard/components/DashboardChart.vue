@@ -135,7 +135,6 @@ export default defineComponent({
 
     onBeforeMount(() => {
       fetchChart();
-      setChart(responseData.data);
     });
 
     const fetchChart = () => {
