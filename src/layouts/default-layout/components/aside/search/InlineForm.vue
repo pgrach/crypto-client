@@ -21,6 +21,7 @@
       value=""
       placeholder="Search..."
       data-kt-search-element="input"
+      autocomplete="off"
     />
     <!--end::Input-->
 

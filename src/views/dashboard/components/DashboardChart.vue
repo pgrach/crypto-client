@@ -117,7 +117,7 @@ export default defineComponent({
       categories.value = [];
       response.forEach(item => {
         data.push(item.value);
-        categories.value.push(moment(item.time).format("DD/MM/YYYY HH:mm:ss"))
+        categories.value.push(getCategoryLabel(item.time))
       })
 
       series.value = [{
@@ -127,6 +127,16 @@ export default defineComponent({
 
       Object.assign(chart.value, chartOptions());
       refreshChart();
+    }
+
+    const getCategoryLabel = (time) => {
+      if (timeMode.value === 'yearly') {
+        return moment(time).format("MMMM")
+      }
+      if (timeMode.value === 'daily') {
+        return moment(time).format("HH:mm:ss")
+      }
+      return moment(time).format("DD/MM/YYYY")
     }
 
     const refreshChart = () => {
