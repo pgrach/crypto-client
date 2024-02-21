@@ -70,6 +70,7 @@ export default defineComponent({
     const startDate = ref("2024-02-18T16:38:01.294Z");
     const endDate = ref("2024-02-18T16:38:01.294Z");
     const series = ref([])
+    const categories = ref([])
 
     const setTimeMode = (val) => {
       timeMode.value = val;
@@ -77,56 +78,8 @@ export default defineComponent({
     }
 
     const setActiveOption = (option) => {
-      // console.log(moment(dateRange.value[0]).format('YYYY-MM-DDTHH:mm:ss'), moment(dateRange.value[1]).format('YYYY-MM-DDTHH:mm:ss'), ' DATE RANGE')
       activeOption.value = option;
       fetchChart();
-    }
-
-    const response = [
-      {
-        time: "2024-02-10T16:38:01.295Z",
-        value: 44,
-      },
-      {
-        time: "2024-02-11T16:38:01.295Z",
-        value: 54,
-      },
-      {
-        time: "2024-02-12T16:38:01.295Z",
-        value: 23,
-      },
-      {
-        time: "2024-02-13T16:38:01.295Z",
-        value: 77,
-      },
-      {
-        time: "2024-02-14T16:38:01.295Z",
-        value: 112,
-      },
-      {
-        time: "2024-02-15T16:38:01.295Z",
-        value: 34,
-      },
-      {
-        time: "2024-02-16T16:38:01.295Z",
-        value: 44,
-      },
-      {
-        time: "2024-02-17T16:38:01.295Z",
-        value: 13,
-      },
-      {
-        time: "2024-02-18T16:38:01.295Z",
-        value: 66,
-      },
-      {
-        time: "2024-02-19T16:38:01.295Z",
-        value: 92,
-      },
-    ]
-
-    const responseData = {
-      data: response
     }
 
     const capitalizeFirstLetter = (str) => {
@@ -152,20 +105,19 @@ export default defineComponent({
 
       axios.post(`${host}${endpoint}`, body)
           .then(function (response) {
-            console.log(response, ' Chart Response');
-            setChart(response.data);
+            setChart(response.data.data);
           })
           .catch(function (error) {
-            console.log(error, ' Chart Error');
+            console.log('Chart Error: ', error);
           });
     }
 
     const setChart = (response) => {
       const data = [];
-      const categories = [];
+      categories.value = [];
       response.forEach(item => {
         data.push(item.value);
-        categories.push(moment(item.time).format("DD/MM/YYYY HH:mm:ss"))
+        categories.value.push(moment(item.time).format("DD/MM/YYYY HH:mm:ss"))
       })
 
       series.value = [{
@@ -173,8 +125,119 @@ export default defineComponent({
         data
       }];
 
-      Object.assign(chart.value, chartOptions(categories));
+      Object.assign(chart.value, chartOptions());
+      refreshChart();
     }
+
+    const refreshChart = () => {
+      if (!chartRef.value) {
+        return;
+      }
+
+      chartRef.value.updateOptions(chartOptions());
+    };
+
+    const chartOptions = (): ApexOptions => {
+      const labelColor = getCSSVariableValue("--bs-gray-500");
+      const borderColor = getCSSVariableValue("--bs-gray-200");
+      const baseColor = getCSSVariableValue("--bs-primary");
+      const secondaryColor = getCSSVariableValue("--bs-gray-300");
+
+      return {
+        chart: {
+          fontFamily: "inherit",
+          type: "bar",
+          toolbar: {
+            show: false,
+          },
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: "10px",
+            borderRadius: 5,
+          },
+        },
+        legend: {
+          show: false,
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"],
+        },
+        xaxis: {
+          categories: categories.value,
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
+          labels: {
+            style: {
+              colors: labelColor,
+              fontSize: "12px",
+            },
+          },
+        },
+        yaxis: {
+          labels: {
+            style: {
+              colors: labelColor,
+              fontSize: "12px",
+            },
+          },
+        },
+        fill: {
+          opacity: 1,
+        },
+        states: {
+          normal: {
+            filter: {
+              type: "none",
+              value: 0,
+            },
+          },
+          hover: {
+            filter: {
+              type: "none",
+              value: 0,
+            },
+          },
+          active: {
+            allowMultipleDataPointsSelection: false,
+            filter: {
+              type: "none",
+              value: 0,
+            },
+          },
+        },
+        tooltip: {
+          style: {
+            fontSize: "12px",
+          },
+          y: {
+            formatter: function (val) {
+              return "$" + val + " thousands";
+            },
+          },
+        },
+        colors: [baseColor, secondaryColor],
+        grid: {
+          borderColor: borderColor,
+          strokeDashArray: 4,
+          yaxis: {
+            lines: {
+              show: true,
+            },
+          },
+        },
+      };
+    };
 
     return {
       dateRange,
@@ -189,108 +252,6 @@ export default defineComponent({
     };
   },
 });
-
-const chartOptions = (categories): ApexOptions => {
-  const labelColor = getCSSVariableValue("--bs-gray-500");
-  const borderColor = getCSSVariableValue("--bs-gray-200");
-  const baseColor = getCSSVariableValue("--bs-primary");
-  const secondaryColor = getCSSVariableValue("--bs-gray-300");
-
-  return {
-    chart: {
-      fontFamily: "inherit",
-      type: "bar",
-      toolbar: {
-        show: false,
-      },
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "10px",
-        borderRadius: 5,
-      },
-    },
-    legend: {
-      show: false,
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ["transparent"],
-    },
-    xaxis: {
-      categories: categories,
-      axisBorder: {
-        show: false,
-      },
-      axisTicks: {
-        show: false,
-      },
-      labels: {
-        style: {
-          colors: labelColor,
-          fontSize: "12px",
-        },
-      },
-    },
-    yaxis: {
-      labels: {
-        style: {
-          colors: labelColor,
-          fontSize: "12px",
-        },
-      },
-    },
-    fill: {
-      opacity: 1,
-    },
-    states: {
-      normal: {
-        filter: {
-          type: "none",
-          value: 0,
-        },
-      },
-      hover: {
-        filter: {
-          type: "none",
-          value: 0,
-        },
-      },
-      active: {
-        allowMultipleDataPointsSelection: false,
-        filter: {
-          type: "none",
-          value: 0,
-        },
-      },
-    },
-    tooltip: {
-      style: {
-        fontSize: "12px",
-      },
-      y: {
-        formatter: function (val) {
-          return "$" + val + " thousands";
-        },
-      },
-    },
-    colors: [baseColor, secondaryColor],
-    grid: {
-      borderColor: borderColor,
-      strokeDashArray: 4,
-      yaxis: {
-        lines: {
-          show: true,
-        },
-      },
-    },
-  };
-};
 </script>
 
 <style>
