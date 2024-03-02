@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { useRouter } from 'vue-router';
-
+import axios from 'axios';
 
 const modules = [Pagination, Navigation, Autoplay]
 const featuresModules = [Mousewheel, Navigation, Pagination, Autoplay]
@@ -21,19 +21,20 @@ const refJoin = ref(null)
 const refSlides = ref(null)
 
 const burgerActive = ref(false)
+const email = ref('') // Declare the email variable
 
 function scrollTo(view) {
-  view.scrollIntoView({ behavior: 'smooth' })
+    view.scrollIntoView({ behavior: 'smooth' })
 }
 
 function scrollToWithDelay(view) {
-  setTimeout(() => {
-    view.scrollIntoView({behavior: 'smooth'})
-  }, 1200)
+    setTimeout(() => {
+        view.scrollIntoView({behavior: 'smooth'})
+    }, 1200)
 }
 
 function scrollOnVerticalSwipe() {
-  refSlides?.value?.scrollIntoView({behavior: 'smooth'})
+    refSlides?.value?.scrollIntoView({behavior: 'smooth'})
 }
 
 // new Sticky('.home-navigation');
@@ -41,25 +42,37 @@ function scrollOnVerticalSwipe() {
 const activeLink = ref('era');
 
 function handleScroll(e) {
-  const scrollPos = e.target.scrollTop;
-  if (scrollPos > 0 && scrollPos < 1000) {
-    activeLink.value = 'era'
-  } else if (scrollPos >= 1000 && scrollPos < 2000) {
-    activeLink.value = 'benefits'
-  } else if (scrollPos >= 2000 && scrollPos < 3400) {
-    activeLink.value = 'capabilities'
-  } else if (scrollPos >= 3400 && scrollPos < 4500) {
-    activeLink.value = 'features'
-  } else {
-    activeLink.value = 'join'
-  }
+    const scrollPos = e.target.scrollTop;
+    if (scrollPos > 0 && scrollPos < 1000) {
+        activeLink.value = 'era'
+    } else if (scrollPos >= 1000 && scrollPos < 2000) {
+        activeLink.value = 'benefits'
+    } else if (scrollPos >= 2000 && scrollPos < 3400) {
+        activeLink.value = 'capabilities'
+    } else if (scrollPos >= 3400 && scrollPos < 4500) {
+        activeLink.value = 'features'
+    } else {
+        activeLink.value = 'join'
+    }
 }
 
 const router = useRouter();
 
 const routeToDashboard = () => {
-  router.push({ name: "dashboard" });
+    router.push({ name: "dashboard" });
 }
+
+const sendDemoEmail = (email) => {
+    const host = import.meta.env.VITE_APP_API_HOST;
+    const endpoint = 'send_demo_email';
+    axios.post(`${host}${endpoint}`, {"email_address": email})
+          .catch(function (error) {
+            console.log('Sending Demo Email Error: ', error);
+          });
+    console.log('Demo Email Sent');
+}
+
+
 </script>
 
 <template>
@@ -485,9 +498,9 @@ const routeToDashboard = () => {
             Stay at the forefront of innovation with our commitment to continuous research and development.
           </div>
           <div class="home-book-demo-input home-input">
-            <input type="email" placeholder="Email">
-            <span class="home-input-arrow">
-              <img src="../../assets/img/input-arrow.svg" alt="Input Arrow">
+            <input type="email" placeholder="Email" v-model="email">
+            <span class="home-input-arrow" @click="sendDemoEmail(email)">
+                <img src="../../assets/img/input-arrow.svg" alt="Input Arrow">
             </span>
           </div>
         </div>
