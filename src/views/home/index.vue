@@ -474,8 +474,7 @@ const sendDemoEmail = (email) => {
       </div>
       <div class="home-join-description-container">
         <h2 class="home-join-description">
-          Embark on a journey where innovation meets your unique needs. Elevate your trading strategies, gain valuable insights, and experience a new standard in
-          rypto trading with AiDala's MVP. Empower Your Trading Journey with AIDALA - Redefining the Future of Crypto Trading.
+          Empower Your Trading Journey with AIDALA - Redefining the Future of Crypto Economics.
         </h2>
       </div>
       <div>
