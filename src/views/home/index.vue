@@ -68,6 +68,7 @@ const validateEmail = (email) => {
 }
 
 const showEmailError = ref(false);
+const showEmailSuccess = ref(false);
 
 const sendDemoEmail = () => {
     const host = import.meta.env.VITE_APP_API_HOST;
@@ -76,6 +77,10 @@ const sendDemoEmail = () => {
     if (validateEmail(email.value)) {
       showEmailError.value = false;
       axios.post(`${host}${endpoint}`, {"email_address": email.value})
+          .then(() => {
+            email.value = '';
+            showEmailSuccess.value = true;
+          })
           .catch(function (error) {
             console.log('Sending Demo Email Error: ', error);
           });
@@ -513,7 +518,8 @@ const sendDemoEmail = () => {
             <span class="home-input-arrow" @click="sendDemoEmail()">
               <img src="../../assets/img/input-arrow.svg" alt="Input Arrow">
             </span>
-            <div v-if="showEmailError" class="home-input__error">Please type valid Email</div>
+            <div v-if="showEmailError" class="home-input__info">Please type valid Email</div>
+            <div v-if="showEmailSuccess" class="home-input__info">Successfully sent</div>
           </div>
         </div>
 
