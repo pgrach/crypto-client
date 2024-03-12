@@ -9,10 +9,10 @@
       </h3>
 
       <div class="card-toolbar chart-filters">
-        <div class="btn me-2" @click="setTimeMode('yearly')" :class="{'active': timeMode === 'yearly'}">Year</div>
-        <div class="btn me-2" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
-        <div class="btn me-2" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
-        <div class="btn me-2" @click="setTimeMode('daily')" :class="{'active': timeMode === 'daily'}">Day</div>
+        <div class="button-primary me-2" @click="setTimeMode('yearly')" :class="{'active': timeMode === 'yearly'}">Year</div>
+        <div class="button-primary me-2" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
+        <div class="button-primary me-2" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
+        <div class="button-primary me-2" @click="setTimeMode('daily')" :class="{'active': timeMode === 'daily'}">Day</div>
 <!--        <div>-->
 <!--          <el-date-picker-->
 <!--              v-model="dateRange"-->
@@ -265,17 +265,11 @@ export default defineComponent({
 </script>
 
 <style>
-.chart-filters .btn {
-  padding: 16px 18px;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 14px;
-  word-wrap: break-word;
-  background: rgba(241, 241, 242, 1);
+.chart-filters .button-primary {
   color: #A1A5B7;
-  border-radius: 6px;
+  background: rgba(241, 241, 242, 1);
 }
-.chart-filters .btn.active {
+.chart-filters .button-primary.active {
   color: #fff;
   background: #3E97FF;
 }

@@ -1,6 +1,13 @@
 <template>
-  <!--begin::Dashboard-->
   <div class="row g-5 g-xl-8">
+
+    <div class="g-xl-8">
+      <DashboardCalculator
+          widget-classes="card-xl-stretch"
+          :height="330"
+      ></DashboardCalculator>
+    </div>
+
     <div class="col-xl-8">
       <DashboardChart
           widget-classes="card-xl-stretch"
@@ -29,6 +36,7 @@ import DashboardChart from '@/views/dashboard/components/DashboardChart.vue';
 import DashboardChartStats from '@/views/dashboard/components/DashboardChartStats.vue';
 import DashboardBtc from '@/views/dashboard/components/DashboardBtc.vue';
 import TradeHistory from '@/views/dashboard/components/TradeHistory.vue';
+import DashboardCalculator from '@/views/dashboard/components/DashboardCalculator.vue';
 
 export default defineComponent({
   name: "dashboard-main",
@@ -36,7 +44,8 @@ export default defineComponent({
     TradeHistory,
     DashboardBtc,
     DashboardChartStats,
-    DashboardChart
+    DashboardChart,
+    DashboardCalculator
   },
 });
 </script>
