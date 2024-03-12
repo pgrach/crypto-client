@@ -57,7 +57,7 @@
       }"
     >
       <div
-        class="container-fluid py-6 py-lg-0 d-flex flex-column flex-lg-row align-items-lg-stretch justify-content-lg-between"
+        class="container-fluid py-6 py-0 d-flex flex-row align-items-stretch justify-content-between"
         id="kt_toolbar_container"
       >
         <PageTitle></PageTitle>
@@ -167,11 +167,5 @@ export default defineComponent({
   width: 36px;
   height: 36px;
   margin: 0 25px 0 28px;
-}
-
-@media (max-width: 992px) {
-  .header-settings {
-    margin-top: 20px;
-  }
 }
 </style>
