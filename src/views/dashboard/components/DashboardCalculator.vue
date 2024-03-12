@@ -89,6 +89,7 @@
 <script lang="ts">
 import { defineComponent, onBeforeMount, ref } from "vue";
 import { ErrorMessage, Field, Form as VForm } from 'vee-validate';
+import axios from 'axios';
 
 export default defineComponent({
   name: "dashboard-calculator",
@@ -110,6 +111,22 @@ export default defineComponent({
 
     const calculate = () => {
       console.log('calculate')
+    }
+
+    onBeforeMount(() => {
+      fetchFormData();
+    });
+
+    const fetchFormData = () => {
+      const host = import.meta.env.VITE_APP_API_HOST;
+
+      axios.get(`${host}asics`)
+          .then(function (response) {
+            console.log(response, ' form data response')
+          })
+          .catch(function (error) {
+            console.log('Form Fetch Error: ', error);
+          });
     }
 
     return {
