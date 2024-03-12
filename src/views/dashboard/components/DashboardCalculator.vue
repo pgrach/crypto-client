@@ -102,12 +102,12 @@ export default defineComponent({
   },
   setup() {
 
-    const address = ref();
-    const quantity = ref();
-    const hashrate = ref();
-    const power = ref();
-    const powerCost = ref();
-    const blockReward = ref();
+    const address = ref('Address Line 1');
+    const quantity = ref(3);
+    const hashrate = ref(198);
+    const power = ref(5445);
+    const powerCost = ref(322);
+    const blockReward = ref(6.45);
 
     const calculate = () => {
       console.log('calculate')
