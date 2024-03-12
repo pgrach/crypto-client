@@ -62,14 +62,26 @@ const routeToDashboard = () => {
     router.push({ name: "dashboard" });
 }
 
-const sendDemoEmail = (email) => {
+const validateEmail = (email) => {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
+const showEmailError = ref(false);
+
+const sendDemoEmail = () => {
     const host = import.meta.env.VITE_APP_API_HOST;
     const endpoint = 'send_demo_email';
-    axios.post(`${host}${endpoint}`, {"email_address": email})
+
+    if (validateEmail(email.value)) {
+      showEmailError.value = false;
+      axios.post(`${host}${endpoint}`, {"email_address": email.value})
           .catch(function (error) {
             console.log('Sending Demo Email Error: ', error);
           });
-    console.log('Demo Email Sent');
+    } else {
+      showEmailError.value = true;
+    }
 }
 
 
@@ -498,9 +510,10 @@ const sendDemoEmail = (email) => {
           </div>
           <div class="home-book-demo-input home-input">
             <input type="email" placeholder="Email" v-model="email">
-            <span class="home-input-arrow" @click="sendDemoEmail(email)">
-                <img src="../../assets/img/input-arrow.svg" alt="Input Arrow">
+            <span class="home-input-arrow" @click="sendDemoEmail()">
+              <img src="../../assets/img/input-arrow.svg" alt="Input Arrow">
             </span>
+            <div v-if="showEmailError" class="home-input__error">Please type valid Email</div>
           </div>
         </div>
 
