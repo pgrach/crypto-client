@@ -26,8 +26,8 @@
     </div>
 
     <div class="chart-options">
-      <DashboardChartOption @click="setActiveOption('cost')" :active="activeOption === 'cost'" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
       <DashboardChartOption @click="setActiveOption('revenue')" :active="activeOption === 'revenue'" label="Revenue" :img="'media/img/chart_revenue.svg'"></DashboardChartOption>
+      <DashboardChartOption @click="setActiveOption('cost')" :active="activeOption === 'cost'" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
       <DashboardChartOption @click="setActiveOption('profit')" :active="activeOption === 'profit'" label="Profit" :img="'media/img/chart_profit.svg'"></DashboardChartOption>
     </div>
 
@@ -64,7 +64,7 @@ export default defineComponent({
     const chartRef = ref<typeof VueApexCharts | null>(null);
     const chart = ref<ApexOptions>({});
     const timeMode = ref("yearly");
-    const activeOption = ref("cost");
+    const activeOption = ref("revenue");
 
     const dateRange = ref('');
     const startDate = ref("2024-02-18T16:38:01.294Z");
@@ -112,11 +112,20 @@ export default defineComponent({
           });
     }
 
+    function getRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     const setChart = (response) => {
       const data = [];
       categories.value = [];
       response.forEach(item => {
-        data.push(item.value);
+        // remove this when MOCKS will be with NEGATIVE values
+        if (activeOption.value === 'profit') {
+          data.push(getRandomNumber(-130, 130));
+        } else {
+          data.push(item.value);
+        }
         categories.value.push(getCategoryLabel(item.time))
       })
 
@@ -150,7 +159,8 @@ export default defineComponent({
     const chartOptions = (): ApexOptions => {
       const labelColor = getCSSVariableValue("--bs-gray-500");
       const borderColor = getCSSVariableValue("--bs-gray-200");
-      const baseColor = getCSSVariableValue("--bs-primary");
+      const baseColor = activeOption.value === 'cost' ? 'rgba(233, 181, 0, 1)' :
+                        activeOption.value === 'profit' ? 'rgba(71, 190, 125, 1)' : getCSSVariableValue("--bs-primary");
       const secondaryColor = getCSSVariableValue("--bs-gray-300");
 
       return {
@@ -163,6 +173,13 @@ export default defineComponent({
         },
         plotOptions: {
           bar: {
+            colors: {
+              ranges: [{
+                from: -100000,
+                to: 0,
+                color: '#FF0000'
+              }]
+            },
             horizontal: false,
             columnWidth: "10px",
             borderRadius: 5,
