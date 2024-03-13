@@ -132,7 +132,7 @@ const sendDemoEmail = () => {
       <ul class="home-navs">
         <li class="home-nav" :class="{ 'home-nav__active': activeLink === 'era' }" @click="scrollTo(refEra)">The AiDala era</li>
         <li class="home-nav" :class="{ 'home-nav__active': activeLink === 'benefits' }" @click="scrollTo(refBenefits)">Benefits</li>
-        <li class="home-nav" :class="{ 'home-nav__active': activeLink === 'capabilities' }" @click="scrollTo(refCapabilities)">Capabilities</li>
+        <!-- <li class="home-nav" :class="{ 'home-nav__active': activeLink === 'capabilities' }" @click="scrollTo(refCapabilities)">Capabilities</li> -->
         <li class="home-nav" :class="{ 'home-nav__active': activeLink === 'features' }" @click="scrollTo(refFeatures)">Features</li>
         <li class="home-nav" :class="{ 'home-nav__active': activeLink === 'join' }" @click="scrollTo(refJoin)">Join AiDala</li>
       </ul>
