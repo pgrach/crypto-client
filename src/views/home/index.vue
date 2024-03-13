@@ -107,7 +107,7 @@ const sendDemoEmail = () => {
       <ul v-if="burgerActive" class="home-navigation_mobile">
         <li class="home-nav-mobile" @click="scrollTo(refEra)">The AiDala era</li>
         <li class="home-nav-mobile" @click="scrollTo(refBenefits)">Benefits</li>
-        <li class="home-nav-mobile" @click="scrollTo(refCapabilities)">Capabilities</li>
+        <!-- <li class="home-nav-mobile" @click="scrollTo(refCapabilities)">Capabilities</li> -->
         <li class="home-nav-mobile" @click="scrollTo(refFeatures)">Features</li>
         <li class="home-nav-mobile" @click="scrollTo(refJoin)">Join AiDala</li>
       </ul>
