@@ -120,12 +120,7 @@ export default defineComponent({
       const data = [];
       categories.value = [];
       response.forEach(item => {
-        // remove this when MOCKS will be with NEGATIVE values
-        if (activeOption.value === 'profit') {
-          data.push(getRandomNumber(-130, 130));
-        } else {
-          data.push(item.value);
-        }
+        data.push(item.value);
         categories.value.push(getCategoryLabel(item.time))
       })
 

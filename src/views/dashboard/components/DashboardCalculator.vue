@@ -19,9 +19,9 @@
           <Field
               type="text"
               class="form-control"
-              placeholder="Address Line"
-              name="Address Line"
-              v-model="address"
+              placeholder="Antminer S19 Pro+ Hyd 198TH/s"
+              name="miner"
+              v-model="miner"
           />
         </div>
 
@@ -102,7 +102,7 @@ export default defineComponent({
   },
   setup() {
 
-    const address = ref('Address Line 1');
+    const miner = ref('Antminer S19 Pro+ Hyd 198TH/s');
     const quantity = ref(3);
     const hashrate = ref(198);
     const power = ref(5445);
@@ -130,7 +130,7 @@ export default defineComponent({
     }
 
     return {
-      address,
+      miner,
       quantity,
       hashrate,
       power,
