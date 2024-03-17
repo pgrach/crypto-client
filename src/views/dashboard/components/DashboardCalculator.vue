@@ -98,8 +98,8 @@ export default defineComponent({
   components: {
     Field,
   },
-  setup() {
-
+  emits: ['setMiner'],
+  setup(props, ctx) {
     const miners = ref([]);
     const miner = ref({ miner_name: 'Antminer S19 Pro+ Hyd 198TH/s' });
     const quantity = ref(3);
@@ -108,7 +108,6 @@ export default defineComponent({
     const powerCost = ref(322);
     const blockReward = ref(6.45);
 
-
     const calculate = () => {
       console.log('calculate')
     }
@@ -116,6 +115,7 @@ export default defineComponent({
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
       power.value = miner.value.power;
+      ctx.emit('setMiner', miner.value);
     }
 
     onBeforeMount(() => {

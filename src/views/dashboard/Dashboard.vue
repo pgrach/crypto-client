@@ -5,6 +5,7 @@
       <DashboardCalculator
           widget-classes="card-xl-stretch"
           :height="330"
+          @setMiner="setMiner"
       ></DashboardCalculator>
     </div>
 
@@ -12,6 +13,7 @@
       <DashboardChart
           widget-classes="card-xl-stretch"
           :height="330"
+          :miner="miner"
       ></DashboardChart>
     </div>
 
@@ -31,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import DashboardChart from '@/views/dashboard/components/DashboardChart.vue';
 import DashboardChartStats from '@/views/dashboard/components/DashboardChartStats.vue';
 import DashboardBtc from '@/views/dashboard/components/DashboardBtc.vue';
@@ -47,6 +49,19 @@ export default defineComponent({
     DashboardChart,
     DashboardCalculator
   },
+  setup() {
+
+    const miner = ref({});
+
+    const setMiner = (val) => {
+      miner.value = val;
+    }
+
+    return {
+      setMiner,
+      miner
+    }
+  }
 });
 </script>
 

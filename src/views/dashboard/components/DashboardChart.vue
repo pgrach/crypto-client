@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent, onBeforeMount, ref } from "vue";
+import { defineComponent, onBeforeMount, ref, watch } from "vue";
 import type { ApexOptions } from "apexcharts";
 import { getCSSVariableValue } from "@/assets/ts/_utils";
 import type VueApexCharts from "vue3-apexcharts";
@@ -58,9 +58,10 @@ export default defineComponent({
   props: {
     widgetClasses: String,
     height: Number,
+    miner: Object,
   },
   components: { DashboardChartOption },
-  setup() {
+  setup(props, ctx) {
     const chartRef = ref<typeof VueApexCharts | null>(null);
     const chart = ref<ApexOptions>({});
     const timeMode = ref("yearly");
@@ -71,6 +72,14 @@ export default defineComponent({
     const endDate = ref("2024-02-18T16:38:01.294Z");
     const series = ref([])
     const categories = ref([])
+
+    watch(
+        () => props.miner,
+        (newValue, oldValue) => {
+          console.log(newValue, oldValue, ' miner value WATCH')
+        },
+        { deep: true }
+    )
 
     const setTimeMode = (val) => {
       timeMode.value = val;
@@ -110,10 +119,6 @@ export default defineComponent({
           .catch(function (error) {
             console.log('Chart Error: ', error);
           });
-    }
-
-    function getRandomNumber(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     const setChart = (response) => {
