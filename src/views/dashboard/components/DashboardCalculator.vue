@@ -16,13 +16,11 @@
       <div class="dashboard-calculator-form">
         <div class="dashboard-calculator-form__item">
           <div class="label">Miner</div>
-          <Field
-              type="text"
-              class="form-control"
-              placeholder="Antminer S19 Pro+ Hyd 198TH/s"
-              name="miner"
-              v-model="miner"
-          />
+
+          <select class="form-select" aria-label="Select example" v-model="miner" @change="setMinerData()">
+            <option v-for="item in miners" :value="item" :key="item.id">{{ item?.miner_name }}</option>
+          </select>
+
         </div>
 
         <div class="dashboard-calculator-form__item">
@@ -102,15 +100,22 @@ export default defineComponent({
   },
   setup() {
 
-    const miner = ref('Antminer S19 Pro+ Hyd 198TH/s');
+    const miners = ref([]);
+    const miner = ref({ miner_name: 'Antminer S19 Pro+ Hyd 198TH/s' });
     const quantity = ref(3);
     const hashrate = ref(198);
-    const power = ref(5445);
+    const power = ref(1111);
     const powerCost = ref(322);
     const blockReward = ref(6.45);
 
+
     const calculate = () => {
       console.log('calculate')
+    }
+
+    const setMinerData = () => {
+      hashrate.value = miner.value.hashrate;
+      power.value = miner.value.power;
     }
 
     onBeforeMount(() => {
@@ -122,7 +127,12 @@ export default defineComponent({
 
       axios.get(`${host}asics`)
           .then(function (response) {
-            console.log(response, ' form data response')
+            miners.value = response && response.data && response.data.items ? response.data.items : [];
+            const firstMiner = miners.value[0] ? miners.value[0] : {};
+            if (firstMiner.miner_name) {
+              miner.value = firstMiner;
+              setMinerData();
+            }
           })
           .catch(function (error) {
             console.log('Form Fetch Error: ', error);
@@ -136,7 +146,9 @@ export default defineComponent({
       power,
       powerCost,
       blockReward,
-      calculate
+      calculate,
+      miners,
+      setMinerData
     };
   },
 });
