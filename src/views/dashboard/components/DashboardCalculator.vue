@@ -101,7 +101,7 @@ export default defineComponent({
   emits: ['setMiner'],
   setup(props, ctx) {
     const miners = ref([]);
-    const miner = ref({ miner_name: 'Antminer S19 Pro+ Hyd 198TH/s' });
+    const miner = ref({ id: 1, miner_name: 'Antminer S19 Pro+ Hyd 198TH/s', hashrate: 198, power: 5445 });
     const quantity = ref(3);
     const hashrate = ref(198);
     const power = ref(1111);
