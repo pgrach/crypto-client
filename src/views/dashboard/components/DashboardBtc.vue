@@ -12,23 +12,47 @@
       </p>
     </div>
     <div class="btc-price">
-      $ 51,455.49
+      $ {{ btcPrice }}
     </div>
     <div class="btc-hint">
-      change of <span class="text-success">4.94%</span> over the past 24 hours
+      change of <span class="text-success">{{ volumeBtc.toFixed(2) }}%</span> over the past 24 hours
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent } from "vue";
+import { defineComponent, ref, onBeforeMount } from "vue";
+import axios from 'axios';
 
 export default defineComponent({
   name: "dashboard-btc",
   components: {},
   setup() {
+
+    const btcPrice = ref(67980.08);
+    const volumeBtc = ref(0.17748118);
+
+    onBeforeMount(() => {
+      fetchBTCPrice();
+    })
+
+    const fetchBTCPrice = () => {
+      const api = 'https://api.blockchain.com/v3/exchange/tickers/BTC-USD';
+
+      axios.get(api)
+          .then(function (response) {
+            btcPrice.value = response?.data?.price_24h;
+            volumeBtc.value = response?.data?.volume_24h;
+          })
+          .catch(function (error) {
+            console.log('Chart Error: ', error);
+          });
+    }
+
     return {
+      volumeBtc,
+      btcPrice,
       getAssetPath,
     };
   },
