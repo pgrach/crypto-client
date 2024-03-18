@@ -51,7 +51,13 @@ export default defineComponent({
   },
   setup() {
 
-    const miner = ref({});
+    const miner = ref({
+      block_reward : 6.25,
+      power_cost: 12,
+      power: 5000,
+      hash_rate : 9380,
+      quantity: 1
+    });
 
     const setMiner = (val) => {
       miner.value = val;

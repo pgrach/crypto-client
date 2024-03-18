@@ -6,7 +6,7 @@
       </h3>
 
       <div>
-        <button class="button-primary" @click="calculate()">Calculate</button>
+        <button class="button-primary" @click="emitMiner()">Calculate</button>
       </div>
 
     </div>
@@ -17,7 +17,7 @@
         <div class="dashboard-calculator-form__item">
           <div class="label">Miner</div>
 
-          <select class="form-select" aria-label="Select example" v-model="miner" @change="setMinerData()">
+          <select class="form-select" aria-label="Select miner name" v-model="miner" @change="setMinerData()">
             <option v-for="item in miners" :value="item" :key="item.id">{{ item?.miner_name }}</option>
           </select>
 
@@ -108,14 +108,20 @@ export default defineComponent({
     const powerCost = ref(322);
     const blockReward = ref(6.45);
 
-    const calculate = () => {
-      console.log('calculate')
-    }
-
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
       power.value = miner.value.power;
-      ctx.emit('setMiner', miner.value);
+    }
+
+    const emitMiner = () => {
+      const minerData = {
+        block_reward: blockReward.value,
+        power_cost: powerCost.value,
+        power: power.value,
+        hash_rate : hashrate.value,
+        quantity: quantity.value
+      }
+      ctx.emit('setMiner', minerData);
     }
 
     onBeforeMount(() => {
@@ -146,7 +152,7 @@ export default defineComponent({
       power,
       powerCost,
       blockReward,
-      calculate,
+      emitMiner,
       miners,
       setMinerData
     };

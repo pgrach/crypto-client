@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent, onBeforeMount, ref, watch } from "vue";
+import { defineComponent, onBeforeMount, onMounted, ref, watch } from "vue";
 import type { ApexOptions } from "apexcharts";
 import { getCSSVariableValue } from "@/assets/ts/_utils";
 import type VueApexCharts from "vue3-apexcharts";
@@ -77,6 +77,7 @@ export default defineComponent({
         () => props.miner,
         (newValue, oldValue) => {
           console.log(newValue, oldValue, ' miner value WATCH')
+          fetchChart();
         },
         { deep: true }
     )
@@ -103,13 +104,22 @@ export default defineComponent({
       const host = import.meta.env.VITE_APP_API_HOST;
       const endpoint = activeOption.value;
 
-      const body = {
-        user_id: 0,
-        time_mode: timeMode.value,
-        // time_filter: {
-        //   start_date: startDate.value,
-        //   end_date: endDate.value
-        // }
+      const minerValue = props && props.miner && props.miner ? props.miner : null;
+      let body;
+
+      if (minerValue) {
+        body = {
+          user_id: 0,
+          time_mode: timeMode.value,
+          ...minerValue
+        }
+      } else {
+        body = {
+          user_id: 0,
+          time_mode: timeMode.value,
+          //   start_date: startDate.value,
+          //   end_date: endDate.value
+        }
       }
 
       axios.post(`${host}${endpoint}`, body)
