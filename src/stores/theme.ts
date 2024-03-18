@@ -20,7 +20,7 @@ export const useThemeStore = defineStore("theme", () => {
       currentMode = ThemeModeComponent.getSystemMode();
     }
 
-    document.documentElement.setAttribute("data-bs-theme", currentMode);
+    document.documentElement.setAttribute("data-bs-theme", "light");
     ThemeModeComponent.init();
   }
 
