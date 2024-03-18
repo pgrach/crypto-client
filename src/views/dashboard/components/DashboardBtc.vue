@@ -12,7 +12,7 @@
       </p>
     </div>
     <div class="btc-price">
-      $ {{ btcPrice }}
+      $ {{ btcPrice.toLocaleString() }}
     </div>
     <div class="btc-hint">
       change of <span class="text-success">{{ volumeBtc.toFixed(2) }}%</span> over the past 24 hours
