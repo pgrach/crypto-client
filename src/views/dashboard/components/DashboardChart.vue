@@ -227,6 +227,9 @@ export default defineComponent({
               colors: labelColor,
               fontSize: "12px",
             },
+            formatter: function (val) {
+              return val.toFixed(2);
+            },
           },
         },
         fill: {
@@ -259,7 +262,7 @@ export default defineComponent({
           },
           y: {
             formatter: function (val) {
-              return val.toString();;
+              return val.toString();
             },
           },
         },
