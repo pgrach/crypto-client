@@ -104,9 +104,9 @@ export default defineComponent({
     const miner = ref({ id: 1, miner_name: 'Antminer S19 Pro+ Hyd 198TH/s', hashrate: 198, power: 5445 });
     const quantity = ref(3);
     const hashrate = ref(198);
-    const power = ref(1111);
+    const power = ref(5445);
     const powerCost = ref(322);
-    const blockReward = ref(6.45);
+    const blockReward = ref(6.25);
 
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
