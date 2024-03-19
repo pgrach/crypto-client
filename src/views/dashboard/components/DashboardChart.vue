@@ -185,7 +185,7 @@ export default defineComponent({
           bar: {
             colors: {
               ranges: [{
-                from: -100000,
+                from: -Infinity,
                 to: 0,
                 color: '#FF0000'
               }]
