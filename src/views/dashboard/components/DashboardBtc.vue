@@ -42,7 +42,7 @@ export default defineComponent({
 
       axios.get(api)
           .then(function (response) {
-            btcPrice.value = response?.data?.price_24h;
+            btcPrice.value = response?.data?.last_trade_price;
             volumeBtc.value = response?.data?.volume_24h;
           })
           .catch(function (error) {
