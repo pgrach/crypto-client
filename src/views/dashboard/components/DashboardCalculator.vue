@@ -105,7 +105,7 @@ export default defineComponent({
     const quantity = ref(3);
     const hashrate = ref(198);
     const power = ref(5445);
-    const powerCost = ref(3);
+    const powerCost = ref(6);
     const blockReward = ref(6.25);
 
     const setMinerData = () => {
