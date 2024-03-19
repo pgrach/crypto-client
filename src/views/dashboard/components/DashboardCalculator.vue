@@ -61,8 +61,8 @@
           <Field
               type="text"
               class="form-control"
-              placeholder="Power Cost"
-              name="Power Cost"
+              placeholder="Power Cost (USD Cents)"
+              name="Power Cost (USD Cents)"
               v-model="powerCost"
           />
         </div>
@@ -105,7 +105,7 @@ export default defineComponent({
     const quantity = ref(3);
     const hashrate = ref(198);
     const power = ref(5445);
-    const powerCost = ref(322);
+    const powerCost = ref(3);
     const blockReward = ref(6.25);
 
     const setMinerData = () => {
