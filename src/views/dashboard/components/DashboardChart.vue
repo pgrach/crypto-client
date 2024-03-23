@@ -128,7 +128,36 @@ export default defineComponent({
           })
           .catch(function (error) {
             console.log('Chart Error: ', error);
+            // setRandomChart();
           });
+    }
+
+    const setRandomChart = () => {
+      const mockData = [];
+      for(let i = 0; i < 100; i++) {
+        mockData.push({
+          value: getRandomValue(),
+          time: getRandomDateTime()
+        })
+      }
+
+      setChart(mockData);
+    }
+
+    const getRandomValue = () => {
+      return Math.floor(Math.random() * (241)) - 120;
+    }
+
+    const getRandomDateTime = () => {
+      const year = Math.floor(Math.random() * (2025 - 2021)) + 2021;
+      const month = Math.floor(Math.random() * 12);
+      const day = Math.floor(Math.random() * 31) + 1;
+      const hour = Math.floor(Math.random() * 24);
+      const minute = Math.floor(Math.random() * 60);
+      const second = Math.floor(Math.random() * 60);
+      const millisecond = Math.floor(Math.random() * 1000);
+      const randomDate = new Date(year, month, day, hour, minute, second, millisecond);
+      return randomDate;
     }
 
     const setChart = (response) => {
@@ -149,13 +178,15 @@ export default defineComponent({
     }
 
     const getCategoryLabel = (time) => {
-      if (timeMode.value === 'yearly') {
-        return moment(time).format("MMMM")
-      }
-      if (timeMode.value === 'daily') {
-        return moment(time).format("HH:mm:ss")
-      }
-      return moment(time).format("DD/MM/YYYY")
+      // if (timeMode.value === 'yearly') {
+      //   return moment(time).format("YYYY-MM-DDTHH:mm:ss")
+      // }
+      // if (timeMode.value === 'daily') {
+      //   return moment(time).format("HH:mm:ss")
+      // }
+      // return moment(time).format("DD/MM/YYYY")
+
+      return moment(time).format("YYYY-MM-DDTHH:mm:ss")
     }
 
     const refreshChart = () => {
@@ -172,13 +203,238 @@ export default defineComponent({
       const baseColor = activeOption.value === 'cost' ? 'rgba(233, 181, 0, 1)' :
                         activeOption.value === 'profit' ? 'rgba(71, 190, 125, 1)' : getCSSVariableValue("--bs-primary");
       const secondaryColor = getCSSVariableValue("--bs-gray-300");
-
+      let chart = {};
+      if (timeMode.value === 'yearly') {
+        chart = {
+          chart: {
+            fontFamily: "inherit",
+            type: "bar",
+            zoom: {
+              type: 'x',
+              enabled: true,
+              autoScaleYaxis: true
+            },
+            toolbar: {
+              show: true,
+            },
+          },
+          plotOptions: {
+            bar: {
+              colors: {
+                ranges: [{
+                  from: -Infinity,
+                  to: 0,
+                  color: '#FF0000'
+                }]
+              },
+              horizontal: false,
+              columnWidth: "10px",
+              borderRadius: 5,
+            },
+          },
+          legend: {
+            show: false,
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          stroke: {
+            show: true,
+            width: 2,
+            colors: ["transparent"],
+          },
+          xaxis: {
+            type: 'datetime',
+            categories: categories.value,
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+            },
+          },
+          yaxis: {
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return val.toFixed(2);
+              },
+            },
+          },
+          fill: {
+            opacity: 1,
+          },
+          states: {
+            normal: {
+              filter: {
+                type: "none",
+                value: 0,
+              },
+            },
+            hover: {
+              filter: {
+                type: "none",
+                value: 0,
+              },
+            },
+            active: {
+              allowMultipleDataPointsSelection: false,
+              filter: {
+                type: "none",
+                value: 0,
+              },
+            },
+          },
+          tooltip: {
+            style: {
+              fontSize: "12px",
+            },
+            y: {
+              formatter: function (val) {
+                return val.toString();
+              },
+            },
+          },
+          colors: [baseColor, secondaryColor],
+          grid: {
+            borderColor: borderColor,
+            strokeDashArray: 4,
+            yaxis: {
+              lines: {
+                show: true,
+              },
+            },
+          },
+        }
+      } else {
+        chart = {
+          chart: {
+            fontFamily: "inherit",
+              type: "bar",
+              zoom: {
+                enabled: false
+              },
+              toolbar: {
+                show: false,
+              },
+          },
+          plotOptions: {
+            bar: {
+              colors: {
+                ranges: [{
+                  from: -Infinity,
+                  to: 0,
+                  color: '#FF0000'
+                }]
+              },
+              horizontal: false,
+                  columnWidth: "10px",
+                  borderRadius: 5,
+            },
+          },
+          legend: {
+            show: false,
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          stroke: {
+            show: true,
+                width: 2,
+                colors: ["transparent"],
+          },
+          xaxis: {
+              categories: categories.value,
+              axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                    fontSize: "12px",
+              },
+            },
+          },
+          yaxis: {
+            labels: {
+              style: {
+                colors: labelColor,
+                    fontSize: "12px",
+              },
+              formatter: function (val) {
+                return val.toFixed(2);
+              },
+            },
+          },
+          fill: {
+            opacity: 1,
+          },
+          states: {
+            normal: {
+              filter: {
+                type: "none",
+                    value: 0,
+              },
+            },
+            hover: {
+              filter: {
+                type: "none",
+                    value: 0,
+              },
+            },
+            active: {
+              allowMultipleDataPointsSelection: false,
+                  filter: {
+                type: "none",
+                    value: 0,
+              },
+            },
+          },
+          tooltip: {
+            style: {
+              fontSize: "12px",
+            },
+            y: {
+              formatter: function (val) {
+                return val.toString();
+              },
+            },
+          },
+          colors: [baseColor, secondaryColor],
+              grid: {
+          borderColor: borderColor,
+              strokeDashArray: 4,
+              yaxis: {
+            lines: {
+              show: true,
+            },
+          },
+        },
+        };
+      }
       return {
         chart: {
           fontFamily: "inherit",
           type: "bar",
+          zoom: {
+            type: 'x',
+            enabled: true,
+            autoScaleYaxis: true
+          },
           toolbar: {
-            show: false,
+            show: true,
           },
         },
         plotOptions: {
@@ -207,6 +463,7 @@ export default defineComponent({
           colors: ["transparent"],
         },
         xaxis: {
+          type: 'datetime',
           categories: categories.value,
           axisBorder: {
             show: false,
