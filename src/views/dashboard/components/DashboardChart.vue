@@ -180,16 +180,28 @@ export default defineComponent({
 
     const setChart = (response) => {
       const data = [];
+      const offsetData = [];
       categories.value = [];
       response.forEach(item => {
         data.push(item.value);
+        offsetData.push(Number(item.value) + Number(item.offset));
         categories.value.push(getCategoryLabel(item.time))
       })
 
-      series.value = [{
-        name: capitalizeFirstLetter(activeOption.value),
-        data
-      }];
+      if (activeOption.value === 'revenue') {
+        series.value = [{
+          name: capitalizeFirstLetter(activeOption.value),
+          data
+        }, {
+          name: 'Offset ' + capitalizeFirstLetter(activeOption.value),
+          data: offsetData
+        }];
+      } else {
+        series.value = [{
+          name: capitalizeFirstLetter(activeOption.value),
+          data
+        }];
+      }
 
       Object.assign(chart.value, chartOptions());
       refreshChart();
@@ -220,7 +232,7 @@ export default defineComponent({
       const borderColor = getCSSVariableValue("--bs-gray-200");
       const baseColor = activeOption.value === 'cost' ? 'rgba(233, 181, 0, 1)' :
                         activeOption.value === 'profit' ? 'rgba(71, 190, 125, 1)' : getCSSVariableValue("--bs-primary");
-      const secondaryColor = getCSSVariableValue("--bs-gray-300");
+      const secondaryColor = 'rgba(71,95,190,0.4)';
       let chart = {};
       if (timeMode.value === 'yearly') {
         chart = {
