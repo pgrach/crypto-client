@@ -57,7 +57,7 @@
         </div>
 
         <div class="dashboard-calculator-form__item">
-          <div class="label">Power Cost</div>
+          <div class="label">Power Cost (USD Cents)</div>
           <Field
               type="text"
               class="form-control"

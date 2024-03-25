@@ -9,10 +9,10 @@
       </h3>
 
       <div class="card-toolbar chart-filters">
-        <div class="button-primary me-2" @click="setTimeMode('yearly')" :class="{'active': timeMode === 'yearly'}">Year</div>
-        <div class="button-primary me-2" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
-        <div class="button-primary me-2" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
-        <div class="button-primary me-2" @click="setTimeMode('daily')" :class="{'active': timeMode === 'daily'}">Day</div>
+        <div class="button-primary" @click="setTimeMode('yearly')" :class="{'active': timeMode === 'yearly'}">Year</div>
+        <div class="button-primary" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
+        <div class="button-primary" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
+        <div class="button-primary" @click="setTimeMode('daily')" :class="{'active': timeMode === 'daily'}">Day</div>
 <!--        <div>-->
 <!--          <el-date-picker-->
 <!--              v-model="dateRange"-->
@@ -25,10 +25,21 @@
       </div>
     </div>
 
-    <div class="chart-options">
-      <DashboardChartOption @click="setActiveOption('revenue')" :active="activeOption === 'revenue'" label="Revenue" :img="'media/img/chart_revenue.svg'"></DashboardChartOption>
-      <DashboardChartOption @click="setActiveOption('cost')" :active="activeOption === 'cost'" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
-      <DashboardChartOption @click="setActiveOption('profit')" :active="activeOption === 'profit'" label="Profit" :img="'media/img/chart_profit.svg'"></DashboardChartOption>
+    <div class="chart-options__container">
+      <div class="chart-options">
+        <DashboardChartOption @click="setActiveOption('revenue')" :active="activeOption === 'revenue'" label="Revenue" :img="'media/img/chart_revenue.svg'"></DashboardChartOption>
+        <DashboardChartOption @click="setActiveOption('cost')" :active="activeOption === 'cost'" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
+        <DashboardChartOption @click="setActiveOption('profit')" :active="activeOption === 'profit'" label="Profit" :img="'media/img/chart_profit.svg'"></DashboardChartOption>
+      </div>
+
+      <div>
+        <div class="dashboard-calculator-form__item">
+          <div class="label" style="text-align: right;">Currency</div>
+          <select class="form-select" aria-label="Select miner name" v-model="currency" @change="onCurrencyChange()">
+            <option v-for="(item, index) in currencies" :value="item" :key="index">{{ item }}</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <div class="card-body">
@@ -70,8 +81,11 @@ export default defineComponent({
     const dateRange = ref('');
     const startDate = ref("2024-02-18T16:38:01.294Z");
     const endDate = ref("2024-02-18T16:38:01.294Z");
-    const series = ref([])
-    const categories = ref([])
+    const series = ref([]);
+    const categories = ref([]);
+
+    const currencies = ref(['USD', 'BTC']);
+    const currency = ref('BTC');
 
     watch(
         () => props.miner,
@@ -82,6 +96,9 @@ export default defineComponent({
         { deep: true }
     )
 
+    const onCurrencyChange = () => {
+      fetchChart();
+    }
     const setTimeMode = (val) => {
       timeMode.value = val;
       fetchChart();
@@ -111,6 +128,7 @@ export default defineComponent({
         body = {
           user_id: 0,
           time_mode: timeMode.value,
+          currency: currency.value,
           ...minerValue
         }
       } else {
@@ -545,7 +563,10 @@ export default defineComponent({
       activeOption,
       getAssetPath,
       setTimeMode,
-      setActiveOption
+      setActiveOption,
+      currencies,
+      currency,
+      onCurrencyChange
     };
   },
 });
@@ -555,6 +576,7 @@ export default defineComponent({
 .chart-filters .button-primary {
   color: #A1A5B7;
   background: rgba(241, 241, 242, 1);
+  margin-left: 5px;
 }
 .chart-filters .button-primary.active {
   color: #fff;
@@ -563,7 +585,11 @@ export default defineComponent({
 
 .chart-options {
   display: flex;
-  margin-top: 10px;
+}
+.chart-options__container {
+  display: flex;
   padding: 0 2.25rem;
+  justify-content: space-between;
+  margin-top: 30px;
 }
 </style>
