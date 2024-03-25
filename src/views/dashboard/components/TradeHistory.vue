@@ -37,8 +37,7 @@
               <tr v-for="item in tableData" :key="item.id">
                 <td>
                   <div class="trade-table-icon">
-                    <img v-if="item.status === 'progress'" :src="getAssetPath('media/img/icon_notification.png')"/>
-                    <img v-if="item.status === 'success'" :src="getAssetPath('media/img/icon_notification_inactive.png')"/>
+                    <img :src="getAssetPath('media/img/eth-logo.png')"/>
                   </div>
                 </td>
                 <td>
@@ -49,7 +48,8 @@
                   >{{ item.description }}</span
                   >
                 </td>
-                <td class="text-end text-muted fw-semibold">{{ item.info }}</td>
+                <td class="text-end text-muted fw-semibold">{{ item.price }}</td>
+                <td class="text-end text-muted fw-semibold">{{ item.fee }}</td>
                 <td class="text-end">
                   <span class="badge" :class="{'badge-light-danger': item.status === 'progress', 'badge-light-success': item.status === 'success'}">{{ item.status === "progress" ? "In Progress" : "Success"}}</span>
                 </td>
@@ -83,39 +83,52 @@ export default defineComponent({
     const tableData = ref([
       {
         id: 1,
-        title: "Top Authors",
-        description: "Successful Fellas",
-        info: "Some",
+        title: "Ethereum",
+        description: "ETH-USD",
+        price: 1.4366,
+        fee: 32400,
         status: "progress"
       },
       {
         id: 2,
-        title: "Top Authors",
-        description: "Successful Fellas",
-        info: "Some info",
+        title: "Ethereum",
+        description: "ETH-USD",
+        price: 1.4366,
+        fee: 32400,
         status: "progress"
       },
       {
         id: 3,
-        title: "New Users",
-        description: "Best Customers",
-        info: "Some info will",
+        title: "Ethereum",
+        description: "ETH-USD",
+        price: 1.4366,
+        fee: 32400,
         status: "success"
       },
       {
         id: 4,
-        title: "Active Customers",
-        description: "Best Customers",
-        info: "Some info will be",
-        status: "success"
+        title: "Ethereum",
+        description: "ETH-USD",
+        price: 1.4366,
+        fee: 32400,
+        status: "progress"
       },
       {
         id: 5,
-        title: "Bestseller Theme",
-        description: "Successful Fellas",
-        info: "Some info will be here",
+        title: "Ethereum",
+        description: "ETH-USD",
+        price: 1.4366,
+        fee: 32400,
+        status: "progress"
+      },
+      {
+        id: 6,
+        title: "Ethereum",
+        description: "ETH-USD",
+        price: 1.4366,
+        fee: 32400,
         status: "success"
-      }
+      },
     ])
 
     return {
