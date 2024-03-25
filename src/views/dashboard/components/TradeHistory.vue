@@ -24,11 +24,11 @@
               <!--begin::Table head-->
               <thead>
                 <tr class="border-0">
-                  <th class="p-0 w-50px"></th>
+                  <th class="p-0 w-50px text-muted fw-semibold">Market</th>
                   <th class="p-0 min-w-150px"></th>
-                  <th class="p-0 min-w-140px"></th>
-                  <th class="p-0 min-w-110px"></th>
-                  <th class="p-0 min-w-50px"></th>
+                  <th class="p-0 min-w-140px text-end text-muted">Amount/Price</th>
+                  <th class="p-0 min-w-110px text-end text-muted">Total Fee</th>
+                  <th class="p-0 min-w-50px text-end text-muted">Status</th>
                 </tr>
               </thead>
 
@@ -93,15 +93,15 @@ export default defineComponent({
         id: 2,
         title: "Ethereum",
         description: "ETH-USD",
-        price: 1.4366,
-        fee: 32400,
+        price: 2.2366,
+        fee: 62400,
         status: "progress"
       },
       {
         id: 3,
         title: "Ethereum",
         description: "ETH-USD",
-        price: 1.4366,
+        price: 3.4366,
         fee: 32400,
         status: "success"
       },
