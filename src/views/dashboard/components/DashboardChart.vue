@@ -188,7 +188,7 @@ export default defineComponent({
         categories.value.push(getCategoryLabel(item.time))
       })
 
-      if (activeOption.value === 'revenue') {
+      if (activeOption.value === 'revenue' && currency.value === 'USD') {
         series.value = [{
           name: capitalizeFirstLetter(activeOption.value),
           data
