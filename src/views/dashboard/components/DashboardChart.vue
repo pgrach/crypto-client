@@ -32,7 +32,7 @@
         <DashboardChartOption @click="setActiveOption('profit')" :active="activeOption === 'profit'" label="Profit" :img="'media/img/chart_profit.svg'"></DashboardChartOption>
       </div>
 
-      <div>
+      <div class="chart-options__currency">
         <div class="dashboard-calculator-form__item">
           <div class="label" style="text-align: right;">Currency</div>
           <select class="form-select" aria-label="Select miner name" v-model="currency" @change="onCurrencyChange()">
@@ -606,5 +606,15 @@ export default defineComponent({
   padding: 0 2.25rem;
   justify-content: space-between;
   margin-top: 30px;
+}
+
+@media only screen and (max-width: 500px) {
+  .chart-options__container {
+    display: block;
+  }
+
+  .chart-options__currency {
+    margin-top: 20px;
+  }
 }
 </style>
