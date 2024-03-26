@@ -14,6 +14,8 @@
           widget-classes="card-xl-stretch"
           :height="330"
           :miner="miner"
+          :start-date="startDate"
+          :end-date="endDate"
       ></DashboardChart>
     </div>
 
@@ -39,6 +41,7 @@ import DashboardChartStats from '@/views/dashboard/components/DashboardChartStat
 import DashboardBtc from '@/views/dashboard/components/DashboardBtc.vue';
 import TradeHistory from '@/views/dashboard/components/TradeHistory.vue';
 import DashboardCalculator from '@/views/dashboard/components/DashboardCalculator.vue';
+import moment from "moment/moment";
 
 export default defineComponent({
   name: "dashboard-main",
@@ -52,20 +55,26 @@ export default defineComponent({
   setup() {
 
     const miner = ref({
-      block_reward : 6.25,
       power_cost: 12,
       power: 5000,
       hash_rate : 9380,
       quantity: 1
     });
 
+    const startDate = ref(moment(new Date()).subtract(7, 'days').format("YYYY-MM-DDTHH:mm:ss"));
+    const endDate = ref(moment(new Date()).format("YYYY-MM-DDTHH:mm:ss"));
+
     const setMiner = (val) => {
       miner.value = val;
+      startDate.value = val.date_range[0];
+      endDate.value = val.date_range[1];
     }
 
     return {
       setMiner,
-      miner
+      miner,
+      startDate,
+      endDate
     }
   }
 });

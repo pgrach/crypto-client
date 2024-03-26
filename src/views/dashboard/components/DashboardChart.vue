@@ -70,6 +70,8 @@ export default defineComponent({
     widgetClasses: String,
     height: Number,
     miner: Object,
+    startDate: String,
+    endDate: String,
   },
   components: { DashboardChartOption },
   setup(props, ctx) {
@@ -79,8 +81,6 @@ export default defineComponent({
     const activeOption = ref("revenue");
 
     const dateRange = ref('');
-    const startDate = ref("2024-02-18T16:38:01.294Z");
-    const endDate = ref("2024-02-18T16:38:01.294Z");
     const series = ref([]);
     const categories = ref([]);
 
@@ -122,6 +122,7 @@ export default defineComponent({
       const endpoint = activeOption.value;
 
       const minerValue = props && props.miner && props.miner ? props.miner : null;
+      delete minerValue.date_range;
       let body;
 
       if (minerValue) {
@@ -129,14 +130,16 @@ export default defineComponent({
           user_id: 0,
           time_mode: timeMode.value,
           currency: currency.value,
+          start_date: props.startDate,
+          end_date: props.endDate,
           ...minerValue
         }
       } else {
         body = {
           user_id: 0,
           time_mode: timeMode.value,
-          //   start_date: startDate.value,
-          //   end_date: endDate.value
+          start_date: props.startDate,
+          end_date: props.endDate
         }
       }
 

@@ -68,16 +68,15 @@
         </div>
 
         <div class="dashboard-calculator-form__item">
-          <div class="label">Block Reward (BTC)</div>
-          <Field
-              type="text"
-              class="form-control"
-              placeholder="Block Reward (BTC)"
-              name="Block Reward (BTC)"
-              v-model="blockReward"
+          <div class="label">Dates</div>
+          <el-date-picker
+              v-model="dateRange"
+              type="daterange"
+              range-separator="To"
+              start-placeholder="Start date"
+              end-placeholder="End date"
           />
         </div>
-
       </div>
 
     </div>
@@ -88,6 +87,7 @@
 import { defineComponent, onBeforeMount, ref } from "vue";
 import { ErrorMessage, Field, Form as VForm } from 'vee-validate';
 import axios from 'axios';
+import moment from "moment";
 
 export default defineComponent({
   name: "dashboard-calculator",
@@ -106,7 +106,7 @@ export default defineComponent({
     const hashrate = ref(198);
     const power = ref(5445);
     const powerCost = ref(3);
-    const blockReward = ref(6.25);
+    const dateRange = ref([moment(new Date()).subtract(7, 'days').toDate(), new Date()]);
 
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
@@ -115,7 +115,7 @@ export default defineComponent({
 
     const emitMiner = () => {
       const minerData = {
-        block_reward: blockReward.value,
+        date_range: dateRange.value,
         power_cost: powerCost.value,
         power: power.value,
         hash_rate : hashrate.value,
@@ -151,7 +151,7 @@ export default defineComponent({
       hashrate,
       power,
       powerCost,
-      blockReward,
+      dateRange,
       emitMiner,
       miners,
       setMinerData
@@ -164,8 +164,13 @@ export default defineComponent({
 .dashboard-calculator-form {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding-bottom: 30px;
   gap: 10px;
+}
+
+.dashboard-calculator-form__input {
+  width: 250px;
 }
 
 .dashboard-calculator-form__item .label {
