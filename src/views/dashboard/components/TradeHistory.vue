@@ -83,48 +83,48 @@ export default defineComponent({
     const tableData = ref([
       {
         id: 1,
-        title: "Ethereum",
-        description: "ETH-USD",
+        title: "Bitcoin",
+        description: "BTC-USD",
         price: 1.4366,
         fee: 32400,
         status: "progress"
       },
       {
         id: 2,
-        title: "Ethereum",
-        description: "ETH-USD",
+        title: "Bitcoin",
+        description: "BTC-USD",
         price: 2.2366,
         fee: 62400,
         status: "progress"
       },
       {
         id: 3,
-        title: "Ethereum",
-        description: "ETH-USD",
+        title: "Bitcoin",
+        description: "BTC-USD",
         price: 3.4366,
         fee: 32400,
         status: "success"
       },
       {
         id: 4,
-        title: "Ethereum",
-        description: "ETH-USD",
+        title: "Bitcoin",
+        description: "BTC-USD",
         price: 1.4366,
         fee: 32400,
         status: "progress"
       },
       {
         id: 5,
-        title: "Ethereum",
-        description: "ETH-USD",
+        title: "Bitcoin",
+        description: "BTC-USD",
         price: 1.4366,
         fee: 32400,
         status: "progress"
       },
       {
         id: 6,
-        title: "Ethereum",
-        description: "ETH-USD",
+        title: "Bitcoin",
+        description: "BTC-USD",
         price: 1.4366,
         fee: 32400,
         status: "success"
