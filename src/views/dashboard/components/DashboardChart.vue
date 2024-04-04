@@ -193,7 +193,8 @@ export default defineComponent({
 
       if ((activeOption.value === 'revenue' && currency.value === 'USD') ||
           (activeOption.value === 'cost' && currency.value === 'BTC') ||
-          (activeOption.value === 'profit' && currency.value === 'USD')
+          (activeOption.value === 'profit' && currency.value === 'USD') ||
+          (activeOption.value === 'profit' && currency.value === 'BTC')
           ) {
         series.value = [{
           name: capitalizeFirstLetter(activeOption.value),
