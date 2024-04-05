@@ -529,7 +529,7 @@ const sendDemoEmail = () => {
             title="Job Stories vs. User Stories: The Misguided Debate"
             description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
             author="Anna Kalinina"
-            date="6 мая 2023"
+            date="6 MAY 2023"
         >
           <template v-slot:article-img>
             <img class="home-blog-article__img" src="../../assets/img/blog-article.png" alt="Article Img">
@@ -545,7 +545,7 @@ const sendDemoEmail = () => {
           description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
           img-author="/src/assets/img/blog-article-author.png"
           author="Anna Kalinina"
-          date="6 мая 2023"
+          date="6 MAY 2023"
         >
           <template v-slot:article-img>
             <img class="home-blog-article__img" src="../../assets/img/blog-article-2.png" alt="Article Img">
@@ -559,7 +559,7 @@ const sendDemoEmail = () => {
             title="Job Stories vs. User Stories: The Misguided Debate"
             description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
             author="Anna Kalinina"
-            date="6 мая 2023"
+            date="6 MAY 2023"
         >
           <template v-slot:article-img>
             <img class="home-blog-article__img" src="../../assets/img/blog-article-3.png" alt="Article Img">
