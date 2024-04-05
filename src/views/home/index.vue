@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import HomeArticle from './components/HomeArticle.vue';
 
 const modules = [Pagination, Navigation, Autoplay]
 const featuresModules = [Mousewheel, Navigation, Pagination, Autoplay]
@@ -515,6 +516,50 @@ const sendDemoEmail = () => {
         <div class="home-book-demo-img">
           <img src="../../assets/img/book-img.svg" alt="Book Your Demo Image">
         </div>
+      </div>
+    </div>
+
+    <div class="home-blog">
+      <h3 class="home-blog__title">News from AiDala</h3>
+      <div class="home-blog__description">
+        Revolutionizing Your Crypto Trading Journey. Elevate your strategies, unlock hidden opportunities, and gain a competitive edge with our exclusive features.
+      </div>
+      <div class="home-blog-articles">
+        <article class="home-blog-article">
+          <img class="home-blog-article__img" src="../../assets/img/blog-article.png" alt="Article Img">
+          <div class="home-blog-article__content">
+            <div>
+              <h4 class="home-blog-article__title">Job Stories vs. User Stories: The Misguided Debate</h4>
+              <div class="home-blog-article__description">
+                Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the
+              </div>
+              <div class="home-blog-article__author">
+                <img class="home-blog-article__author__img" src="../../assets/img/blog-article-author.png" alt="Author">
+                <div>Анна Калинина</div>
+                <div class="home-blog-article__author__separator">&#9679;</div>
+                <div>6 мая 2023</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <HomeArticle
+          imgSrc="/src/assets/img/blog-article.png"
+          title="Job Stories vs. User Stories: The Misguided Debate"
+          description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
+          img-author="/src/assets/img/blog-article-author.png"
+          author="Anna Kalinina"
+          date="6 мая 2023"
+        ></HomeArticle>
+
+        <HomeArticle
+            imgSrc="/src/assets/img/blog-article.png"
+            title="Job Stories vs. User Stories: The Misguided Debate"
+            description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
+            img-author="/src/assets/img/blog-article-author.png"
+            author="Anna Kalinina"
+            date="6 мая 2023"
+        ></HomeArticle>
       </div>
     </div>
 
