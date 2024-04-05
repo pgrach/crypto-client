@@ -526,10 +526,11 @@ const sendDemoEmail = () => {
       </div>
       <div class="home-blog-articles">
         <HomeArticle
-            title="Job Stories vs. User Stories: The Misguided Debate"
-            description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
-            author="Anna Kalinina"
-            date="6 MAY 2023"
+          :id="1"
+          title="Job Stories vs. User Stories: The Misguided Debate"
+          description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
+          author="Anna Kalinina"
+          date="6 MAY 2023"
         >
           <template v-slot:article-img>
             <img class="home-blog-article__img" src="../../assets/img/blog-article.png" alt="Article Img">
@@ -540,6 +541,7 @@ const sendDemoEmail = () => {
         </HomeArticle>
 
         <HomeArticle
+          :id="2"
           imgSrc="/src/assets/img/blog-article-2.png"
           title="Job Stories vs. User Stories: The Misguided Debate"
           description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
@@ -556,10 +558,11 @@ const sendDemoEmail = () => {
         </HomeArticle>
 
         <HomeArticle
-            title="Job Stories vs. User Stories: The Misguided Debate"
-            description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
-            author="Anna Kalinina"
-            date="6 MAY 2023"
+          :id="3"
+          title="Job Stories vs. User Stories: The Misguided Debate"
+          description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
+          author="Anna Kalinina"
+          date="6 MAY 2023"
         >
           <template v-slot:article-img>
             <img class="home-blog-article__img" src="../../assets/img/blog-article-3.png" alt="Article Img">

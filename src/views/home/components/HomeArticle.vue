@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps({
+  id: Number,
   imgSrc: String,
   title: String,
   description: String,
@@ -11,10 +12,14 @@ const props = defineProps({
 
 <template>
   <article class="home-blog-article">
-    <slot name="article-img"></slot>
+    <RouterLink :to="`/articles/${props.id}`">
+      <slot name="article-img"></slot>
+    </RouterLink>
     <div class="home-blog-article__content">
       <div>
-        <h4 class="home-blog-article__title">{{ props.title }}</h4>
+        <RouterLink :to="`/articles/${props.id}`">
+          <h4 class="home-blog-article__title">{{ props.title }}</h4>
+        </RouterLink>
         <div class="home-blog-article__description">{{ props.description }}</div>
         <div class="home-blog-article__author">
           <slot name="author-img"></slot>

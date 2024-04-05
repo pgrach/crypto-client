@@ -1,0 +1,95 @@
+.home-article
+
+  &__title
+    color: #fff
+    font-size: 40px
+    font-weight: 500
+    margin-top: 250px
+    text-align: center
+
+  &__author
+    display: flex
+    justify-content: center
+
+  &__img
+    height: auto
+    margin: 54px 0 44px
+    width: 100%
+    max-width: 1200px
+
+    &-container
+      display: flex
+      justify-content: center
+
+  &__content
+    padding-left: 300px
+    color: #fff
+    font-size: 20px
+    font-weight: 400
+    line-height: 28px
+    width: 100%
+    max-width: 1200px
+
+    &-container
+      display: flex
+      justify-content: center
+
+  &__recommendations
+    margin: 72px auto
+    width: 100%
+    max-width: 1200px
+
+    &__title
+      margin-bottom: 32px
+      color: #fff
+      font-size: 40px
+      font-weight: 500
+      word-wrap: break-word
+
+    &__articles
+      display: flex
+      justify-content: space-between
+
+  &__recommendation
+    position: relative
+    max-width: 390px
+    width: 100%
+    cursor: pointer
+
+    &__img
+      width: 100%
+      height: auto
+
+    &__title
+      position: absolute
+      bottom: 20px
+      left: 20px
+      color: #fff
+      font-size: 20px
+      font-weight: 400
+      line-height: 28px
+      width: calc(100% - 40px)
+
+@media only screen and (max-width: 1200px)
+  .home-article__content
+    padding: 0
+    font-size: 16px
+    line-height: 19px
+
+  .home-article__recommendations__articles
+    display: block
+
+  .home-article__recommendation
+    width: 100%
+    margin: 0 auto 16px
+
+@media only screen and (max-width: 500px)
+  .home-article__title
+    font-size: 32px
+
+  .home-article__recommendation__title
+    font-size: 16px
+    line-height: 18px
+    bottom: 15px
+    left: 15px
+    width: calc(100% - 30px)
