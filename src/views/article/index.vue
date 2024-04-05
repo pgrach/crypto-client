@@ -80,11 +80,13 @@ const routeToArticle = (id, view) => {
 
     <footer class="home-footer-container">
       <div class="home-footer">
-        <div class="home-footer-link">
+        <div @click="routeToHome()" class="home-footer-link cursor-pointer">
           AiDala.uk
         </div>
         <div class="home-footer-linkedin">
-          <img src="../../assets/img/linkedin_square.svg" alt="Linkedin Image">
+          <a href="https://www.linkedin.com/company/aidala-inc/about/" target="_blank">
+            <img src="../../assets/img/linkedin_square.svg" alt="Linkedin Image">
+          </a>
         </div>
       </div>
     </footer>

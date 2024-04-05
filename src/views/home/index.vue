@@ -580,7 +580,9 @@ const sendDemoEmail = () => {
           AiDala.uk
         </div>
         <div class="home-footer-linkedin">
-          <img src="../../assets/img/linkedin_square.svg" alt="Linkedin Image">
+          <a href="https://www.linkedin.com/company/aidala-inc/about/" target="_blank">
+            <img src="../../assets/img/linkedin_square.svg" alt="Linkedin Image">
+          </a>
         </div>
       </div>
     </footer>
