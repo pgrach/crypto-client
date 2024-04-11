@@ -32,6 +32,8 @@
     </div>
   </div>
 
+  <DashboardMarketData></DashboardMarketData>
+
 </template>
 
 <script lang="ts">
@@ -42,10 +44,12 @@ import DashboardBtc from '@/views/dashboard/components/DashboardBtc.vue';
 import TradeHistory from '@/views/dashboard/components/TradeHistory.vue';
 import DashboardCalculator from '@/views/dashboard/components/DashboardCalculator.vue';
 import moment from "moment/moment";
+import DashboardMarketData from '@/views/dashboard/components/DashboardMarketData.vue';
 
 export default defineComponent({
   name: "dashboard-main",
   components: {
+    DashboardMarketData,
     TradeHistory,
     DashboardBtc,
     DashboardChartStats,
