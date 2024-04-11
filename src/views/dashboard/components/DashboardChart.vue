@@ -85,7 +85,7 @@ export default defineComponent({
     watch(() => currency, () => { fetchChart() }, { deep: true })
 
     const getDates = computed(() => {
-      return moment(props.startDate).format('ll') + ' - ' + moment(props.startDate).format('ll');
+      return moment(props.startDate).format('ll') + ' - ' + moment(props.endDate).format('ll');
     });
     const setTimeMode = (val) => {
       timeMode.value = val;
