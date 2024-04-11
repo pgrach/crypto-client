@@ -82,17 +82,14 @@ export default defineComponent({
       refreshChart();
     });
 
-    const chartOptions = (
-        color: string = "primary",
-        height: string = "auto"
-    ): ApexOptions => {
+    const chartOptions = (): ApexOptions => {
       const chartColor = props.chartColor;
       const backColor = props.backColor;
 
       return {
         chart: {
           fontFamily: "inherit",
-          height: height,
+          height: chartHeight,
           type: "radialBar",
         },
         plotOptions: {
