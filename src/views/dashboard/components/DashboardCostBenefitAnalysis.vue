@@ -1,21 +1,7 @@
 <template>
-  <div class="card p-8">
-    <!--begin::Header-->
-    <div class="d-flex justify-content-start align-items-center border-0">
-      <img
-          alt="Logo"
-          :src="getAssetPath('media/img/btc.png')"
-          class="btc-logo"
-      />
-      <p class="text-gray-600 fw-bold fs-3 ms-7">
-        Bitcoin Price(BTC)
-      </p>
-    </div>
-    <div class="btc-price">
-      $ {{ btcPrice.toLocaleString() }}
-    </div>
-    <div class="btc-hint">
-      change of <span class="text-success">{{ volumeBtc.toFixed(2) }}%</span> over the past 24 hours
+  <div class="card">
+    <div class="dashboard-cost-benefit-analysis">
+      <div class="dashboard-cost-benefit-analysis__title">Cost-Benefit Analysis</div>
     </div>
   </div>
 </template>
@@ -26,7 +12,7 @@ import { defineComponent, ref, onBeforeMount } from "vue";
 import axios from 'axios';
 
 export default defineComponent({
-  name: "dashboard-btc",
+  name: "dashboard-cost-benefit-analysis",
   components: {},
   setup() {
 
@@ -60,23 +46,11 @@ export default defineComponent({
 </script>
 
 <style lang="sass">
-.btc
+.dashboard-cost-benefit-analysis
 
-  &-logo
-    width: 48px
-    height: auto
-
-  &-price
-    margin-top: 30px
-    font-size: 34px
-    color: #000
+  &__title
+    color: #7E8299
+    font-size: 18px
     font-weight: 600
-    line-height: 34px
-
-  &-hint
-    margin-top: 30px
-    color: #A1A5B7
-    font-size: 14px
-    font-weight: 600
-    line-height: 14px
+    line-height: 18px
 </style>

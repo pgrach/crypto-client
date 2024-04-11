@@ -22,7 +22,7 @@
     <div class="col-xl-4 dashboard-stats">
         <DashboardChartStats/>
 
-        <DashboardBtc class="mb-8" />
+        <DashboardCostBenefitAnalysis class="mb-8" />
     </div>
   </div>
 
@@ -40,7 +40,7 @@
 import { defineComponent, reactive, ref } from "vue";
 import DashboardChart from '@/views/dashboard/components/DashboardChart.vue';
 import DashboardChartStats from '@/views/dashboard/components/DashboardChartStats.vue';
-import DashboardBtc from '@/views/dashboard/components/DashboardBtc.vue';
+import DashboardCostBenefitAnalysis from '@/views/dashboard/components/DashboardCostBenefitAnalysis.vue';
 import TradeHistory from '@/views/dashboard/components/TradeHistory.vue';
 import DashboardCalculator from '@/views/dashboard/components/DashboardCalculator.vue';
 import moment from "moment/moment";
@@ -51,7 +51,7 @@ export default defineComponent({
   components: {
     DashboardMarketData,
     TradeHistory,
-    DashboardBtc,
+    DashboardCostBenefitAnalysis,
     DashboardChartStats,
     DashboardChart,
     DashboardCalculator
