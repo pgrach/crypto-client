@@ -3,9 +3,9 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bold fs-3 mb-1">Highlights on chart</span>
+        <span class="card-label fw-bold fs-3 mb-1">Mining Financial Summary</span>
         <span class="text-muted mt-1 fw-semibold fs-7"
-          >Latest social statistics</span
+          >Stats for Selected Period</span
         >
       </h3>
     </div>
@@ -31,9 +31,9 @@
               <tbody>
                 <tr>
                   <td>
-                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Sum of costs</div>
+                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Total Revenue</div>
                   </td>
-                  <td class="text-end">
+                  <td class="text-end dashboard-chart-stats-value">
                     <KTIcon
                         icon-name="arrow-up"
                         icon-class="fs-3 text-success"
@@ -47,9 +47,9 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Margin %</div>
+                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Total Costs </div>
                   </td>
-                  <td class="text-end">
+                  <td class="text-end dashboard-chart-stats-value">
                     <KTIcon
                         icon-name="arrow-up"
                         icon-class="fs-3 text-success"
@@ -62,9 +62,9 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">***</div>
+                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Cumulative Net Profit</div>
                   </td>
-                  <td class="text-end">
+                  <td class="text-end dashboard-chart-stats-value">
                     <KTIcon
                         icon-name="arrow-down"
                         icon-class="fs-3 text-danger"
@@ -78,9 +78,9 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">****</div>
+                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Average Cost of Production per Bitcoin (USD)</div>
                   </td>
-                  <td class="text-end">
+                  <td class="text-end dashboard-chart-stats-value">
                     <KTIcon
                         icon-name="arrow-up"
                         icon-class="fs-3 text-success"
@@ -118,3 +118,8 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="sass">
+.dashboard-chart-stats-value
+  width: 200px
+</style>
