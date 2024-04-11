@@ -8,36 +8,24 @@
         >
       </h3>
 
-      <div class="card-toolbar chart-filters">
-        <div class="button-primary" @click="setTimeMode('yearly')" :class="{'active': timeMode === 'yearly'}">Year</div>
-        <div class="button-primary" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
-        <div class="button-primary" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
-        <div class="button-primary" @click="setTimeMode('daily')" :class="{'active': timeMode === 'daily'}">Day</div>
-<!--        <div>-->
-<!--          <el-date-picker-->
-<!--              v-model="dateRange"-->
-<!--              type="daterange"-->
-<!--              range-separator="To"-->
-<!--              start-placeholder="Start date"-->
-<!--              end-placeholder="End date"-->
-<!--          />-->
-<!--        </div>-->
-      </div>
-    </div>
-
-    <div class="chart-options__container">
       <div class="chart-options">
         <DashboardChartOption @click="setActiveOption('revenue')" :active="activeOption === 'revenue'" label="Revenue" :img="'media/img/chart_revenue.svg'"></DashboardChartOption>
         <DashboardChartOption @click="setActiveOption('cost')" :active="activeOption === 'cost'" label="Costs" :img="'media/img/chart_costs.svg'"></DashboardChartOption>
         <DashboardChartOption @click="setActiveOption('profit')" :active="activeOption === 'profit'" label="Profit" :img="'media/img/chart_profit.svg'"></DashboardChartOption>
       </div>
+    </div>
 
-      <div class="chart-options__currency">
-        <div class="dashboard-calculator-form__item">
-          <div class="label" style="text-align: right;">Currency</div>
-          <select class="form-select" aria-label="Select miner name" v-model="currency" @change="onCurrencyChange()">
-            <option v-for="(item, index) in currencies" :value="item" :key="index">{{ item }}</option>
-          </select>
+    <div class="chart-filters__container">
+      <div class="card-toolbar chart-filters">
+        <div class="d-flex chart-currencies">
+          <div v-for="(item, index) in currencies" :key="index" class="button-primary" @click="setCurrency(item)" :class="{'active': currency === item}">{{ item }}</div>
+        </div>
+
+        <div class="d-flex chart-times">
+          <div class="button-primary" @click="setTimeMode('yearly')" :class="{'active': timeMode === 'yearly'}">Year</div>
+          <div class="button-primary" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
+          <div class="button-primary" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
+          <div class="button-primary" @click="setTimeMode('daily')" :class="{'active': timeMode === 'daily'}">Day</div>
         </div>
       </div>
     </div>
@@ -96,16 +84,18 @@ export default defineComponent({
         { deep: true }
     )
 
+    watch(() => currency, () => { fetchChart() }, { deep: true })
+
     const getDates = computed(() => {
       return moment(props.startDate).format('ll') + ' - ' + moment(props.startDate).format('ll');
     });
-
-    const onCurrencyChange = () => {
-      fetchChart();
-    }
     const setTimeMode = (val) => {
       timeMode.value = val;
       fetchChart();
+    }
+
+    const setCurrency = (item) => {
+      currency.value = item;
     }
 
     const setActiveOption = (option) => {
@@ -372,41 +362,49 @@ export default defineComponent({
       setActiveOption,
       currencies,
       currency,
-      onCurrencyChange,
-      getDates
+      getDates,
+      setCurrency
     };
   },
 });
 </script>
 
-<style>
-.chart-filters .button-primary {
-  color: #A1A5B7;
-  background: rgba(241, 241, 242, 1);
-  margin-left: 5px;
-}
-.chart-filters .button-primary.active {
-  color: #fff;
-  background: #3E97FF;
-}
+<style lang="sass">
+.chart-filters
+  display: flex
+  justify-content: space-between
 
-.chart-options {
-  display: flex;
-}
-.chart-options__container {
-  display: flex;
-  padding: 0 2.25rem;
-  justify-content: space-between;
-  margin-top: 30px;
-}
+  .button-primary
+    transition: .2s linear
 
-@media only screen and (max-width: 500px) {
-  .chart-options__container {
-    display: block;
-  }
+.chart-times .button-primary
+  color: #A1A5B7
+  background: rgba(241, 241, 242, 1)
+  margin-left: 5px
 
-  .chart-options__currency {
-    margin-top: 20px;
-  }
-}
+.chart-times .button-primary.active
+  color: #fff
+  background: #3E97FF
+
+.chart-currencies .button-primary
+  color: #7E8299
+  background: #fff
+  margin-left: 5px
+
+.chart-currencies .button-primary.active
+  color: #7E8299
+  background: #F1F1F2
+
+.chart-options
+  display: flex
+
+.chart-filters__container
+  padding: 0 2.25rem
+  margin-top: 30px
+
+
+@media only screen and (max-width: 500px)
+  .chart-filters__container
+    display: block
+
 </style>
