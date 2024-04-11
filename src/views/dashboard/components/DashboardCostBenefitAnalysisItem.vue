@@ -62,20 +62,14 @@ export default defineComponent({
     });
 
     onBeforeMount(() => {
-      Object.assign(
-          chart.value,
-          chartOptions(props.chartColor, chartHeight)
-      );
+      Object.assign(chart.value, chartOptions());
     });
 
     const refreshChart = () => {
       if (!chartRef.value) {
         return;
       }
-
-      chartRef.value.updateOptions(
-          chartOptions(props.chartColor, chartHeight)
-      );
+      chartRef.value.updateOptions(chartOptions());
     };
 
     watch(themeMode, () => {
