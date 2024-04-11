@@ -2,9 +2,9 @@
   <div class="card" :class="widgetClasses">
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bold fs-3 mb-1">Deliveries by Category</span>
+        <span class="card-label fw-bold fs-3 mb-1">Financial overview</span>
         <span class="text-muted fw-semibold fs-7 mt-1"
-        >Total 424,567 deliveries</span
+        >{{ getDates }}</span
         >
       </h3>
 
@@ -56,7 +56,7 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent, onBeforeMount, onMounted, ref, watch } from "vue";
+import { computed, defineComponent, onBeforeMount, onMounted, ref, watch } from "vue";
 import type { ApexOptions } from "apexcharts";
 import { getCSSVariableValue } from "@/assets/ts/_utils";
 import type VueApexCharts from "vue3-apexcharts";
@@ -95,6 +95,10 @@ export default defineComponent({
         },
         { deep: true }
     )
+
+    const getDates = computed(() => {
+      return moment(props.startDate).format('ll') + ' - ' + moment(props.startDate).format('ll');
+    });
 
     const onCurrencyChange = () => {
       fetchChart();
@@ -186,7 +190,7 @@ export default defineComponent({
       const offsetData = [];
       categories.value = [];
       response.forEach(item => {
-        data.push(item.value);
+        data.push(Number(item.value));
         offsetData.push(Number(item.value) + Number(item.offset));
         categories.value.push(getCategoryLabel(item.time))
       })
@@ -198,10 +202,12 @@ export default defineComponent({
           ) {
         series.value = [{
           name: capitalizeFirstLetter(activeOption.value),
-          data
+          data,
+          type: 'bar'
         }, {
-          name: 'Offset ' + capitalizeFirstLetter(activeOption.value),
-          data: offsetData
+          name: 'Offset',
+          data: offsetData,
+          type: 'area'
         }];
       } else {
         series.value = [{
@@ -239,232 +245,11 @@ export default defineComponent({
       const borderColor = getCSSVariableValue("--bs-gray-200");
       const baseColor = activeOption.value === 'cost' ? 'rgba(233, 181, 0, 1)' :
                         activeOption.value === 'profit' ? 'rgba(71, 190, 125, 1)' : getCSSVariableValue("--bs-primary");
-      const secondaryColor = 'rgba(71,95,190,0.4)';
-      let chart = {};
-      if (timeMode.value === 'yearly') {
-        chart = {
-          chart: {
-            fontFamily: "inherit",
-            type: "bar",
-            zoom: {
-              type: 'x',
-              enabled: true,
-              autoScaleYaxis: true
-            },
-            toolbar: {
-              show: true,
-            },
-          },
-          plotOptions: {
-            bar: {
-              colors: {
-                ranges: [{
-                  from: -Infinity,
-                  to: 0,
-                  color: '#FF0000'
-                }]
-              },
-              horizontal: false,
-              columnWidth: "10px",
-              borderRadius: 5,
-            },
-          },
-          legend: {
-            show: false,
-          },
-          dataLabels: {
-            enabled: false,
-          },
-          stroke: {
-            show: true,
-            width: 2,
-            colors: ["transparent"],
-          },
-          xaxis: {
-            type: 'datetime',
-            categories: categories.value,
-            axisBorder: {
-              show: false,
-            },
-            axisTicks: {
-              show: false,
-            },
-            labels: {
-              style: {
-                colors: labelColor,
-                fontSize: "12px",
-              },
-            },
-          },
-          yaxis: {
-            labels: {
-              style: {
-                colors: labelColor,
-                fontSize: "12px",
-              },
-              formatter: function (val) {
-                return val.toFixed(2);
-              },
-            },
-          },
-          fill: {
-            opacity: 1,
-          },
-          states: {
-            normal: {
-              filter: {
-                type: "none",
-                value: 0,
-              },
-            },
-            hover: {
-              filter: {
-                type: "none",
-                value: 0,
-              },
-            },
-            active: {
-              allowMultipleDataPointsSelection: false,
-              filter: {
-                type: "none",
-                value: 0,
-              },
-            },
-          },
-          tooltip: {
-            style: {
-              fontSize: "12px",
-            },
-            y: {
-              formatter: function (val) {
-                return val.toString();
-              },
-            },
-          },
-          colors: [baseColor, secondaryColor],
-          grid: {
-            borderColor: borderColor,
-            strokeDashArray: 4,
-            yaxis: {
-              lines: {
-                show: true,
-              },
-            },
-          },
-        }
-      } else {
-        chart = {
-          chart: {
-            fontFamily: "inherit",
-              type: "bar",
-              zoom: {
-                enabled: false
-              },
-              toolbar: {
-                show: false,
-              },
-          },
-          plotOptions: {
-            bar: {
-              colors: {
-                ranges: [{
-                  from: -Infinity,
-                  to: 0,
-                  color: '#FF0000'
-                }]
-              },
-              horizontal: false,
-                  columnWidth: "10px",
-                  borderRadius: 5,
-            },
-          },
-          legend: {
-            show: false,
-          },
-          dataLabels: {
-            enabled: false,
-          },
-          stroke: {
-            show: true,
-                width: 2,
-                colors: ["transparent"],
-          },
-          xaxis: {
-              categories: categories.value,
-              axisBorder: {
-              show: false,
-            },
-            axisTicks: {
-              show: false,
-            },
-            labels: {
-              style: {
-                colors: labelColor,
-                    fontSize: "12px",
-              },
-            },
-          },
-          yaxis: {
-            labels: {
-              style: {
-                colors: labelColor,
-                    fontSize: "12px",
-              },
-              formatter: function (val) {
-                return val.toFixed(2);
-              },
-            },
-          },
-          fill: {
-            opacity: 1,
-          },
-          states: {
-            normal: {
-              filter: {
-                type: "none",
-                    value: 0,
-              },
-            },
-            hover: {
-              filter: {
-                type: "none",
-                    value: 0,
-              },
-            },
-            active: {
-              allowMultipleDataPointsSelection: false,
-                  filter: {
-                type: "none",
-                    value: 0,
-              },
-            },
-          },
-          tooltip: {
-            style: {
-              fontSize: "12px",
-            },
-            y: {
-              formatter: function (val) {
-                return val.toString();
-              },
-            },
-          },
-          colors: [baseColor, secondaryColor],
-              grid: {
-          borderColor: borderColor,
-              strokeDashArray: 4,
-              yaxis: {
-            lines: {
-              show: true,
-            },
-          },
-        },
-        };
-      }
+      const secondaryColor = 'rgba(71 ,95 ,190 , 0.2)';
+
       return {
         chart: {
           fontFamily: "inherit",
-          type: "bar",
           zoom: {
             type: 'x',
             enabled: true,
@@ -484,15 +269,15 @@ export default defineComponent({
               }]
             },
             horizontal: false,
-            columnWidth: "10px",
-            borderRadius: 5,
+            columnWidth: "7px",
+            borderRadius: 3,
           },
         },
         legend: {
           show: false,
         },
         dataLabels: {
-          enabled: false,
+          enabled: false
         },
         stroke: {
           show: true,
@@ -551,12 +336,14 @@ export default defineComponent({
           },
         },
         tooltip: {
+          shared: true,
+          intersect: false,
           style: {
             fontSize: "12px",
           },
           y: {
             formatter: function (val) {
-              return val.toString();
+              return val.toFixed(5);
             },
           },
         },
@@ -585,7 +372,8 @@ export default defineComponent({
       setActiveOption,
       currencies,
       currency,
-      onCurrencyChange
+      onCurrencyChange,
+      getDates
     };
   },
 });

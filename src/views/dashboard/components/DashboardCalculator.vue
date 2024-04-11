@@ -15,7 +15,7 @@
 
       <div class="dashboard-calculator-form">
         <div class="dashboard-calculator-form__item">
-          <div class="label">Miner</div>
+          <div class="label">Model</div>
 
           <select class="form-select" aria-label="Select miner name" v-model="miner" @change="setMinerData()">
             <option v-for="item in miners" :value="item" :key="item.id">{{ item?.miner_name }}</option>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="dashboard-calculator-form__item">
-          <div class="label">Power (W)</div>
+          <div class="label">Energy Cost (cents per kWh)</div>
           <Field
               type="text"
               class="form-control"
@@ -57,7 +57,7 @@
         </div>
 
         <div class="dashboard-calculator-form__item">
-          <div class="label">Power Cost (USD Cents)</div>
+          <div class="label">Cost of hardware ($)</div>
           <Field
               type="text"
               class="form-control"
@@ -68,7 +68,7 @@
         </div>
 
         <div class="dashboard-calculator-form__item">
-          <div class="label">Dates</div>
+          <div class="label">Mining Period</div>
           <el-date-picker
               v-model="dateRange"
               type="daterange"
@@ -166,7 +166,7 @@ export default defineComponent({
   justify-content: space-between;
   flex-wrap: wrap;
   padding-bottom: 30px;
-  gap: 10px;
+  gap: 20px;
 }
 
 .dashboard-calculator-form__input {
