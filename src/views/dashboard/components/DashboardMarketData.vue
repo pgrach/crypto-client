@@ -111,7 +111,7 @@ export default defineComponent({
   &-item
 
     &__container
-      margin: 0 60px
+      margin-left: 80px
       display: flex
       justify-content: center
       align-content: start
@@ -135,7 +135,6 @@ export default defineComponent({
     display: block
 
   .live-market-data-item__container
-    margin: 0 0
+    margin: 20px 20px 0 0
     justify-content: start
-    margin-top: 20px
 </style>

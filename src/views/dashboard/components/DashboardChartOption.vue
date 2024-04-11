@@ -73,4 +73,9 @@ export default defineComponent({
   line-height: 14px
   margin-top: 7px
   text-align: center
+
+@media only screen and (max-width: 700px)
+  .chart-option
+    margin: 20px 0
+    width: 100%
 </style>

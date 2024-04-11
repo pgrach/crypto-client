@@ -1,11 +1,9 @@
 <template>
   <div class="card" :class="widgetClasses">
-    <div class="card-header border-0 pt-5">
+    <div class="dashboard-chart-card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bold fs-3 mb-1">Financial overview</span>
-        <span class="text-muted fw-semibold fs-7 mt-1"
-        >{{ getDates }}</span
-        >
+        <div class="card-label fw-bold fs-3 mb-1 mt-3">Financial overview</div>
+        <div class="text-muted fw-semibold fs-7 mt-2">{{ getDates }}</div>
       </h3>
 
       <div class="chart-options">
@@ -17,11 +15,11 @@
 
     <div class="chart-filters__container">
       <div class="card-toolbar chart-filters">
-        <div class="d-flex chart-currencies">
+        <div class="chart-currencies">
           <div v-for="(item, index) in currencies" :key="index" class="button-primary" @click="setCurrency(item)" :class="{'active': currency === item}">{{ item }}</div>
         </div>
 
-        <div class="d-flex chart-times">
+        <div class="chart-times">
           <div class="button-primary" @click="setTimeMode('yearly')" :class="{'active': timeMode === 'yearly'}">Year</div>
           <div class="button-primary" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
           <div class="button-primary" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
@@ -370,12 +368,21 @@ export default defineComponent({
 </script>
 
 <style lang="sass">
+.dashboard-chart-card-header
+  display: flex
+  justify-content: space-between
+  padding: 0 2.25rem
+  border-bottom: 1px solid var(--bs-card-border-color)
+
 .chart-filters
   display: flex
   justify-content: space-between
 
   .button-primary
     transition: .2s linear
+
+.chart-times
+  display: flex
 
 .chart-times .button-primary
   color: #A1A5B7
@@ -385,6 +392,9 @@ export default defineComponent({
 .chart-times .button-primary.active
   color: #fff
   background: #3E97FF
+
+.chart-currencies
+  display: flex
 
 .chart-currencies .button-primary
   color: #7E8299
@@ -403,8 +413,23 @@ export default defineComponent({
   margin-top: 30px
 
 
-@media only screen and (max-width: 500px)
+@media only screen and (max-width: 700px)
   .chart-filters__container
+    margin-top: 0px
+
+  .dashboard-chart-card-header
     display: block
+
+  .chart-filters
+    display: block
+
+  .chart-options, .chart-times, .chart-currencies
+    display: block
+
+  .chart-times
+    margin-top: 20px
+
+  .chart-times .button-primary, .chart-currencies .button-primary
+    margin: 5px 0
 
 </style>

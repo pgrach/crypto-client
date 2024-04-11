@@ -3,10 +3,8 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bold fs-3 mb-1">Trade history</span>
-        <span class="text-muted mt-1 fw-semibold fs-7"
-        >Total 424</span
-        >
+        <span class="card-label fw-bold fs-3 mb-1">Analytics</span>
+        <span class="text-muted mt-1 fw-semibold fs-7">Updated 37 minutes ago</span>
       </h3>
     </div>
     <!--end::Header-->
@@ -24,7 +22,7 @@
               <!--begin::Table head-->
               <thead>
                 <tr class="border-0">
-                  <th class="p-0 w-50px text-muted fw-semibold">Market</th>
+                  <th class="p-0 w-50px text-muted fw-semibold">BTC sold daily</th>
                   <th class="p-0 min-w-150px"></th>
                   <th class="p-0 min-w-140px text-end text-muted">Amount/Price</th>
                   <th class="p-0 min-w-110px text-end text-muted">Total Fee</th>
