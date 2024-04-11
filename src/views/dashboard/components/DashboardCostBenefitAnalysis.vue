@@ -4,11 +4,22 @@
       <div class="dashboard-cost-benefit-analysis__title">Cost-Benefit Analysis</div>
 
       <div class="dashboard-cost-benefit-analysis-container">
-        <DashboardCostBenefitAnalysisItem :change="45" label="Hardware payback" state="up" />
+        <DashboardCostBenefitAnalysisItem
+            :change="45"
+            label="Hardware payback"
+            state="up"
+            chart-color="rgba(62, 151, 255, 1)"
+            back-color="rgba(238, 246, 255, 1)"
+        />
 
         <div class="dashboard-cost-benefit-analysis__line"></div>
 
-        <DashboardCostBenefitAnalysisItem :change="60" label="Buying vs mining" />
+        <DashboardCostBenefitAnalysisItem
+            :change="60"
+            label="Buying vs mining"
+            chart-color="rgba(80, 20, 208, 1)"
+            back-color="rgba(248, 245, 255, 1)"
+        />
       </div>
     </div>
   </div>
