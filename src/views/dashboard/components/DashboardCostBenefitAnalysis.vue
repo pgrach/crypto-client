@@ -2,6 +2,14 @@
   <div class="card">
     <div class="dashboard-cost-benefit-analysis">
       <div class="dashboard-cost-benefit-analysis__title">Cost-Benefit Analysis</div>
+
+      <div class="dashboard-cost-benefit-analysis-container">
+        <DashboardCostBenefitAnalysisItem :change="45" label="Hardware payback" state="up" />
+
+        <div class="dashboard-cost-benefit-analysis__line"></div>
+
+        <DashboardCostBenefitAnalysisItem :change="60" label="Buying vs mining" />
+      </div>
     </div>
   </div>
 </template>
@@ -10,10 +18,11 @@
 import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, ref, onBeforeMount } from "vue";
 import axios from 'axios';
+import DashboardCostBenefitAnalysisItem from '@/views/dashboard/components/DashboardCostBenefitAnalysisItem.vue';
 
 export default defineComponent({
   name: "dashboard-cost-benefit-analysis",
-  components: {},
+  components: {DashboardCostBenefitAnalysisItem},
   setup() {
 
     const btcPrice = ref(67980.08);
@@ -47,10 +56,19 @@ export default defineComponent({
 
 <style lang="sass">
 .dashboard-cost-benefit-analysis
+  padding: 30px 20px
 
   &__title
     color: #7E8299
     font-size: 18px
     font-weight: 600
     line-height: 18px
+    margin-bottom: 30px
+
+  &__line
+    border-top: 1px #E1E3EA dotted
+    height: 1px
+    width: 100%
+    margin: 20px 0
 </style>
+
