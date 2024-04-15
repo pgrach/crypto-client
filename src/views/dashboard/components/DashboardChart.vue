@@ -122,16 +122,20 @@ export default defineComponent({
           user_id: 0,
           time_mode: timeMode.value,
           currency: currency.value,
-          start_date: props.startDate,
-          end_date: props.endDate,
+          time_filter: {
+            start_date: props.startDate,
+            end_date: props.endDate
+          },
           ...minerValue
         }
       } else {
         body = {
           user_id: 0,
           time_mode: timeMode.value,
-          start_date: props.startDate,
-          end_date: props.endDate
+          time_filter: {
+            start_date: props.startDate,
+            end_date: props.endDate
+          },
         }
       }
 

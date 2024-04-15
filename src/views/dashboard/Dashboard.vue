@@ -65,7 +65,7 @@ export default defineComponent({
       quantity: 1
     });
 
-    const startDate = ref(moment(new Date()).subtract(7, 'days').format("YYYY-MM-DDTHH:mm:ss"));
+    const startDate = ref(moment(new Date()).subtract(1, 'years').format("YYYY-MM-DDTHH:mm:ss"));
     const endDate = ref(moment(new Date()).format("YYYY-MM-DDTHH:mm:ss"));
 
     const setMiner = (val) => {

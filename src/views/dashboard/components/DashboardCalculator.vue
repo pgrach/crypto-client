@@ -106,7 +106,7 @@ export default defineComponent({
     const hashrate = ref(198);
     const power = ref(5445);
     const powerCost = ref(3);
-    const dateRange = ref([moment(new Date()).subtract(7, 'days').toDate(), new Date()]);
+    const dateRange = ref([moment(new Date()).subtract(1, 'years').toDate(), new Date()]);
 
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
