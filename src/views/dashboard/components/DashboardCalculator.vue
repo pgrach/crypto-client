@@ -2,7 +2,7 @@
   <div class="card dashboard-calculator" :class="widgetClasses">
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bold fs-3 mb-1">Calculator</span>
+        <span class="card-label fw-bold fs-3 mb-1">Historical Calculation</span>
       </h3>
 
       <div>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="dashboard-calculator-form__item">
-          <div class="label">Energy Cost (cents per kWh)</div>
+          <div class="label">Power (W)</div>
           <Field
               type="text"
               class="form-control"
@@ -57,13 +57,24 @@
         </div>
 
         <div class="dashboard-calculator-form__item">
+          <div class="label">Energy Cost (cents per kWh)</div>
+          <Field
+              type="text"
+              class="form-control"
+              placeholder="Energy Cost (cents per kWh)"
+              name="Energy Cost (cents per kWh)"
+              v-model="powerCost"
+          />
+        </div>
+
+        <div class="dashboard-calculator-form__item">
           <div class="label">Cost of hardware ($)</div>
           <Field
               type="text"
               class="form-control"
-              placeholder="Power Cost (USD Cents)"
-              name="Power Cost (USD Cents)"
-              v-model="powerCost"
+              placeholder="Cost of hardware ($)"
+              name="Cost of hardware ($)"
+              v-model="costOfHw"
           />
         </div>
 
@@ -77,6 +88,7 @@
               end-placeholder="End date"
           />
         </div>
+
       </div>
 
     </div>
@@ -106,6 +118,7 @@ export default defineComponent({
     const hashrate = ref(198);
     const power = ref(5445);
     const powerCost = ref(3);
+    const costOfHw = ref(6.45);
     const dateRange = ref([moment(new Date()).subtract(1, 'years').toDate(), new Date()]);
 
     const setMinerData = () => {
@@ -119,7 +132,8 @@ export default defineComponent({
         power_cost: powerCost.value,
         power: power.value,
         hash_rate : hashrate.value,
-        quantity: quantity.value
+        quantity: quantity.value,
+        cost_of_hw: costOfHw.value
       }
       ctx.emit('setMiner', minerData);
     }
@@ -151,6 +165,7 @@ export default defineComponent({
       hashrate,
       power,
       powerCost,
+      costOfHw,
       dateRange,
       emitMiner,
       miners,
@@ -163,14 +178,10 @@ export default defineComponent({
 <style>
 .dashboard-calculator-form {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   flex-wrap: wrap;
   padding-bottom: 30px;
   gap: 20px;
-}
-
-.dashboard-calculator-form__input {
-  width: 250px;
 }
 
 .dashboard-calculator-form__item .label {

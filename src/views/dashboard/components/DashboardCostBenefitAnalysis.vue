@@ -5,7 +5,7 @@
 
       <div class="dashboard-cost-benefit-analysis-container">
         <DashboardCostBenefitAnalysisItem
-            :change="45"
+            :change="hardwarePayback"
             label="Hardware payback"
             state="up"
             chart-color="rgba(62, 151, 255, 1)"
@@ -15,7 +15,7 @@
         <div class="dashboard-cost-benefit-analysis__line"></div>
 
         <DashboardCostBenefitAnalysisItem
-            :change="60"
+            :change="buyVsMinePayback"
             label="Buying vs mining"
             chart-color="rgba(80, 20, 208, 1)"
             back-color="rgba(248, 245, 255, 1)"
@@ -27,38 +27,75 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent, ref, onBeforeMount } from "vue";
+import { defineComponent, ref, onBeforeMount, watch } from "vue";
 import axios from 'axios';
 import DashboardCostBenefitAnalysisItem from '@/views/dashboard/components/DashboardCostBenefitAnalysisItem.vue';
+import moment from 'moment/moment';
 
 export default defineComponent({
   name: "dashboard-cost-benefit-analysis",
-  components: {DashboardCostBenefitAnalysisItem},
-  setup() {
+  components: {
+    DashboardCostBenefitAnalysisItem
+  },
+  props: {
+    miner: Object,
+    startDate: String,
+    endDate: String,
+    timeMode: String,
+    currency: String,
+  },
+  setup(props, ctx) {
 
-    const btcPrice = ref(67980.08);
-    const volumeBtc = ref(0.17748118);
+    const buyVsMinePayback = ref(0);
+    const hardwarePayback = ref(0);
 
     onBeforeMount(() => {
-      fetchBTCPrice();
+      fetchCostBenefitAnalysis();
     })
 
-    const fetchBTCPrice = () => {
-      const api = 'https://api.blockchain.com/v3/exchange/tickers/BTC-USD';
+    watch(
+        () => props.miner,
+        (newValue, oldValue) => {
+          fetchCostBenefitAnalysis();
+        },
+        { deep: true }
+    )
 
-      axios.get(api)
+    const fetchCostBenefitAnalysis = () => {
+      const host = import.meta.env.VITE_APP_API_HOST;
+      const endpoint = 'cost_benefit_analysis';
+
+      const minerValue = props && props.miner && props.miner ? props.miner : null;
+      delete minerValue.date_range;
+      let body;
+
+      if (minerValue) {
+        body = {
+          user_id: 0,
+          time_mode: props.timeMode,
+          currency: props.currency,
+          time_filter: {
+            start_date: moment(props.startDate).format("YYYY-MM-DDTHH:mm:ss"),
+            end_date: moment(props.endDate).format("YYYY-MM-DDTHH:mm:ss")
+          },
+          ...minerValue
+        }
+      }
+
+      axios.post(`${host}${endpoint}`, body)
           .then(function (response) {
-            btcPrice.value = response?.data?.last_trade_price;
-            volumeBtc.value = response?.data?.volume_24h;
+            buyVsMinePayback.value = response?.data?.buy_vs_mine_payback ? response.data.buy_vs_mine_payback : 0;
+            hardwarePayback.value = response?.data?.hardware_payback ? response.data.hardware_payback : 0;
           })
           .catch(function (error) {
             console.log('Chart Error: ', error);
+            // setRandomChart();
           });
     }
 
     return {
-      volumeBtc,
-      btcPrice,
+      buyVsMinePayback,
+      hardwarePayback,
       getAssetPath,
     };
   },

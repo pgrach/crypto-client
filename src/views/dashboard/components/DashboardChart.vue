@@ -59,6 +59,7 @@ export default defineComponent({
     startDate: String,
     endDate: String,
   },
+  emits: ['emitTimeMode', 'emitCurrency'],
   components: { DashboardChartOption },
   setup(props, ctx) {
     const chartRef = ref<typeof VueApexCharts | null>(null);
@@ -89,11 +90,13 @@ export default defineComponent({
     });
     const setTimeMode = (val) => {
       timeMode.value = val;
+      ctx.emit('emitTimeMode', val);
       fetchChart();
     }
 
     const setCurrency = (item) => {
       currency.value = item;
+      ctx.emit('emitCurrency', item);
     }
 
     const setActiveOption = (option) => {
@@ -106,7 +109,7 @@ export default defineComponent({
     }
 
     onBeforeMount(() => {
-      fetchChart();
+      // fetchChart();
     });
 
     const fetchChart = () => {
@@ -117,26 +120,15 @@ export default defineComponent({
       delete minerValue.date_range;
       let body;
 
-      if (minerValue) {
-        body = {
-          user_id: 0,
-          time_mode: timeMode.value,
-          currency: currency.value,
-          time_filter: {
-            start_date: props.startDate,
-            end_date: props.endDate
-          },
-          ...minerValue
-        }
-      } else {
-        body = {
-          user_id: 0,
-          time_mode: timeMode.value,
-          time_filter: {
-            start_date: props.startDate,
-            end_date: props.endDate
-          },
-        }
+      body = {
+        user_id: 0,
+        time_mode: timeMode.value,
+        currency: currency.value,
+        time_filter: {
+          start_date: moment(props.startDate).format("YYYY-MM-DDTHH:mm:ss"),
+          end_date: moment(props.endDate).format("YYYY-MM-DDTHH:mm:ss")
+        },
+        ...minerValue
       }
 
       axios.post(`${host}${endpoint}`, body)

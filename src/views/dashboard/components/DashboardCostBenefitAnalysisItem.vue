@@ -52,18 +52,21 @@ export default defineComponent({
 
     const chartRef = ref<typeof VueApexCharts | null>(null);
     const chart = ref<ApexOptions>({});
-    const store = useThemeStore();
+    const series = ref([]);
     const chartHeight = 170;
 
-    const series = ref([props.change]);
-
-    const themeMode = computed(() => {
-      return store.mode;
-    });
-
-    onBeforeMount(() => {
+    watch(
+        () => props.change,
+        (newValue, oldValue) => {
+          setChart();
+        },
+        { deep: true }
+    )
+    const setChart = () => {
+      series.value = [props.change];
       Object.assign(chart.value, chartOptions());
-    });
+      refreshChart();
+    }
 
     const refreshChart = () => {
       if (!chartRef.value) {
@@ -71,10 +74,6 @@ export default defineComponent({
       }
       chartRef.value.updateOptions(chartOptions());
     };
-
-    watch(themeMode, () => {
-      refreshChart();
-    });
 
     const chartOptions = (): ApexOptions => {
       const chartColor = props.chartColor;
