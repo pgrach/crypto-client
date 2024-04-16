@@ -101,7 +101,7 @@ export default defineComponent({
               },
               value: {
                 offsetY: -2,
-                fontSize: '20px',
+                fontSize: '16px',
                 fontWeight: 600,
               }
             }
