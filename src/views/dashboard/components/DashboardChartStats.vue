@@ -34,14 +34,11 @@
                     <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Total Revenue</div>
                   </td>
                   <td class="text-end dashboard-chart-stats-value">
-                    <KTIcon
-                        icon-name="arrow-up"
-                        icon-class="fs-3 text-success"
-                    />
+                    <DashboardArrow :state="totalRevenue > 0 ? 'up' : 'down'"></DashboardArrow>
                     <span
-                        class="fs-4 fw-bold"
+                        class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
-                      55,700
+                      {{ totalRevenue }}
                     </span>
                   </td>
                 </tr>
@@ -50,14 +47,12 @@
                     <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Total Costs </div>
                   </td>
                   <td class="text-end dashboard-chart-stats-value">
-                    <KTIcon
-                        icon-name="arrow-up"
-                        icon-class="fs-3 text-success"
-                    />
-                    <span class="fs-4 fw-bold">
-                      7.8
+                    <DashboardArrow :state="totalCosts > 0 ? 'up' : 'down'"></DashboardArrow>
+                    <span
+                        class="fs-4 fw-bold dashboard-chart-stats-value__margin"
+                    >
+                      {{ totalCosts }}
                     </span>
-                    <span class="fs-4 text-gray-600 fw-bold">/ 10</span>
                   </td>
                 </tr>
                 <tr>
@@ -65,14 +60,11 @@
                     <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Cumulative Net Profit</div>
                   </td>
                   <td class="text-end dashboard-chart-stats-value">
-                    <KTIcon
-                        icon-name="arrow-down"
-                        icon-class="fs-3 text-danger"
-                    />
+                    <DashboardArrow :state="totalProfit > 0 ? 'up' : 'down'"></DashboardArrow>
                     <span
-                        class="fs-4 fw-bold"
+                        class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
-                      730k
+                      {{ totalProfit }}
                     </span>
                   </td>
                 </tr>
@@ -81,14 +73,11 @@
                     <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Average Cost of Production per Bitcoin (USD)</div>
                   </td>
                   <td class="text-end dashboard-chart-stats-value">
-                    <KTIcon
-                        icon-name="arrow-up"
-                        icon-class="fs-3 text-success"
-                    />
+                    <DashboardArrow :state="averageCost > 0 ? 'up' : 'down'"></DashboardArrow>
                     <span
-                        class="fs-4 fw-bold"
+                        class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
-                      2.09$
+                      {{ averageCost }}
                     </span>
                   </td>
                 </tr>
@@ -106,14 +95,27 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import DashboardArrow from "@/views/dashboard/components/DashboardArrow.vue";
 
 export default defineComponent({
   name: "dashboard-chart-stats",
-  components: {},
+  components: {
+    DashboardArrow
+  },
   setup() {
+
+    const totalRevenue = ref(55700);
+    const totalCosts = ref(-13200);
+    const totalProfit = ref(65400);
+    const averageCost = ref(20);
+
     return {
       getAssetPath,
+      totalRevenue,
+      totalCosts,
+      totalProfit,
+      averageCost
     };
   },
 });
@@ -122,4 +124,7 @@ export default defineComponent({
 <style lang="sass">
 .dashboard-chart-stats-value
   width: 200px
+
+.dashboard-chart-stats-value__margin
+  margin-left: 5px
 </style>
