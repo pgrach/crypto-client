@@ -529,7 +529,7 @@ const sendDemoEmail = () => {
         <HomeArticle
           v-for="item in articles"
           :key="item.id"
-          :id="1"
+          :hash="item.hash"
           :title="item.title"
           :description="item.description"
           :author="item.author"

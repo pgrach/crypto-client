@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/articles/:id",
+    path: "/articles/:hash",
     name: "Article",
     component: Article,
     meta: {

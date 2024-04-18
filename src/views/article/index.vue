@@ -21,7 +21,7 @@ onMounted(() => {
 
 
 watch(
-    () => route.params.id,
+    () => route.params.hash,
     (newValue, oldValue) => {
       setArticle();
     },
@@ -29,12 +29,12 @@ watch(
 )
 
 const setArticle = () => {
-  article.value = articles.find(item => item.id == route.params.id)
+  article.value = articles.find(item => item.hash == route.params.hash)
 }
 
-const routeToArticle = (id, view) => {
+const routeToArticle = (hash, view) => {
   view.scrollIntoView({ behavior: 'instant' });
-  router.push({ path: `/articles/${id}` });
+  router.push({ path: `/articles/${hash}` });
 }
 </script>
 
@@ -75,7 +75,7 @@ const routeToArticle = (id, view) => {
 
       <div class="home-article__recommendations__articles">
 
-        <div v-for="item in articles" class="home-article__recommendation" @click="routeToArticle(item.id, refArticle)" :key="item.id">
+        <div v-for="item in articles" class="home-article__recommendation" @click="routeToArticle(item.hash, refArticle)" :key="item.id">
           <img class="home-article__recommendation__img" src="@/assets/img/blog-article.png" alt="Article Image">
           <h2 class="home-article__recommendation__title">{{ item.title }}</h2>
         </div>

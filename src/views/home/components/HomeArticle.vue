@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  id: Number,
+  hash: Number,
   imgSrc: String,
   title: String,
   description: String,
@@ -12,7 +12,7 @@ const props = defineProps({
 
 <template>
   <article class="home-blog-article">
-    <RouterLink :to="`/articles/${props.id}`">
+    <RouterLink :to="`/articles/${props.hash}`">
       <slot name="article-img"></slot>
     </RouterLink>
     <div class="home-blog-article__content">
