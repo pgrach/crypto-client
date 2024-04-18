@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import HomeArticle from './components/HomeArticle.vue';
+import { articles } from '../article/articles';
 
 const modules = [Pagination, Navigation, Autoplay]
 const featuresModules = [Mousewheel, Navigation, Pagination, Autoplay]
@@ -526,51 +527,22 @@ const sendDemoEmail = () => {
       </div>
       <div class="home-blog-articles">
         <HomeArticle
+          v-for="item in articles"
+          :key="item.id"
           :id="1"
-          title="Job Stories vs. User Stories: The Misguided Debate"
-          description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
-          author="Anna Kalinina"
-          date="6 MAY 2023"
+          :title="item.title"
+          :description="item.description"
+          :author="item.author"
+          :date="item.date"
         >
           <template v-slot:article-img>
             <img class="home-blog-article__img" src="../../assets/img/blog-article.png" alt="Article Img">
           </template>
           <template v-slot:author-img>
-            <img class="home-blog-article__author__img" src="../../assets/img/blog-article-author.png" alt="Author">
+            <img class="home-blog-article__author__img" src="../../assets/img/blog-author-pavel.png" alt="Author">
           </template>
         </HomeArticle>
 
-        <HomeArticle
-          :id="2"
-          imgSrc="/src/assets/img/blog-article-2.png"
-          title="Job Stories vs. User Stories: The Misguided Debate"
-          description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
-          img-author="/src/assets/img/blog-article-author.png"
-          author="Anna Kalinina"
-          date="6 MAY 2023"
-        >
-          <template v-slot:article-img>
-            <img class="home-blog-article__img" src="../../assets/img/blog-article-2.png" alt="Article Img">
-          </template>
-          <template v-slot:author-img>
-            <img class="home-blog-article__author__img" src="../../assets/img/blog-article-author.png" alt="Author">
-          </template>
-        </HomeArticle>
-
-        <HomeArticle
-          :id="3"
-          title="Job Stories vs. User Stories: The Misguided Debate"
-          description="Prologue: Who should spend the time to make a killer portfolio website? Consider this: What’s your unique UX superpower? What’s the"
-          author="Anna Kalinina"
-          date="6 MAY 2023"
-        >
-          <template v-slot:article-img>
-            <img class="home-blog-article__img" src="../../assets/img/blog-article-3.png" alt="Article Img">
-          </template>
-          <template v-slot:author-img>
-            <img class="home-blog-article__author__img" src="../../assets/img/blog-article-author.png" alt="Author">
-          </template>
-        </HomeArticle>
       </div>
     </div>
 
