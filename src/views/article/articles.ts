@@ -18,25 +18,25 @@ export const articles = [
         Here's a glimpse of what we're working on currently:
         <br/><br/>
         
-        <img style="max-width: 700px; width: 100%;" src="../public/images/financial-focus-1.png" alt="">
+        <img style="max-width: 700px; width: 100%;" src="/images/financial-focus-1.png" alt="">
         
         <br/><br/>
         Advanced Profitability Calculator: By analyzing historical Bitcoin data, we're developing insights into how investments might have played out, tailored to unique mining setup of anyone. We believe current mining calculators are inadequate; therefore, we are offering this improved version for free.
         <br/><br/>
         
-        <img style="max-width: 700px; width: 100%;"  src="../public/images/financial-focus-2.png" alt="">
+        <img style="max-width: 700px; width: 100%;"  src="/images/financial-focus-2.png" alt="">
         
         <br/><br/>
         Investment Performance Visualization: We're exploring ways to visually present each miner's investment journey, simplifying complex information and highlighting key factors behind ROI.
         <br/><br/>
         
-        <img style="max-width: 700px; width: 100%;"  src="../public/images/financial-focus-3.png" alt="">
+        <img style="max-width: 700px; width: 100%;"  src="/images/financial-focus-3.png" alt="">
         
         <br/><br/>
         Selling Strategies Analysis: Timing and “allocation strategy” (HODL-strategy) are key in Bitcoin. We want users to be able to compare different selling approaches.
         <br/><br/>
             
-        <img style="max-width: 700px; width: 100%;"  src="../public/images/financial-focus-4.png" alt="">
+        <img style="max-width: 700px; width: 100%;"  src="/images/financial-focus-4.png" alt="">
         
         <br/><br/>
         All that leads us to more juicy features like Real-time Profitability Monitoring, Hardware Financial Diagnostics, Cost-Efficiency Balancing, and Investment Decision Support.
