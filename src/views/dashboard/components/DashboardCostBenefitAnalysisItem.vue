@@ -1,22 +1,10 @@
 <template>
   <div class="cost-benefits-item">
     <div class="cost-benefits-item__options">
-      <div  class="cost-benefits-item__options__change">
-        <KTIcon
-            v-if="props.state === 'up'"
-            icon-name="arrow-up"
-            icon-class="fs-3 text-success"
-        />
-        <KTIcon
-            v-else
-            icon-name="arrow-down"
-            icon-class="fs-3 text-danger"
-        />
-        <span class="cost-benefits-item__options__change__value">{{ props.change }}%</span>
-      </div>
-      <div class="cost-benefits-item__options__label">
+      <slot name="cost-benefit-img"></slot>
+      <span class="cost-benefits-item__options__label">
         {{ props.label }}
-      </div>
+      </span>
     </div>
     <div class="cost-benefits-item__chart">
       <apexchart
@@ -138,29 +126,25 @@ export default defineComponent({
   height: 80px
   justify-content: space-between
 
+  &__img
+    width: 20px
+
   &__options
+    display: flex
+    align-items: center
     margin-top: 8px
-    padding: 10px 10px
+    padding: 12px 12px
     box-sizing: border-box
     border: 1px #E1E3EA dotted
     width: 130px
     height: 60px
 
-    &__change
-      color: #181C32
-      font-size: 16px
-      font-weight: 600
-      line-height: 16px
-
-      &__value
-        margin-left: 7px
-
     &__label
-      color: #A1A5B7
+      color: #181C32
       font-size: 12px
       font-weight: 600
       line-height: 12px
-      margin-top: 7px
+      margin-left: 12px
 
   &__chart
     width: 50%

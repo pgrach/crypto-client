@@ -10,17 +10,25 @@
             :state="hardwarePayback >= 0 ? 'up' : 'down'"
             chart-color="rgba(62, 151, 255, 1)"
             back-color="rgba(238, 246, 255, 1)"
-        />
+        >
+          <template v-slot:cost-benefit-img>
+            <img class="cost-benefits-item__img" :src="getAssetPath('media/img/hardware_payback.svg')" alt="Hardware Payback Img">
+          </template>
+        </DashboardCostBenefitAnalysisItem>
 
         <div class="dashboard-cost-benefit-analysis__line"></div>
 
         <DashboardCostBenefitAnalysisItem
             :change="buyVsMinePayback"
-            label="Buying vs mining"
+            label="Mine vs Buy"
             :state="hardwarePayback >= 0 ? 'up' : 'down'"
             chart-color="rgba(80, 20, 208, 1)"
             back-color="rgba(248, 245, 255, 1)"
-        />
+        >
+          <template v-slot:cost-benefit-img>
+            <img class="cost-benefits-item__img" :src="getAssetPath('media/img/mine_buy.svg')" alt="Mine Buy Img">
+          </template>
+        </DashboardCostBenefitAnalysisItem>
       </div>
     </div>
   </div>
