@@ -7,7 +7,7 @@
         <DashboardCostBenefitAnalysisItem
             :change="hardwarePayback"
             label="Hardware payback"
-            :state="hardwarePayback > 0 ? 'up' : 'down'"
+            :state="hardwarePayback >= 0 ? 'up' : 'down'"
             chart-color="rgba(62, 151, 255, 1)"
             back-color="rgba(238, 246, 255, 1)"
         />
@@ -17,7 +17,7 @@
         <DashboardCostBenefitAnalysisItem
             :change="buyVsMinePayback"
             label="Buying vs mining"
-            :state="hardwarePayback > 0 ? 'up' : 'down'"
+            :state="hardwarePayback >= 0 ? 'up' : 'down'"
             chart-color="rgba(80, 20, 208, 1)"
             back-color="rgba(248, 245, 255, 1)"
         />

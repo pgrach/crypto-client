@@ -23,7 +23,13 @@
     </div>
 
     <div class="col-xl-4 dashboard-stats">
-        <DashboardChartStats/>
+        <DashboardChartStats
+            :miner="miner"
+            :start-date="startDate"
+            :end-date="endDate"
+            :time-mode="timeMode"
+            :currency="currency"
+        />
 
         <DashboardCostBenefitAnalysis
             :miner="miner"

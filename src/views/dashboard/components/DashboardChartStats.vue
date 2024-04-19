@@ -34,7 +34,7 @@
                     <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Total Revenue</div>
                   </td>
                   <td class="text-end dashboard-chart-stats-value">
-                    <DashboardArrow :state="totalRevenue > 0 ? 'up' : 'down'"></DashboardArrow>
+                    <DashboardArrow :state="totalRevenue >= 0 ? 'up' : 'down'"></DashboardArrow>
                     <span
                         class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
@@ -47,7 +47,7 @@
                     <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Total Costs </div>
                   </td>
                   <td class="text-end dashboard-chart-stats-value">
-                    <DashboardArrow :state="totalCosts > 0 ? 'up' : 'down'"></DashboardArrow>
+                    <DashboardArrow :state="totalCosts >= 0 ? 'up' : 'down'"></DashboardArrow>
                     <span
                         class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
@@ -60,7 +60,7 @@
                     <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Cumulative Net Profit</div>
                   </td>
                   <td class="text-end dashboard-chart-stats-value">
-                    <DashboardArrow :state="totalProfit > 0 ? 'up' : 'down'"></DashboardArrow>
+                    <DashboardArrow :state="totalProfit >= 0 ? 'up' : 'down'"></DashboardArrow>
                     <span
                         class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
@@ -73,7 +73,7 @@
                     <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Average Cost of Production per Bitcoin (USD)</div>
                   </td>
                   <td class="text-end dashboard-chart-stats-value">
-                    <DashboardArrow :state="averageCost > 0 ? 'up' : 'down'"></DashboardArrow>
+                    <DashboardArrow :state="averageCost >= 0 ? 'up' : 'down'"></DashboardArrow>
                     <span
                         class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
@@ -95,20 +95,76 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent, ref } from "vue";
+import { defineComponent, onBeforeMount, ref, watch } from "vue";
 import DashboardArrow from "@/views/dashboard/components/DashboardArrow.vue";
+import moment from 'moment';
+import axios from 'axios';
 
 export default defineComponent({
   name: "dashboard-chart-stats",
+  props: {
+    miner: Object,
+    startDate: String,
+    endDate: String,
+    timeMode: String,
+    currency: String,
+  },
   components: {
     DashboardArrow
   },
-  setup() {
+  setup(props, ctx) {
 
-    const totalRevenue = ref(55700);
-    const totalCosts = ref(-13200);
-    const totalProfit = ref(65400);
-    const averageCost = ref(20);
+    const totalRevenue = ref(0);
+    const totalCosts = ref(0);
+    const totalProfit = ref(0);
+    const averageCost = ref(0);
+
+    onBeforeMount(() => {
+      fetchSummary();
+    })
+
+    watch(
+        () => props.miner,
+        (newValue, oldValue) => {
+          fetchSummary();
+        },
+        { deep: true }
+    )
+
+
+    const fetchSummary = () => {
+      const host = import.meta.env.VITE_APP_API_HOST;
+      const endpoint = 'summary';
+
+      const minerValue = props && props.miner && props.miner ? props.miner : null;
+      delete minerValue.date_range;
+      let body;
+
+      if (minerValue) {
+        body = {
+          user_id: 0,
+          time_mode: props.timeMode,
+          currency: props.currency,
+          time_filter: {
+            start_date: moment(props.startDate).format("YYYY-MM-DDTHH:mm:ss"),
+            end_date: moment(props.endDate).format("YYYY-MM-DDTHH:mm:ss")
+          },
+          ...minerValue
+        }
+      }
+
+      axios.post(`${host}${endpoint}`, body)
+          .then(function (response) {
+            totalRevenue.value = response?.data?.total_rev_usd ? response.data.total_rev_usd : 0;
+            totalCosts.value = response?.data?.total_cost_usd ? response.data.total_cost_usd : 0;
+            totalProfit.value = response?.data?.total_profit_usd ? response.data.total_profit_usd : 0;
+            averageCost.value = response?.data?.avg_cost_per_btc ? response.data.avg_cost_per_btc : 0;
+          })
+          .catch(function (error) {
+            console.log('Chart Error: ', error);
+            // setRandomChart();
+          });
+    }
 
     return {
       getAssetPath,
