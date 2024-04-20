@@ -119,7 +119,7 @@ export default defineComponent({
     const power = ref(5445);
     const powerCost = ref(3);
     const costOfHw = ref(6.45);
-    const dateRange = ref([moment(new Date()).subtract(1, 'years').toDate(), ref(moment(new Date()).subtract(2, 'months').format("YYYY-MM-DDTHH:mm:ss"))]);
+    const dateRange = ref([moment(new Date()).subtract(15, 'months').toDate(), moment(new Date()).subtract(13, 'months').format("YYYY-MM-DDTHH:mm:ss")]);
 
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;

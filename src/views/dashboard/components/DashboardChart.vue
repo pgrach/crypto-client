@@ -71,13 +71,14 @@ export default defineComponent({
     const series = ref([]);
     const categories = ref([]);
 
+    const chartLabels = ref([]);
+
     const currencies = ref(['USD', 'BTC']);
     const currency = ref('BTC');
 
     watch(
         () => props.miner,
         (newValue, oldValue) => {
-          console.log(newValue, oldValue, ' miner value WATCH')
           fetchChart();
         },
         { deep: true }
@@ -136,7 +137,6 @@ export default defineComponent({
             setChart(response.data.data);
           })
           .catch(function (error) {
-            console.log('Chart Error: ', error);
             // setRandomChart();
           });
     }
@@ -177,6 +177,7 @@ export default defineComponent({
         data.push(Number(item.value));
         offsetData.push(Number(item.value) + Number(item.offset));
         categories.value.push(getCategoryLabel(item.time))
+        chartLabels.value.push({ time: moment(item.time).valueOf(), label: item.label })
       })
 
       if ((activeOption.value === 'revenue' && currency.value === 'USD') ||
@@ -223,6 +224,11 @@ export default defineComponent({
 
       chartRef.value.updateOptions(chartOptions());
     };
+
+    const getChartLabel = (val) => {
+      const found = chartLabels.value.find(item => item.time === val);
+      return found.label;
+    }
 
     const chartOptions = (): ApexOptions => {
       const labelColor = getCSSVariableValue("--bs-gray-500");
@@ -328,6 +334,11 @@ export default defineComponent({
           y: {
             formatter: function (val) {
               return val.toFixed(5);
+            },
+          },
+          x: {
+            formatter: function (val) {
+              return getChartLabel(val);
             },
           },
         },
