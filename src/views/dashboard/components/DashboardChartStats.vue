@@ -155,10 +155,10 @@ export default defineComponent({
 
       axios.post(`${host}${endpoint}`, body)
           .then(function (response) {
-            totalRevenue.value = response?.data?.total_rev_usd ? Number(response.data.total_rev_usd).toFixed(4) : 0;
-            totalCosts.value = response?.data?.total_cost_usd ? Number(response.data.total_cost_usd).toFixed(4) : 0;
-            totalProfit.value = response?.data?.total_profit_usd ? Number(response.data.total_profit_usd).toFixed(4) : 0;
-            averageCost.value = response?.data?.avg_cost_per_btc ? Number(response.data.avg_cost_per_btc).toFixed(4) : 0;
+            totalRevenue.value = response?.data?.total_rev_usd ? Number(response.data.total_rev_usd).toFixed(4) as any : 0;
+            totalCosts.value = response?.data?.total_cost_usd ? Number(response.data.total_cost_usd).toFixed(4) as any : 0;
+            totalProfit.value = response?.data?.total_profit_usd ? Number(response.data.total_profit_usd).toFixed(4) as any : 0;
+            averageCost.value = response?.data?.avg_cost_per_btc ? Number(response.data.avg_cost_per_btc).toFixed(4) as any : 0;
           })
           .catch(function (error) {
             console.log('Chart Error: ', error);
