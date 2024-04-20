@@ -22,7 +22,7 @@
               <!--begin::Table head-->
               <thead>
                 <tr class="border-0">
-                  <th class="p-0 w-50px text-muted fw-semibold">BTC sold daily</th>
+                  <th class="p-0 text-muted fw-semibold">BTC sold daily</th>
                   <th class="p-0 min-w-150px"></th>
                   <th class="p-0 min-w-140px text-end text-muted">Amount/Price</th>
                   <th class="p-0 min-w-110px text-end text-muted">Total Fee</th>
