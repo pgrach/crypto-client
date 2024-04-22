@@ -10,6 +10,10 @@
       ></DashboardCalculator>
     </div>
 
+    <div class="g-xl-8">
+      <DashboardTradingAnalysis></DashboardTradingAnalysis>
+    </div>
+
     <div class="col-xl-8">
       <DashboardChart
           widget-classes="card-xl-stretch"
@@ -61,10 +65,12 @@ import TradeHistory from '@/views/dashboard/components/TradeHistory.vue';
 import DashboardCalculator from '@/views/dashboard/components/DashboardCalculator.vue';
 import moment from "moment/moment";
 import DashboardMarketData from '@/views/dashboard/components/DashboardMarketData.vue';
+import DashboardTradingAnalysis from '@/views/dashboard/components/DashboardTradingAnalysis.vue';
 
 export default defineComponent({
   name: "dashboard-main",
   components: {
+    DashboardTradingAnalysis,
     DashboardMarketData,
     TradeHistory,
     DashboardCostBenefitAnalysis,
