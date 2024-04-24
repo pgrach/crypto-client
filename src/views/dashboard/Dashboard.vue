@@ -46,11 +46,11 @@
     </div>
   </div>
 
-  <div class="row g-5 g-xl-8">
-    <div>
-      <TradeHistory></TradeHistory>
-    </div>
-  </div>
+<!--  <div class="row g-5 g-xl-8">-->
+<!--    <div>-->
+<!--      <TradeHistory></TradeHistory>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <DashboardMarketData></DashboardMarketData>
 
