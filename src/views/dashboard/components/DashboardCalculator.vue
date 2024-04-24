@@ -6,7 +6,17 @@
       </h3>
 
       <div>
-        <button class="button-primary" @click="emitMiner()">Calculate</button>
+        <button class="button-primary button-primary__loader"
+                :class="{'button-primary__loader_loading': loading}"
+                :disabled="loading" @click="emitMiner()">
+          <span class="button-primary__loader__label">
+            Calculate
+          </span>
+          <span
+            v-if="loading"
+            class="spinner-border spinner-border-sm loader-left"
+          ></span>
+        </button>
       </div>
 
     </div>
@@ -100,6 +110,7 @@ export default defineComponent({
   props: {
     widgetClasses: String,
     height: Number,
+    loading: Boolean,
   },
   components: {
     Field,
@@ -176,6 +187,26 @@ export default defineComponent({
   flex-wrap: wrap;
   padding-bottom: 30px;
   gap: 20px;
+}
+
+.button-primary__loader {
+  width: 140px;
+  height: 37px;
+  padding: 0;
+  text-align: start;
+  transition: .3s linear;
+}
+
+.button-primary__loader_loading {
+  opacity: 0.8;
+}
+
+.button-primary__loader__label {
+  margin-left: 40px;
+}
+
+.loader-left {
+  margin-left: 5px;
 }
 
 .dashboard-calculator-form__item .label {

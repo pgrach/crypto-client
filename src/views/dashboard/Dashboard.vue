@@ -7,6 +7,7 @@
           :height="330"
           :miner="miner"
           @setMiner="setMiner"
+          :loading="loading"
       ></DashboardCalculator>
     </div>
 
@@ -80,6 +81,8 @@ export default defineComponent({
   },
   setup() {
 
+    const loading = ref(false);
+
     const miner = ref({
       power_cost: 12,
       power: 5000,
@@ -95,9 +98,13 @@ export default defineComponent({
     const endDate = ref(moment(new Date()).subtract(13, 'months').format("YYYY-MM-DDTHH:mm:ss"));
 
     const setMiner = (val) => {
+      loading.value = true;
       miner.value = val;
       startDate.value = val.date_range[0];
       endDate.value = val.date_range[1];
+      setTimeout(() => {
+        loading.value = false;
+      }, 800)
     }
 
     const setTimeMode = (val) => {
@@ -116,7 +123,8 @@ export default defineComponent({
       timeMode,
       currency,
       setTimeMode,
-      setCurrency
+      setCurrency,
+      loading
     }
   }
 });
