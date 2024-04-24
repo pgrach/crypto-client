@@ -3,6 +3,8 @@ import { createPinia } from "pinia";
 import { Tooltip } from "bootstrap";
 import App from "./App.vue";
 
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 /*
 TIP: To get started with clean router change path to @/router/clean.ts.
  */
@@ -20,6 +22,8 @@ import { initKtIcon } from "@/core/plugins/keenthemes";
 import "@/core/plugins/prismjs";
 
 const app = createApp(App);
+
+app.component('VueDatePicker', VueDatePicker);
 
 app.use(createPinia());
 app.use(router);

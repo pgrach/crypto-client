@@ -78,15 +78,9 @@
           />
         </div>
 
-        <div class="dashboard-calculator-form__item">
+        <div class="dashboard-calculator-form__item dashboard-calculator-form__date-range">
           <div class="label">Mining Period</div>
-          <el-date-picker
-              v-model="dateRange"
-              type="daterange"
-              range-separator="To"
-              start-placeholder="Start date"
-              end-placeholder="End date"
-          />
+          <VueDatePicker v-model="dateRange" range />
         </div>
 
       </div>
@@ -192,6 +186,10 @@ export default defineComponent({
   line-height: 14px;
 }
 
+.dashboard-calculator-form__date-range {
+  width: 300px;
+}
+
 @media only screen and (max-width: 1100px) {
   .dashboard-calculator-form {
     display: block;
@@ -199,6 +197,10 @@ export default defineComponent({
 
   .dashboard-calculator-form__item {
     margin-bottom: 15px;
+  }
+
+  .dashboard-calculator-form__date-range {
+    width: 200px;
   }
 }
 </style>
