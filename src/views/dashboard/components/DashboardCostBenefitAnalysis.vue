@@ -7,7 +7,6 @@
         <DashboardCostBenefitAnalysisItem
             :change="hardwarePayback"
             label="Hardware payback"
-            :state="hardwarePayback >= 0 ? 'up' : 'down'"
             chart-color="rgba(62, 151, 255, 1)"
             back-color="rgba(238, 246, 255, 1)"
         >
@@ -21,7 +20,6 @@
         <DashboardCostBenefitAnalysisItem
             :change="buyVsMinePayback"
             label="Mine vs Buy"
-            :state="hardwarePayback >= 0 ? 'up' : 'down'"
             chart-color="rgba(80, 20, 208, 1)"
             back-color="rgba(248, 245, 255, 1)"
         >
@@ -71,7 +69,26 @@ export default defineComponent({
         { deep: true }
     )
 
+    watch(
+        () => props.timeMode,
+        (newValue, oldValue) => {
+          fetchCostBenefitAnalysis();
+        },
+        { deep: true }
+    )
+
+    watch(
+        () => props.sellMode,
+        (newValue, oldValue) => {
+          fetchCostBenefitAnalysis();
+        },
+        { deep: true }
+    )
+
     const fetchCostBenefitAnalysis = () => {
+      if (props.timeMode === "daily" && props.sellMode === "monthly") {
+        return;
+      }
       const host = import.meta.env.VITE_APP_API_HOST;
       const endpoint = 'cost_benefit_analysis';
 

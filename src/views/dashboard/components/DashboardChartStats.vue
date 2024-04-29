@@ -132,8 +132,26 @@ export default defineComponent({
         { deep: true }
     )
 
+    watch(
+        () => props.timeMode,
+        (newValue, oldValue) => {
+          fetchSummary();
+        },
+        { deep: true }
+    )
+
+    watch(
+        () => props.sellMode,
+        (newValue, oldValue) => {
+          fetchSummary();
+        },
+        { deep: true }
+    )
 
     const fetchSummary = () => {
+      if (props.timeMode === "daily" && props.sellMode === "monthly") {
+        return;
+      }
       const host = import.meta.env.VITE_APP_API_HOST;
       const endpoint = 'summary';
 

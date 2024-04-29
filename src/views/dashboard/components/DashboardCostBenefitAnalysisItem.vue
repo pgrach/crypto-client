@@ -31,7 +31,6 @@ export default defineComponent({
   props: {
     change: Number,
     label: String,
-    state: String,
     chartColor: String,
     backColor: String,
   },
@@ -69,6 +68,14 @@ export default defineComponent({
 
       return {
         chart: {
+          animations: {
+            enabled: false,
+            speed: 0,
+            dynamicAnimation: {
+              enabled: false,
+              speed: 0
+            }
+          },
           fontFamily: "inherit",
           height: chartHeight,
           type: "radialBar",
