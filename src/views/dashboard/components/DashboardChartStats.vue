@@ -107,6 +107,7 @@ export default defineComponent({
     startDate: String,
     endDate: String,
     timeMode: String,
+    sellMode: String,
     currency: String,
   },
   components: {
@@ -144,6 +145,7 @@ export default defineComponent({
         body = {
           user_id: 0,
           time_mode: props.timeMode,
+          sell_mode: props.sellMode,
           currency: props.currency,
           time_filter: {
             start_date: moment(props.startDate).format("YYYY-MM-DDTHH:mm:ss"),

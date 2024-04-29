@@ -12,7 +12,10 @@
     </div>
 
     <div class="g-xl-8">
-      <DashboardTradingAnalysis></DashboardTradingAnalysis>
+      <DashboardTradingAnalysis
+          :time-mode="timeMode"
+          @emit-sell-mode="setSellMode"
+      ></DashboardTradingAnalysis>
     </div>
 
     <div class="col-xl-8">
@@ -22,6 +25,7 @@
           :miner="miner"
           :start-date="startDate"
           :end-date="endDate"
+          :sell-mode="sellMode"
           @emit-currency="setCurrency"
           @emit-time-mode="setTimeMode"
       ></DashboardChart>
@@ -33,6 +37,7 @@
             :start-date="startDate"
             :end-date="endDate"
             :time-mode="timeMode"
+            :sell-mode="sellMode"
             :currency="currency"
         />
 
@@ -41,6 +46,7 @@
             :start-date="startDate"
             :end-date="endDate"
             :time-mode="timeMode"
+            :sell-mode="sellMode"
             :currency="currency"
             class="mb-8"
         />
@@ -91,7 +97,8 @@ export default defineComponent({
       cost_of_hw: 6.45
     });
 
-    const timeMode = ref('yearly');
+    const timeMode = ref('monthly');
+    const sellMode = ref('daily');
     const currency = ref('BTC');
 
     const startDate = ref(moment(new Date()).subtract(15, 'months').format("YYYY-MM-DDTHH:mm:ss"));
@@ -111,6 +118,10 @@ export default defineComponent({
       timeMode.value = val;
     }
 
+    const setSellMode = (val) => {
+      sellMode.value = val;
+    }
+
     const setCurrency = (val) => {
       currency.value = val;
     }
@@ -121,7 +132,9 @@ export default defineComponent({
       startDate,
       endDate,
       timeMode,
+      sellMode,
       currency,
+      setSellMode,
       setTimeMode,
       setCurrency,
       loading

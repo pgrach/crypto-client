@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedWeek}" >
+      <div v-if="timeMode === 'monthly'" class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedWeek}" >
         <div class="form-check form-check-custom form-check-success form-check-solid">
           <div class="dashboard-trading-analysis__option__check-line"></div>
           <input class="form-check-input" type="checkbox" v-model="selectedWeek"/>
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <div class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedMonth}" >
+      <div v-if="timeMode === 'monthly'" class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedMonth}" >
         <div class="form-check form-check-custom form-check-success form-check-solid">
           <div class="dashboard-trading-analysis__option__check-line"></div>
           <input class="form-check-input" type="checkbox" v-model="selectedMonth"/>
@@ -108,20 +108,32 @@ import moment from "moment";
 export default defineComponent({
   name: "dashboard-trading-analysis",
   props: {
-    widgetClasses: String,
-    height: Number,
+    timeMode: Object,
   },
-  emits: ['setTradingAnalysisOption'],
+  emits: ['emitSellMode'],
   setup(props, ctx) {
     const selectedDay = ref(true);
     const selectedWeek = ref(false);
     const selectedMonth = ref(false);
+
+    watch(
+        () => props.timeMode,
+        (newValue, oldValue) => {
+          if (newValue === 'daily') {
+            selectedDay.value = true
+            selectedWeek.value = false
+            selectedMonth.value = false
+          }
+        },
+        { deep: true }
+    )
 
     watch(() => selectedDay.value,
         (newValue, oldValue) => {
           if (newValue === true) {
             selectedWeek.value = false
             selectedMonth.value = false
+            ctx.emit('emitSellMode', 'daily');
           }
         })
 
@@ -130,6 +142,7 @@ export default defineComponent({
           if (newValue === true) {
             selectedDay.value = false
             selectedMonth.value = false
+            ctx.emit('emitSellMode', 'weekly');
           }
         })
 
@@ -138,6 +151,7 @@ export default defineComponent({
           if (newValue === true) {
             selectedDay.value = false
             selectedWeek.value = false
+            ctx.emit('emitSellMode', 'monthly');
           }
         })
 

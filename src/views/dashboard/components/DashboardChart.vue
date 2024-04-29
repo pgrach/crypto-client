@@ -20,9 +20,7 @@
         </div>
 
         <div class="chart-times">
-          <div class="button-primary" @click="setTimeMode('yearly')" :class="{'active': timeMode === 'yearly'}">Year</div>
           <div class="button-primary" @click="setTimeMode('monthly')" :class="{'active': timeMode === 'monthly'}">Month</div>
-          <div class="button-primary" @click="setTimeMode('weekly')" :class="{'active': timeMode === 'weekly'}">Week</div>
           <div class="button-primary" @click="setTimeMode('daily')" :class="{'active': timeMode === 'daily'}">Day</div>
         </div>
       </div>
@@ -58,13 +56,14 @@ export default defineComponent({
     miner: Object,
     startDate: String,
     endDate: String,
+    sellMode: String,
   },
   emits: ['emitTimeMode', 'emitCurrency'],
   components: { DashboardChartOption },
   setup(props, ctx) {
     const chartRef = ref<typeof VueApexCharts | null>(null);
     const chart = ref<ApexOptions>({});
-    const timeMode = ref("yearly");
+    const timeMode = ref("monthly");
     const activeOption = ref("revenue");
 
     const dateRange = ref('');
@@ -78,6 +77,14 @@ export default defineComponent({
 
     watch(
         () => props.miner,
+        (newValue, oldValue) => {
+          fetchChart();
+        },
+        { deep: true }
+    )
+
+    watch(
+        () => props.sellMode,
         (newValue, oldValue) => {
           fetchChart();
         },
@@ -114,6 +121,9 @@ export default defineComponent({
     });
 
     const fetchChart = () => {
+      if (timeMode.value === "daily" && props.sellMode === "monthly") {
+        return;
+      }
       const host = import.meta.env.VITE_APP_API_HOST;
       const endpoint = activeOption.value;
 
@@ -124,6 +134,7 @@ export default defineComponent({
       body = {
         user_id: 0,
         time_mode: timeMode.value,
+        sell_mode: props.sellMode,
         currency: currency.value,
         time_filter: {
           start_date: moment(props.startDate).format("YYYY-MM-DDTHH:mm:ss"),
@@ -137,20 +148,7 @@ export default defineComponent({
             setChart(response.data.data);
           })
           .catch(function (error) {
-            // setRandomChart();
           });
-    }
-
-    const setRandomChart = () => {
-      const mockData = [];
-      for(let i = 0; i < 100; i++) {
-        mockData.push({
-          value: getRandomValue(),
-          time: getRandomDateTime()
-        })
-      }
-
-      setChart(mockData);
     }
 
     const getRandomValue = () => {
