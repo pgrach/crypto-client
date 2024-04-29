@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div v-if="timeMode === 'monthly'" class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedWeek}" >
+      <div v-if="props.timeMode === 'monthly'" class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedWeek}" >
         <div class="form-check form-check-custom form-check-success form-check-solid">
           <div class="dashboard-trading-analysis__option__check-line"></div>
           <input class="form-check-input" type="checkbox" v-model="selectedWeek"/>
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <div v-if="timeMode === 'monthly'" class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedMonth}" >
+      <div v-if="props.timeMode === 'monthly'" class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedMonth}" >
         <div class="form-check form-check-custom form-check-success form-check-solid">
           <div class="dashboard-trading-analysis__option__check-line"></div>
           <input class="form-check-input" type="checkbox" v-model="selectedMonth"/>
@@ -108,7 +108,7 @@ import moment from "moment";
 export default defineComponent({
   name: "dashboard-trading-analysis",
   props: {
-    timeMode: Object,
+    timeMode: String,
   },
   emits: ['emitSellMode'],
   setup(props, ctx) {
@@ -119,7 +119,7 @@ export default defineComponent({
     watch(
         () => props.timeMode,
         (newValue, oldValue) => {
-          if (newValue === 'daily') {
+          if (newValue as any === 'daily') {
             selectedDay.value = true
             selectedWeek.value = false
             selectedMonth.value = false
@@ -158,7 +158,8 @@ export default defineComponent({
     return {
       selectedDay,
       selectedWeek,
-      selectedMonth
+      selectedMonth,
+      props
     };
   },
 });
