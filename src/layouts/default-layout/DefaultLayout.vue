@@ -13,7 +13,7 @@
       <KTHeader />
 
       <!-- begin:: Content -->
-      <div id="kt_content" class="content d-flex flex-column flex-column-fluid">
+      <div id="kt_content" class="d-flex mt-2 flex-column flex-column-fluid">
         <!-- begin:: Content Body -->
         <div class="post d-flex flex-column-fluid">
           <div
