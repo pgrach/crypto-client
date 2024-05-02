@@ -78,7 +78,7 @@
         </div>
 
         <div class="dashboard-calculator-form__item">
-          <div class="label">Cost of hardware ($)</div>
+          <div class="label">Cost of hardware ($ per unit)</div>
           <Field
               type="text"
               class="form-control"
@@ -119,12 +119,15 @@ export default defineComponent({
   setup(props, ctx) {
     const miners = ref([]);
     const miner = ref({ id: 1, miner_name: 'Antminer S19 Pro+ Hyd 198TH/s', hashrate: 198, power: 5445 });
-    const quantity = ref(3);
+    const quantity = ref(10);
     const hashrate = ref(198);
     const power = ref(5445);
-    const powerCost = ref(3);
-    const costOfHw = ref(6.45);
-    const dateRange = ref([moment(new Date()).subtract(15, 'months').toDate(), moment(new Date()).subtract(13, 'months').format("YYYY-MM-DDTHH:mm:ss")]);
+    const powerCost = ref(6);
+    const costOfHw = ref(2000);
+    const dateRange = ref([
+      moment('01-01-2019').toDate(),
+      moment(new Date()).subtract(1, 'days').format("YYYY-MM-DDTHH:mm:ss")
+    ]);
 
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
@@ -181,11 +184,15 @@ export default defineComponent({
 </script>
 
 <style>
+.dashboard-calculator .dp__input {
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
 .dashboard-calculator-form {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   gap: 20px;
 }
 

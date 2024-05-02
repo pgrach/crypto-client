@@ -1,7 +1,7 @@
 <template>
-  <div class="row g-5 g-xl-8">
+  <div class="row g-2 g-xl-2">
 
-    <div class="g-xl-8">
+    <div>
       <DashboardCalculator
           widget-classes="card-xl-stretch"
           :height="330"
@@ -11,14 +11,14 @@
       ></DashboardCalculator>
     </div>
 
-    <div class="g-xl-8">
+    <div v-if="isCalculated">
       <DashboardTradingAnalysis
           :time-mode="timeMode"
           @emit-sell-mode="setSellMode"
       ></DashboardTradingAnalysis>
     </div>
 
-    <div class="col-xl-8">
+    <div v-if="isCalculated" class="col-xl-8">
       <DashboardChart
           widget-classes="card-xl-stretch"
           :height="330"
@@ -31,7 +31,7 @@
       ></DashboardChart>
     </div>
 
-    <div class="col-xl-4 dashboard-stats">
+    <div v-if="isCalculated" class="col-xl-4 dashboard-stats">
         <DashboardChartStats
             :miner="miner"
             :start-date="startDate"
@@ -88,23 +88,25 @@ export default defineComponent({
   setup() {
 
     const loading = ref(false);
+    const isCalculated = ref(false);
 
     const miner = ref({
-      power_cost: 12,
+      power_cost: 6,
       power: 5000,
       hash_rate : 9380,
-      quantity: 1,
-      cost_of_hw: 6.45
+      quantity: 10,
+      cost_of_hw: 2000
     });
 
     const timeMode = ref('monthly');
     const sellMode = ref('daily');
     const currency = ref('BTC');
 
-    const startDate = ref(moment(new Date()).subtract(15, 'months').format("YYYY-MM-DDTHH:mm:ss"));
-    const endDate = ref(moment(new Date()).subtract(13, 'months').format("YYYY-MM-DDTHH:mm:ss"));
+    const startDate = ref(moment('01-01-2019').format("YYYY-MM-DDTHH:mm:ss"));
+    const endDate = ref(moment(new Date()).subtract(1, 'days').format("YYYY-MM-DDTHH:mm:ss"));
 
     const setMiner = (val) => {
+      isCalculated.value = true;
       loading.value = true;
       miner.value = val;
       startDate.value = val.date_range[0];
@@ -137,7 +139,8 @@ export default defineComponent({
       setSellMode,
       setTimeMode,
       setCurrency,
-      loading
+      loading,
+      isCalculated
     }
   }
 });
