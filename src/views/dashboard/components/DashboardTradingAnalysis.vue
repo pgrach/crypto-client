@@ -192,7 +192,6 @@ export default defineComponent({
       const endpoint = 'summaries';
 
       const minerValue = props && props.miner && props.miner ? props.miner : null;
-      delete minerValue.date_range;
       let body;
 
       if (minerValue) {
@@ -205,7 +204,11 @@ export default defineComponent({
             start_date: moment(props.startDate).format("YYYY-MM-DDTHH:mm:ss"),
             end_date: moment(props.endDate).format("YYYY-MM-DDTHH:mm:ss")
           },
-          ...minerValue
+          cost_of_hw: minerValue.cost_of_hw,
+          hash_rate: minerValue.hash_rate,
+          power: minerValue.power,
+          power_cost: minerValue.power_cost,
+          quantity: minerValue.quantity
         }
       }
 
