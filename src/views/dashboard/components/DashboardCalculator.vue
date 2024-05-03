@@ -204,10 +204,6 @@ export default defineComponent({
   flex-wrap: wrap;
   padding-bottom: 15px;
   gap: 20px;
-
-  .el-date-editor.el-input, .el-date-editor.el-input__wrapper {
-    width: 100%;
-  }
 }
 
 .button-primary__loader {
@@ -272,6 +268,10 @@ export default defineComponent({
 @media only screen and (max-width: 1100px) {
   .dashboard-calculator-form {
     display: block;
+
+    .el-date-editor.el-input, .el-date-editor.el-input__wrapper {
+      width: 100%;
+    }
   }
 
   .dashboard-calculator-form__item {
