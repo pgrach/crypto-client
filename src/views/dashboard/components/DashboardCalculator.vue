@@ -88,11 +88,19 @@
           />
         </div>
 
-        <div class="dashboard-calculator-form__item dashboard-calculator-form__date-range">
+        <div class="dashboard-calculator-form__item dashboard-calculator-form__dates">
           <div class="label">Mining Period</div>
-          <VueDatePicker v-model="dateRange" range />
+          <div class="dashboard-calculator-form__dates__container">
+            <div class="dashboard-calculator-form__dates__item">
+              <span class="dashboard-calculator-form__dates__item__label">Start Date</span>
+              <el-date-picker v-model="startDate" size="large"></el-date-picker>
+            </div>
+            <div class="dashboard-calculator-form__dates__item">
+              <span class="dashboard-calculator-form__dates__item__label">End Date</span>
+              <el-date-picker v-model="endDate" size="large"></el-date-picker>
+            </div>
+          </div>
         </div>
-
       </div>
 
     </div>
@@ -104,9 +112,15 @@ import { defineComponent, onBeforeMount, ref } from "vue";
 import { ErrorMessage, Field, Form as VForm } from 'vee-validate';
 import axios from 'axios';
 import moment from "moment";
+import { start } from '@popperjs/core';
 
 export default defineComponent({
   name: "dashboard-calculator",
+  methods: {
+    start() {
+      return start
+    }
+  },
   props: {
     widgetClasses: String,
     height: Number,
@@ -124,10 +138,8 @@ export default defineComponent({
     const power = ref(5445);
     const powerCost = ref(6);
     const costOfHw = ref(2000);
-    const dateRange = ref([
-      moment('01-01-2019').toDate(),
-      moment(new Date()).subtract(1, 'days').format("YYYY-MM-DDTHH:mm:ss")
-    ]);
+    const startDate = ref(moment('01-01-2019').toDate());
+    const endDate = ref(moment(new Date()).subtract(1, 'days').format("YYYY-MM-DDTHH:mm:ss"));
 
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
@@ -136,7 +148,8 @@ export default defineComponent({
 
     const emitMiner = () => {
       const minerData = {
-        date_range: dateRange.value,
+        startDate: startDate.value,
+        endDate: endDate.value,
         power_cost: powerCost.value,
         power: power.value,
         hash_rate : hashrate.value,
@@ -174,7 +187,8 @@ export default defineComponent({
       power,
       powerCost,
       costOfHw,
-      dateRange,
+      startDate,
+      endDate,
       emitMiner,
       miners,
       setMinerData
@@ -183,17 +197,17 @@ export default defineComponent({
 });
 </script>
 
-<style>
-.dashboard-calculator .dp__input {
-  padding-top: 11px;
-  padding-bottom: 11px;
-}
+<style lang="scss">
 .dashboard-calculator-form {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
   padding-bottom: 15px;
   gap: 20px;
+
+  .el-date-editor.el-input, .el-date-editor.el-input__wrapper {
+    width: 100%;
+  }
 }
 
 .button-primary__loader {
@@ -224,8 +238,35 @@ export default defineComponent({
   line-height: 14px;
 }
 
-.dashboard-calculator-form__date-range {
-  width: 300px;
+.dashboard-calculator-form__dates {
+  width: 600px;
+
+  .label {
+    margin-bottom: 4px;
+  }
+
+  &__container {
+    display: flex;
+  }
+
+  &__item {
+    position: relative;
+    padding-top: 12px;
+
+    &:last-child {
+      margin-left: 12px;
+    }
+
+    &__label {
+      position: absolute;
+      top: -4px;
+      right: 0;
+      z-index: 2;
+      font-weight: bold;
+      color: #989494;
+      font-size: 11px;
+    }
+  }
 }
 
 @media only screen and (max-width: 1100px) {
@@ -237,8 +278,21 @@ export default defineComponent({
     margin-bottom: 15px;
   }
 
-  .dashboard-calculator-form__date-range {
-    width: 200px;
+  .dashboard-calculator-form__dates {
+    width: 100%;
+
+    &__container {
+      display: block;
+    }
+
+    &__item {
+      margin-top: 15px;
+      margin-top: 15px;
+
+      &:last-child {
+        margin-left: 0;
+      }
+    }
   }
 }
 </style>

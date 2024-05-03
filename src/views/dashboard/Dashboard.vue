@@ -113,8 +113,8 @@ export default defineComponent({
       isCalculated.value = true;
       loading.value = true;
       miner.value = val;
-      startDate.value = val.date_range[0];
-      endDate.value = val.date_range[1];
+      startDate.value = val.startDate;
+      endDate.value = val.endDate;
       setTimeout(() => {
         loading.value = false;
       }, 800)
