@@ -86,12 +86,12 @@
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_cost_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_cost_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Cost</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_profit_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_profit_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Profit</div>
         </div>
       </div>
