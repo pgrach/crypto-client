@@ -30,17 +30,17 @@
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">$63,240</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_rev_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Revenue</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">$63,240</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_cost_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Cost</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">$63,240</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_profit_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Profit</div>
         </div>
       </div>
@@ -55,17 +55,17 @@
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">$63,240</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_rev_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Revenue</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">$63,240</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_cost_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Cost</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">$63,240</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_profit_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Profit</div>
         </div>
       </div>
@@ -81,17 +81,17 @@
 
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">$63,240</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_rev_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Revenue</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">$63,240</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_cost_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Cost</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">$63,240</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_profit_usd) }}$</div>
           <div class="dashboard-trading-analysis__option__item__label">Total Profit</div>
         </div>
       </div>
@@ -109,12 +109,37 @@ export default defineComponent({
   name: "dashboard-trading-analysis",
   props: {
     timeMode: String,
+    miner: Object,
+    startDate: String,
+    endDate: String,
+    currency: String,
   },
   emits: ['emitSellMode'],
   setup(props, ctx) {
     const selectedDay = ref(true);
     const selectedWeek = ref(false);
     const selectedMonth = ref(false);
+    const sellMode = ref('daily');
+
+    const totalDaily = ref({ total_rev_usd: 0, total_cost_usd: 0, total_profit_usd: 0 });
+    const totalWeekly = ref({ total_rev_usd: 0, total_cost_usd: 0, total_profit_usd: 0 });
+    const totalMonthly = ref({ total_rev_usd: 0, total_cost_usd: 0, total_profit_usd: 0 });
+
+    watch(
+        () => props.miner,
+        (newValue, oldValue) => {
+          fetchSummaries();
+        },
+        { deep: true }
+    )
+
+    watch(
+        () => sellMode,
+        (newValue, oldValue) => {
+          fetchSummaries();
+        },
+        { deep: true }
+    )
 
     watch(
         () => props.timeMode,
@@ -124,6 +149,7 @@ export default defineComponent({
             selectedWeek.value = false
             selectedMonth.value = false
           }
+          fetchSummaries();
         },
         { deep: true }
     )
@@ -131,8 +157,9 @@ export default defineComponent({
     watch(() => selectedDay.value,
         (newValue, oldValue) => {
           if (newValue === true) {
-            selectedWeek.value = false
-            selectedMonth.value = false
+            selectedWeek.value = false;
+            selectedMonth.value = false;
+            sellMode.value = 'daily';
             ctx.emit('emitSellMode', 'daily');
           }
         })
@@ -140,8 +167,9 @@ export default defineComponent({
     watch(() => selectedWeek.value,
         (newValue, oldValue) => {
           if (newValue === true) {
-            selectedDay.value = false
-            selectedMonth.value = false
+            selectedDay.value = false;
+            selectedMonth.value = false;
+            sellMode.value = 'weekly';
             ctx.emit('emitSellMode', 'weekly');
           }
         })
@@ -149,17 +177,64 @@ export default defineComponent({
     watch(() => selectedMonth.value,
         (newValue, oldValue) => {
           if (newValue === true) {
-            selectedDay.value = false
-            selectedWeek.value = false
+            selectedDay.value = false;
+            selectedWeek.value = false;
+            sellMode.value = 'monthly';
             ctx.emit('emitSellMode', 'monthly');
           }
         })
+
+    const fetchSummaries = () => {
+      if (props.timeMode === "daily" && sellMode.value === "monthly") {
+        return;
+      }
+      const host = import.meta.env.VITE_APP_API_HOST;
+      const endpoint = 'summaries';
+
+      const minerValue = props && props.miner && props.miner ? props.miner : null;
+      delete minerValue.date_range;
+      let body;
+
+      if (minerValue) {
+        body = {
+          user_id: 0,
+          time_mode: props.timeMode,
+          sell_mode: sellMode.value,
+          currency: props.currency,
+          time_filter: {
+            start_date: moment(props.startDate).format("YYYY-MM-DDTHH:mm:ss"),
+            end_date: moment(props.endDate).format("YYYY-MM-DDTHH:mm:ss")
+          },
+          ...minerValue
+        }
+      }
+
+      axios.post(`${host}${endpoint}`, body)
+          .then(function (response) {
+            const totals = response?.data?.data ? response.data.data : [];
+            totalDaily.value = totals.find(item => item.sell_mode === 'daily');
+            totalWeekly.value = totals.find(item => item.sell_mode === 'weekly');
+            totalMonthly.value = totals.find(item => item.sell_mode === 'monthly');
+          })
+          .catch(function (error) {
+            console.log('Chart Error: ', error);
+            // setRandomChart();
+          });
+    }
+
+    const formatCurrency = (item) => {
+      return Number(item).toFixed(4);
+    }
 
     return {
       selectedDay,
       selectedWeek,
       selectedMonth,
-      props
+      props,
+      totalDaily,
+      totalWeekly,
+      totalMonthly,
+      formatCurrency
     };
   },
 });

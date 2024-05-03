@@ -14,6 +14,10 @@
     <div v-if="isCalculated">
       <DashboardTradingAnalysis
           :time-mode="timeMode"
+          :miner="miner"
+          :start-date="startDate"
+          :end-date="endDate"
+          :currency="currency"
           @emit-sell-mode="setSellMode"
       ></DashboardTradingAnalysis>
     </div>
