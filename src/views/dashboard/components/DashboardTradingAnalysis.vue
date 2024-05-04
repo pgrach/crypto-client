@@ -30,17 +30,17 @@
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_rev_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_rev_usd) }}</div>
           <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalDaily.total_rev_usd < 0}">Total Revenue</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_cost_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_cost_usd) }}</div>
           <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalDaily.total_cost_usd < 0}">Total Cost</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_profit_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_profit_usd) }}</div>
           <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalDaily.total_profit_usd < 0}">Total Profit</div>
         </div>
       </div>
@@ -55,17 +55,17 @@
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_rev_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_rev_usd) }}</div>
           <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalWeekly.total_rev_usd < 0}">Total Revenue</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_cost_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_cost_usd) }}</div>
           <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalWeekly.total_cost_usd < 0}">Total Cost</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_profit_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_profit_usd) }}</div>
           <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalWeekly.total_profit_usd < 0}">Total Profit</div>
         </div>
       </div>
@@ -81,17 +81,17 @@
 
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_rev_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_rev_usd) }}</div>
           <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalMonthly.total_rev_usd < 0}">Total Revenue</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_cost_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_cost_usd) }}</div>
           <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalMonthly.total_cost_usd < 0}">Total Cost</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item" >
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_profit_usd) }}$</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_profit_usd) }}</div>
           <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalMonthly.total_profit_usd < 0}">Total Profit</div>
         </div>
       </div>
@@ -227,9 +227,21 @@ export default defineComponent({
 
     const formatCurrency = (item) => {
       if (props.currency === 'BTC') {
-        return Number(item).toFixed(6)
+        const formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 6,
+          maximumFractionDigits: 6
+        });
+        return formatter.format(item)
       } else {
-        return Number(item).toFixed(2)
+        const formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+        return formatter.format(item)
       }
     }
 

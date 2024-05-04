@@ -191,9 +191,21 @@ export default defineComponent({
 
     const formatCurrency = (item) => {
       if (props.currency === 'BTC') {
-        return Number(item).toFixed(6)
+        const formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 6,
+          maximumFractionDigits: 6
+        });
+        return formatter.format(item)
       } else {
-        return Number(item).toFixed(2)
+        const formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+        return formatter.format(item)
       }
     }
 
