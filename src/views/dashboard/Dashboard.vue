@@ -11,7 +11,7 @@
       ></DashboardCalculator>
     </div>
 
-    <div v-if="isCalculated">
+    <div v-show="isCalculated">
       <DashboardTradingAnalysis
           :time-mode="timeMode"
           :miner="miner"
@@ -22,7 +22,7 @@
       ></DashboardTradingAnalysis>
     </div>
 
-    <div v-if="isCalculated" class="col-xl-8">
+    <div v-show="isCalculated" class="col-xl-8">
       <DashboardChart
           widget-classes="card-xl-stretch"
           :height="330"
@@ -35,7 +35,7 @@
       ></DashboardChart>
     </div>
 
-    <div v-if="isCalculated" class="col-xl-4 dashboard-stats">
+    <div v-show="isCalculated" class="col-xl-4 dashboard-stats">
         <DashboardChartStats
             :miner="miner"
             :start-date="startDate"
@@ -110,14 +110,14 @@ export default defineComponent({
     const endDate = ref(moment(new Date()).subtract(1, 'days').format("YYYY-MM-DDTHH:mm:ss"));
 
     const setMiner = (val) => {
-      isCalculated.value = true;
       loading.value = true;
       miner.value = val;
       startDate.value = val.startDate;
       endDate.value = val.endDate;
       setTimeout(() => {
         loading.value = false;
-      }, 800)
+        isCalculated.value = true;
+      }, 1500)
     }
 
     const setTimeMode = (val) => {
