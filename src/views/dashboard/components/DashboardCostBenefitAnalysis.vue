@@ -4,29 +4,43 @@
       <div class="dashboard-cost-benefit-analysis__title">Cost-Benefit Analysis</div>
 
       <div class="dashboard-cost-benefit-analysis-container">
-        <DashboardCostBenefitAnalysisItem
-            :change="hardwarePayback"
-            label="Hardware payback"
-            chart-color="rgba(62, 151, 255, 1)"
-            back-color="rgba(238, 246, 255, 1)"
+        <el-tooltip
+            class="box-item"
+            effect="dark"
+            content="Percentage of initial mining hardware costs recovered through mining"
+            placement="top-end"
         >
-          <template v-slot:cost-benefit-img>
-            <img class="cost-benefits-item__img" :src="getAssetPath('media/img/hardware_payback.svg')" alt="Hardware Payback Img">
-          </template>
-        </DashboardCostBenefitAnalysisItem>
+          <DashboardCostBenefitAnalysisItem
+              :change="hardwarePayback"
+              label="Hardware payback"
+              chart-color="rgba(62, 151, 255, 1)"
+              back-color="rgba(238, 246, 255, 1)"
+          >
+            <template v-slot:cost-benefit-img>
+              <img class="cost-benefits-item__img" :src="getAssetPath('media/img/hardware_payback.svg')" alt="Hardware Payback Img">
+            </template>
+          </DashboardCostBenefitAnalysisItem>
+        </el-tooltip>
 
         <div class="dashboard-cost-benefit-analysis__line"></div>
 
-        <DashboardCostBenefitAnalysisItem
-            :change="buyVsMinePayback"
-            label="Mine vs Buy"
-            chart-color="rgba(80, 20, 208, 1)"
-            back-color="rgba(248, 245, 255, 1)"
+         <el-tooltip
+            class="box-item"
+            effect="dark"
+            content="Compares earnings from mining with the equivalent value in Bitcoin if purchased directly for the same initial investment. Values over 100% indicate mining has produced more Bitcoin value than a direct purchase"
+            placement="top-end"
         >
-          <template v-slot:cost-benefit-img>
-            <img class="cost-benefits-item__img" :src="getAssetPath('media/img/mine_buy.svg')" alt="Mine Buy Img">
-          </template>
-        </DashboardCostBenefitAnalysisItem>
+          <DashboardCostBenefitAnalysisItem
+              :change="buyVsMinePayback"
+              label="Mine vs Buy"
+              chart-color="rgba(80, 20, 208, 1)"
+              back-color="rgba(248, 245, 255, 1)"
+          >
+            <template v-slot:cost-benefit-img>
+              <img class="cost-benefits-item__img" :src="getAssetPath('media/img/mine_buy.svg')" alt="Mine Buy Img">
+            </template>
+          </DashboardCostBenefitAnalysisItem>
+        </el-tooltip>
       </div>
     </div>
   </div>

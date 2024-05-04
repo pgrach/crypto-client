@@ -143,7 +143,7 @@ export default defineComponent({
     padding: 12px 12px
     box-sizing: border-box
     border: 1px #E1E3EA dotted
-    width: 130px
+    width: 100%
     height: 60px
 
     &__label
