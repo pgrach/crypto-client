@@ -38,7 +38,7 @@
                     <span
                         class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
-                      {{ totalRevenue }}
+                      {{ formatCurrency(totalRevenue) }}
                     </span>
                   </td>
                 </tr>
@@ -51,7 +51,7 @@
                     <span
                         class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
-                      {{ totalCosts }}
+                      {{ formatCurrency(totalCosts) }}
                     </span>
                   </td>
                 </tr>
@@ -64,7 +64,7 @@
                     <span
                         class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
-                      {{ totalProfit }}
+                      {{ formatCurrency(totalProfit) }}
                     </span>
                   </td>
                 </tr>
@@ -77,7 +77,7 @@
                     <span
                         class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
-                      {{ averageCost }}
+                      {{ formatCurrency(averageCost) }}
                     </span>
                   </td>
                 </tr>
@@ -178,10 +178,10 @@ export default defineComponent({
 
       axios.post(`${host}${endpoint}`, body)
           .then(function (response) {
-            totalRevenue.value = response?.data?.total_rev_usd ? Number(response.data.total_rev_usd).toFixed(4) as any : 0;
-            totalCosts.value = response?.data?.total_cost_usd ? Number(response.data.total_cost_usd).toFixed(4) as any : 0;
-            totalProfit.value = response?.data?.total_profit_usd ? Number(response.data.total_profit_usd).toFixed(4) as any : 0;
-            averageCost.value = response?.data?.avg_cost_per_btc ? Number(response.data.avg_cost_per_btc).toFixed(4) as any : 0;
+            totalRevenue.value = response?.data?.total_rev_usd ? response.data.total_rev_usd : 0;
+            totalCosts.value = response?.data?.total_cost_usd ? response.data.total_cost_usd : 0;
+            totalProfit.value = response?.data?.total_profit_usd ? response.data.total_profit_usd : 0;
+            averageCost.value = response?.data?.avg_cost_per_btc ? response.data.avg_cost_per_btc : 0;
           })
           .catch(function (error) {
             console.log('Chart Error: ', error);
@@ -189,12 +189,21 @@ export default defineComponent({
           });
     }
 
+    const formatCurrency = (item) => {
+      if (props.currency === 'BTC') {
+        return Number(item).toFixed(6)
+      } else {
+        return Number(item).toFixed(2)
+      }
+    }
+
     return {
       getAssetPath,
       totalRevenue,
       totalCosts,
       totalProfit,
-      averageCost
+      averageCost,
+      formatCurrency
     };
   },
 });
