@@ -172,27 +172,51 @@ export default defineComponent({
 
     const setChart = (response) => {
       const data = [];
-      const offsetData = [];
+      const difficultyData = [];
+      const btcData = [];
       categories.value = [];
       response.forEach(item => {
         data.push(Number(item.value));
-        offsetData.push(Number(item.value) + Number(item.offset));
-        categories.value.push(getCategoryLabel(item.time))
-        chartLabels.value.push({ time: moment(item.time).valueOf(), label: item.label })
-      })
+        difficultyData.push(Number(item.value) + Number(item.offset));
+        btcData.push(Number(item.value) + Number(item.offset));
+        categories.value.push(getCategoryLabel(item.time));
+        chartLabels.value.push({ time: moment(item.time).valueOf(), label: item.label });
+      });
 
-      if ((activeOption.value === 'revenue' && currency.value === 'USD') ||
-          (activeOption.value === 'cost' && currency.value === 'BTC') ||
-          (activeOption.value === 'profit' && currency.value === 'USD') ||
-          (activeOption.value === 'profit' && currency.value === 'BTC')
-          ) {
+      if (activeOption.value === 'revenue' && currency.value === 'USD') {
         series.value = [{
           name: capitalizeFirstLetter(activeOption.value),
           data,
           type: 'bar'
         }, {
-          name: 'Offset',
-          data: offsetData,
+          name: 'Difficulty',
+          data: difficultyData,
+          type: 'area'
+        }, {
+          name: 'BTC Price',
+          data: btcData,
+          type: 'area'
+        }];
+      } else if (activeOption.value === 'cost' && currency.value === 'BTC') {
+        series.value = [{
+          name: capitalizeFirstLetter(activeOption.value),
+          data,
+          type: 'bar'
+        },
+        {
+          name: 'BTC Price',
+          data: btcData,
+          type: 'area'
+        }];
+      } else if (activeOption.value === 'revenue' && currency.value === 'BTC') {
+        series.value = [{
+          name: capitalizeFirstLetter(activeOption.value),
+          data,
+          type: 'bar'
+        },
+        {
+          name: 'Difficulty',
+          data: difficultyData,
           type: 'area'
         }];
       } else {
@@ -237,6 +261,7 @@ export default defineComponent({
       const baseColor = activeOption.value === 'cost' ? 'rgba(233, 181, 0, 1)' :
                         activeOption.value === 'profit' ? 'rgba(71, 190, 125, 1)' : getCSSVariableValue("--bs-primary");
       const secondaryColor = 'rgba(71 ,95 ,190 , 0.2)';
+      const tertiaryColor = 'rgba(71,190,178,0.2)';
 
       return {
         chart: {
@@ -291,17 +316,63 @@ export default defineComponent({
             },
           },
         },
-        yaxis: {
-          labels: {
-            style: {
-              colors: labelColor,
-              fontSize: "12px",
+        yaxis: [
+          {
+            title: {
+              text: capitalizeFirstLetter(activeOption.value),
+              style: {
+                color: baseColor,
+              },
             },
-            formatter: function (val) {
-              return val.toFixed(2);
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return val.toFixed(2);
+              },
             },
           },
-        },
+          {
+            show: ((activeOption.value === 'revenue' && currency.value === 'USD') || (activeOption.value === 'revenue' && currency.value === 'BTC')),
+            opposite: true,
+            title: {
+              text: 'Difficulty',
+              style: {
+                color: secondaryColor,
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return val.toFixed(2);
+              },
+            },
+          },
+          {
+            show: ((activeOption.value === 'revenue' && currency.value === 'USD') || (activeOption.value === 'cost' && currency.value === 'BTC')),
+            opposite: true,
+            title: {
+              text: 'BTC',
+              style: {
+                color: tertiaryColor,
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return val.toFixed(2);
+              },
+            },
+          },
+        ],
         fill: {
           opacity: 1,
         },
@@ -343,7 +414,7 @@ export default defineComponent({
             },
           },
         },
-        colors: [baseColor, secondaryColor],
+        colors: [baseColor, secondaryColor, tertiaryColor],
         grid: {
           borderColor: borderColor,
           strokeDashArray: 4,
