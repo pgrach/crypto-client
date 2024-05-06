@@ -149,7 +149,6 @@ export default defineComponent({
 
       if ((activeOption.value === 'revenue' && currency.value === 'USD')) {
         Promise.all([axios.post(`${host}${endpoint}`, body), axios.post(`${host}difficulties`, body), axios.post(`${host}btc_prices`, body)]).then((values) => {
-          console.log(values);
           const response = values[0].data.data;
           difficultiesResponse.value = values[1].data;
           btcResponse.value = values[2].data;
@@ -157,17 +156,14 @@ export default defineComponent({
         });
       } else if (activeOption.value === 'cost' && currency.value === 'BTC') {
         Promise.all([axios.post(`${host}${endpoint}`, body), axios.post(`${host}btc_prices`, body)]).then((values) => {
-          console.log(values);
           const response = values[0].data.data;
           btcResponse.value = values[1].data;
           setChart(response);
         });
       } else if (activeOption.value === 'revenue' && currency.value === 'BTC') {
         Promise.all([axios.post(`${host}${endpoint}`, body), axios.post(`${host}difficulties`, body)]).then((values) => {
-          console.log(values);
           const response = values[0].data.data;
           difficultiesResponse.value = values[1].data;
-          console.log(response, difficultiesResponse.value, values[1].data)
           setChart(response);
         });
       } else {
