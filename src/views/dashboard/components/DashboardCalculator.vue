@@ -139,7 +139,7 @@ export default defineComponent({
     const powerCost = ref(6);
     const costOfHw = ref(2000);
     const startDate = ref(moment('01-01-2019').toDate());
-    const endDate = ref(moment(new Date()).subtract(2, 'days').format("YYYY-MM-DDTHH:mm:ss"));
+    const endDate = ref(moment(new Date()).subtract(4, 'days').format("YYYY-MM-DDTHH:mm:ss"));
 
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
