@@ -75,6 +75,9 @@ export default defineComponent({
     const currencies = ref(['USD', 'BTC']);
     const currency = ref('BTC');
 
+    const difficultiesResponse = ref([]);
+    const btcResponse = ref([]);
+
     watch(
         () => props.miner,
         (newValue, oldValue) => {
@@ -128,9 +131,7 @@ export default defineComponent({
       const endpoint = activeOption.value;
 
       const minerValue = props && props.miner && props.miner ? props.miner : null;
-      let body;
-
-      body = {
+      const body = {
         user_id: 0,
         time_mode: timeMode.value,
         sell_mode: props.sellMode,
@@ -146,28 +147,37 @@ export default defineComponent({
         quantity: minerValue.quantity
       }
 
-      axios.post(`${host}${endpoint}`, body)
-          .then(function (response) {
-            setChart(response.data.data);
-          })
-          .catch(function (error) {
-          });
-    }
-
-    const getRandomValue = () => {
-      return Math.floor(Math.random() * (241)) - 120;
-    }
-
-    const getRandomDateTime = () => {
-      const year = Math.floor(Math.random() * (2025 - 2021)) + 2021;
-      const month = Math.floor(Math.random() * 12);
-      const day = Math.floor(Math.random() * 31) + 1;
-      const hour = Math.floor(Math.random() * 24);
-      const minute = Math.floor(Math.random() * 60);
-      const second = Math.floor(Math.random() * 60);
-      const millisecond = Math.floor(Math.random() * 1000);
-      const randomDate = new Date(year, month, day, hour, minute, second, millisecond);
-      return randomDate;
+      if ((activeOption.value === 'revenue' && currency.value === 'USD')) {
+        Promise.all([axios.post(`${host}${endpoint}`, body), axios.post(`${host}difficulties`, body), axios.post(`${host}btc_prices`, body)]).then((values) => {
+          console.log(values);
+          const response = values[0].data.data;
+          difficultiesResponse.value = values[1].data;
+          btcResponse.value = values[2].data;
+          setChart(response);
+        });
+      } else if (activeOption.value === 'cost' && currency.value === 'BTC') {
+        Promise.all([axios.post(`${host}${endpoint}`, body), axios.post(`${host}btc_prices`, body)]).then((values) => {
+          console.log(values);
+          const response = values[0].data.data;
+          btcResponse.value = values[1].data;
+          setChart(response);
+        });
+      } else if (activeOption.value === 'revenue' && currency.value === 'BTC') {
+        Promise.all([axios.post(`${host}${endpoint}`, body), axios.post(`${host}difficulties`, body)]).then((values) => {
+          console.log(values);
+          const response = values[0].data.data;
+          difficultiesResponse.value = values[1].data;
+          console.log(response, difficultiesResponse.value, values[1].data)
+          setChart(response);
+        });
+      } else {
+        axios.post(`${host}${endpoint}`, body)
+            .then(function (response) {
+              setChart(response.data.data);
+            })
+            .catch(function (error) {
+            });
+      }
     }
 
     const setChart = (response) => {
@@ -177,8 +187,14 @@ export default defineComponent({
       categories.value = [];
       response.forEach(item => {
         data.push(Number(item.value));
-        difficultyData.push(Number(item.value) + Number(item.offset));
-        btcData.push(Number(item.value) + Number(item.offset));
+        const foundDifficulty = difficultiesResponse.value.find(diff => diff.label === item.label);
+        if (foundDifficulty) {
+          difficultyData.push(Number(foundDifficulty.value));
+        }
+        const foundBtc = btcResponse.value.find(btc => btc.label === item.label);
+        if (foundBtc) {
+          btcData.push(Number(foundBtc.value));
+        }
         categories.value.push(getCategoryLabel(item.time));
         chartLabels.value.push({ time: moment(item.time).valueOf(), label: item.label });
       });
