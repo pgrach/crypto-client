@@ -130,6 +130,9 @@ export default defineComponent({
       const host = import.meta.env.VITE_APP_API_HOST;
       const endpoint = activeOption.value;
 
+      difficultiesResponse.value = [];
+      btcResponse.value = [];
+
       const minerValue = props && props.miner && props.miner ? props.miner : null;
       const body = {
         user_id: 0,
