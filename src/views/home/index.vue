@@ -23,7 +23,12 @@ const refJoin = ref(null)
 const refSlides = ref(null)
 
 const burgerActive = ref(false)
-const email = ref('') // Declare the email variable
+const email = ref('')
+const articlesRef = ref([])
+
+onMounted(() => {
+  articlesRef.value = articles;
+})
 
 function scrollTo(view) {
     view.scrollIntoView({ behavior: 'smooth' })
@@ -527,7 +532,7 @@ const sendDemoEmail = () => {
       </div>
       <div class="home-blog-articles">
         <HomeArticle
-          v-for="item in articles"
+          v-for="item in articlesRef"
           :key="item.id"
           :hash="item.hash"
           :title="item.title"
