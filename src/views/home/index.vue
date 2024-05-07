@@ -28,6 +28,7 @@ const articlesRef = ref([])
 
 onMounted(() => {
   articlesRef.value = articles;
+  articlesRef.value.sort((a, b) => b.id - a.id);
 })
 
 function scrollTo(view) {
