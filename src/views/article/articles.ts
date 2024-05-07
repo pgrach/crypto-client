@@ -75,7 +75,7 @@ export const articles = [
         CAPEX (Capital Expenditure) refers to the initial costs of starting your mining operation, including the purchase price of hardware multiplied by the quantity bought.
           
         <br/><br/>
-        <img style="max-width: 400px; width: 100%;" src="/images/cost-benefit-2-sub.png" alt="">
+        <img style="width: 100%;" src="/images/cost-benefit-2-sub.png" alt="">
         <br/><br/>
         
         For example, if your mining operation has generated a cumulative net profit of $10,000 and your CAPEX was $12,500, your Hardware Payback would be:
