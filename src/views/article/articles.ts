@@ -59,7 +59,7 @@ export const articles = [
     "date": "7 MAY 2024",
     "description": "Is Bitcoin mining still profitable, and are you essentially buying Bitcoin through mining? These are common questions for anyone considering investing in mining.",
     "content": `
-        Is Bitcoin mining still profitable, and are you essentially buying Bitcoin through mining? These are common questions for anyone considering investing in mining. To answer these, a cost-benefit analysis is crucial for gaining a deeper financial understanding of this investment. This post explores two important metrics: Hardware Payback and Mine vs Buy.
+        <b>Is Bitcoin mining still profitable, and are you essentially buying Bitcoin through mining?</b> These are common questions for anyone considering investing in mining. To answer these, a cost-benefit analysis is crucial for gaining a deeper financial understanding of this investment. This post explores two important metrics: Hardware Payback and Mine vs Buy.
         <br/><br/>
         <img style="max-width: 500px; width: 100%;" src="/images/cost-benefit-1.png" alt="">
         
@@ -71,8 +71,8 @@ export const articles = [
         <img style="max-width: 500px; width: 100%;" src="/images/cost-benefit-2.png" alt="">
         <br/><br/>
         
-        Cumulative Net Profit is the total profit from mining after deducting operational costs (e.g., electricity). The actual profit amount can vary based on trading strategy, which we explore separately. Also, your approach to holding Bitcoin (a.k.a. "HODL" strategy) plays a crucial role—whether you choose to keep your profits in BTC or convert in USD. 
-        CAPEX (Capital Expenditure) refers to the initial costs of starting your mining operation, including the purchase price of hardware multiplied by the quantity bought.
+        <b>Cumulative Net Profit</b> is the total profit from mining after deducting operational costs (e.g., electricity). The actual profit amount can vary based on trading strategy, which we explore separately. Also, your approach to holding Bitcoin (a.k.a. "HODL" strategy) plays a crucial role—whether you choose to keep your profits in BTC or convert in USD. 
+        <b>CAPEX</b> (Capital Expenditure) refers to the initial costs of starting your mining operation, including the purchase price of hardware multiplied by the quantity bought.
           
         <br/><br/>
         <img style="width: 100%;" src="/images/cost-benefit-2-sub.png" alt="">
@@ -86,15 +86,15 @@ export const articles = [
         
         This means you have recovered 80% of your initial hardware investment through mining profits.
         <br/><br/>
-        Mine vs Buy compares the profitability of mining Bitcoin versus directly purchasing Bitcoin at market price. The formula for this metric is:
+        <b>Mine vs Buy</b> compares the profitability of mining Bitcoin versus directly purchasing Bitcoin at market price. The formula for this metric is:
             
         <br/><br/>
         <img style="max-width: 500px; width: 100%;" src="/images/cost-benefit-4.png" alt="">
         <br/><br/>
         
-        Cumulative Net Profit in BTC is the net profit from mining, retained in Bitcoin. This involves converting just enough Bitcoin to cover operational costs like electricity, keeping the rest intact. 
+        <b>Cumulative Net Profit</b> in BTC is the net profit from mining, retained in Bitcoin. This involves converting just enough Bitcoin to cover operational costs like electricity, keeping the rest intact. 
         <br/><br/>
-        CAPEX in BTC is your initial hardware cost converted into Bitcoin, based on the USD/BTC exchange rate at the start of mining. In reality, the date of payment for the hardware often differs from the day you actually begin mining, which can lead to differences in the conversion rate. However, for simplicity in our analysis, we use the exchange rate as of the mining start date.
+        <b>CAPEX in BTC</b> is your initial hardware cost converted into Bitcoin, based on the USD/BTC exchange rate at the start of mining. In reality, the date of payment for the hardware often differs from the day you actually begin mining, which can lead to differences in the conversion rate. However, for simplicity in our analysis, we use the exchange rate as of the mining start date.
         <br/><br/>
         For example, if you have a cumulative net profit of 0.5 BTC and your CAPEX in BTC was 0.38 BTC, the Mine vs Buy ratio would be 132%:
         
@@ -104,23 +104,23 @@ export const articles = [
         
         This suggests that mining has been 32% more profitable than buying the equivalent amount of Bitcoin at the start of the operation.
         <br/><br/>
-        Observations and Interpretations
+        <b>Observations and Interpretations</b>
         <br/><br/>
-        How should we interpret a situation where Hardware Payback is below 100%, but Mine vs Buy is above 100%? This scenario indicates that not all the initial CAPEX on mining hardware has been recouped through profits when measured in USD. However, the profitability of mining over buying Bitcoin has still been higher.
+        How should we interpret a situation where <b>Hardware Payback</b> is below 100%, <b>but Mine vs Buy</b> is above 100%? This scenario indicates that not all the initial CAPEX on mining hardware has been recouped through profits when measured in USD. However, the profitability of mining over buying Bitcoin has still been higher.
             
         <br/><br/>
         <img style="max-width: 500px; width: 100%;" src="/images/cost-benefit-6.png" alt="">
         <br/><br/>
         
-        So, which metric is more important? The answer lies in your "accumulation strategy" or HODL strategy. If you convert your Bitcoin profits into USD, then Hardware Payback is the more critical metric for you, as it reflects the return on your initial USD investment. However, if you are a Bitcoin hodler, preferring to keep your earnings in BTC, then Mine vs Buy is a more important gauge.
+        So, which metric is more important? The answer lies in your "accumulation strategy" or HODL strategy. If you convert your Bitcoin profits into USD, then <b>Hardware Payback</b> is the more critical metric for you, as it reflects the return on your initial USD investment. However, if you are a Bitcoin hodler, preferring to keep your earnings in BTC, then <b>Mine vs Buy</b> is a more important gauge.
         <br/><br/>
         However, the practical outcome of this situation can vary depending on a few factors:
         <br/><br/>
-        Factors Influencing the Hardware Payback Calculation
+        <b>Factors Influencing the Hardware Payback Calculation</b>
         <br/><br/>
-        Conversion of BTC to USD: If you retain some of your mining profits in Bitcoin and the price of Bitcoin rises, the USD value of these holdings could increase. This potential appreciation can significantly impact your return calculations and might accelerate the payback period.
+        <b> Conversion of BTC to USD</b>: If you retain some of your mining profits in Bitcoin and the price of Bitcoin rises, the USD value of these holdings could increase. This potential appreciation can significantly impact your return calculations and might accelerate the payback period.
         <br/><br/>
-        Resale Value of Mining Equipment: The mining hardware's residual value can also play a vital role in your overall profitability. Often referred to as "residual value" in accounting terms, this factor depends on demand, technological advancements, and market conditions. If your mining hardware still has resale value, this can be factored into the cumulative profits to provide a more comprehensive assessment of your ROI. We shall cover this topic in another post.
+        <b>Resale Value of Mining Equipment</b>: The mining hardware's residual value can also play a vital role in your overall profitability. Often referred to as "residual value" in accounting terms, this factor depends on demand, technological advancements, and market conditions. If your mining hardware still has resale value, this can be factored into the cumulative profits to provide a more comprehensive assessment of your ROI. We shall cover this topic in another post.
         <br/><br/>
         <b>Conclusion</b>
         <br/><br/>
