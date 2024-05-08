@@ -229,7 +229,7 @@ export default defineComponent({
       if (props.currency === 'BTC') {
         const formatter = new Intl.NumberFormat('en-US', {
           style: 'currency',
-          currency: 'USD',
+          currency: 'BTC',
           minimumFractionDigits: 6,
           maximumFractionDigits: 6
         });
