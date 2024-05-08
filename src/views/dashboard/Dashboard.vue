@@ -107,7 +107,7 @@ export default defineComponent({
     const currency = ref('BTC');
 
     const startDate = ref(moment('01-01-2019').format("YYYY-MM-DDTHH:mm:ss"));
-    const endDate = ref(moment(new Date()).subtract(4, 'days').format("YYYY-MM-DDTHH:mm:ss"));
+    const endDate = ref(moment(new Date()).subtract(1, 'days').format("YYYY-MM-DDTHH:mm:ss"));
 
     const setMiner = (val) => {
       loading.value = true;
