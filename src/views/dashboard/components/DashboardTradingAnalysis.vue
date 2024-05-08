@@ -126,6 +126,14 @@ export default defineComponent({
     const totalMonthly = ref({ total_rev_usd: 0, total_cost_usd: 0, total_profit_usd: 0 });
 
     watch(
+        () => props.currency,
+        (newValue, oldValue) => {
+          fetchSummaries();
+        },
+        { deep: true }
+    )
+
+    watch(
         () => props.miner,
         (newValue, oldValue) => {
           fetchSummaries();

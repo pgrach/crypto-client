@@ -125,6 +125,14 @@ export default defineComponent({
     })
 
     watch(
+        () => props.currency,
+        (newValue, oldValue) => {
+          fetchSummary();
+        },
+        { deep: true }
+    )
+
+    watch(
         () => props.miner,
         (newValue, oldValue) => {
           fetchSummary();
