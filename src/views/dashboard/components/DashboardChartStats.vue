@@ -77,7 +77,7 @@
                     <span
                         class="fs-4 fw-bold dashboard-chart-stats-value__margin"
                     >
-                      {{ formatCurrency(averageCost) }}
+                      {{ formatCurrency(averageCost, true) }}
                     </span>
                   </td>
                 </tr>
@@ -197,8 +197,8 @@ export default defineComponent({
           });
     }
 
-    const formatCurrency = (item) => {
-      if (props.currency === 'BTC') {
+    const formatCurrency = (item, alwaysUsd = false) => {
+      if (!alwaysUsd && props.currency === 'BTC') {
         const formatter = new Intl.NumberFormat('en-US', {
           style: 'currency',
           currency: 'USD',
