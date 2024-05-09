@@ -13,7 +13,7 @@
           Result if BTC Sold
         </div>
 
-        <div class="dashboard-trading-analysis__tab">
+        <div v-if="false" class="dashboard-trading-analysis__tab">
           Result if BTC not Sold
         </div>
       </div>
