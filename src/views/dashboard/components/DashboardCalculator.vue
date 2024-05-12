@@ -138,7 +138,7 @@ export default defineComponent({
     const power = ref(5445);
     const powerCost = ref(6);
     const costOfHw = ref(2000);
-    const startDate = ref(moment('01-01-2019').toDate());
+    const startDate = ref(moment('2019-01-01', 'YYYY-MM-DD').toDate());
     const endDate = ref(moment(new Date()).subtract(1, 'days').format("YYYY-MM-DDTHH:mm:ss"));
 
     const setMinerData = () => {
