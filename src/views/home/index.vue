@@ -8,8 +8,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import HomeArticle from './components/HomeArticle.vue';
-import { articles } from '../article/articles';
 
 const modules = [Pagination, Navigation, Autoplay]
 const featuresModules = [Mousewheel, Navigation, Pagination, Autoplay]
@@ -24,12 +22,6 @@ const refSlides = ref(null)
 
 const burgerActive = ref(false)
 const email = ref('')
-const articlesRef = ref([])
-
-onMounted(() => {
-  articlesRef.value = articles;
-  articlesRef.value.sort((a, b) => b.id - a.id);
-})
 
 function scrollTo(view) {
     view.scrollIntoView({ behavior: 'smooth' })
@@ -66,6 +58,10 @@ const router = useRouter();
 
 const routeToDashboard = () => {
     router.push({ name: "dashboard" });
+}
+
+const routeToNews = () => {
+  router.push({ path: "/news" });
 }
 
 const validateEmail = (email) => {
@@ -115,6 +111,7 @@ const sendDemoEmail = () => {
         <li class="home-nav-mobile" @click="scrollTo(refFeatures)">Features</li>
         <li class="home-nav-mobile" @click="scrollTo(refBenefits)">Benefits</li>
         <li class="home-nav-mobile" @click="scrollTo(refJoin)">Join AiDala</li>
+        <li class="home-nav-mobile" @click="routeToNews()">News</li>
       </ul>
     </Transition>
 
@@ -139,6 +136,7 @@ const sendDemoEmail = () => {
         <li class="home-nav" :class="{ 'home-nav__active': activeLink === 'features' }" @click="scrollTo(refFeatures)">Features</li>
         <li class="home-nav" :class="{ 'home-nav__active': activeLink === 'benefits' }" @click="scrollTo(refBenefits)">Benefits</li>
         <li class="home-nav" :class="{ 'home-nav__active': activeLink === 'join' }" @click="scrollTo(refJoin)">Join AiDala</li>
+        <li class="home-nav" @click="routeToNews()">News</li>
       </ul>
     </nav>
 
@@ -523,32 +521,6 @@ const sendDemoEmail = () => {
         <div class="home-book-demo-img">
           <img src="../../assets/img/book-img.svg" alt="Book Your Demo Image">
         </div>
-      </div>
-    </div>
-
-    <div class="home-blog">
-      <h3 class="home-blog__title">News from AiDala</h3>
-      <div class="home-blog__description">
-        Revolutionizing Your Crypto Trading Journey. Elevate your strategies, unlock hidden opportunities, and gain a competitive edge with our exclusive features.
-      </div>
-      <div class="home-blog-articles">
-        <HomeArticle
-          v-for="item in articlesRef"
-          :key="item.id"
-          :hash="item.hash"
-          :title="item.title"
-          :description="item.description"
-          :author="item.author"
-          :date="item.date"
-        >
-          <template v-slot:article-img>
-            <img class="home-blog-article__img" src="../../assets/img/blog-article.png" alt="Article Img">
-          </template>
-          <template v-slot:author-img>
-            <img class="home-blog-article__author__img" src="../../assets/img/blog-author-pavel.png" alt="Author">
-          </template>
-        </HomeArticle>
-
       </div>
     </div>
 

@@ -6,6 +6,7 @@ import {
 import { useAuthStore } from "@/stores/auth";
 import { useConfigStore } from "@/stores/config";
 import Home from "@/views/home/index.vue";
+import News from "@/views/news/index.vue";
 import App from "@/views/app/index.vue";
 import Article from "@/views/article/index.vue";
 
@@ -16,6 +17,14 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
     meta: {
       pageTitle: "AiDala | Home",
+    },
+  },
+  {
+    path: "/news",
+    name: "news",
+    component: News,
+    meta: {
+      pageTitle: "AiDala | News",
     },
   },
   {
