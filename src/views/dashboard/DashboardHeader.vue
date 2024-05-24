@@ -1,8 +1,8 @@
 <template>
   <div class="dashboard-header">
     <div class="dashboard-header__main">
-      <img alt="Logo" src="/media/img/logo_aidala.svg" class="h-25px h-lg-25px">
-      <div class="dashboard-header__main__title">Aidala</div>
+      <img alt="Logo" src="/media/img/logo_aidala.svg" class="h-25px h-lg-25px cursor-pointer" @click="routeToHome">
+      <div class="dashboard-header__main__title cursor-pointer" @click="routeToHome">Aidala</div>
       <div class="dashboard-header__main__tab">Dashboard</div>
       <div class="dashboard-header__main__link">Learn more about methodology</div>
     </div>
@@ -52,11 +52,16 @@ export default defineComponent({
       router.push({ path: '/access-form' });
     }
 
+    const routeToHome = () => {
+      router.push({ path: '/' });
+    }
+
     const showDialog = () => {
       dialogVisible.value = true;
     }
 
     return {
+      routeToHome,
       showDialog,
       dialogVisible,
       routeToAccessForm
@@ -102,7 +107,6 @@ export default defineComponent({
     font-weight: 600
     line-height: 16px
     margin-left: 20px
-    cursor: pointer
 
 .join-beta-dialog
   background: linear-gradient(112deg, #00D2FF 0%, #3A7BD5 100%)
