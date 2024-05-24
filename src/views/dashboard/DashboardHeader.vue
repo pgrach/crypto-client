@@ -13,7 +13,6 @@
     <el-dialog
         v-model="dialogVisible"
         width="1000"
-        :before-close="handleClose"
         class="join-beta-dialog"
     >
       <div class="join-beta-dialog-container">
