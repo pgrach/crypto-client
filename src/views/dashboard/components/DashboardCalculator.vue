@@ -5,20 +5,6 @@
         <span class="card-label fw-bold fs-3 mb-1">Historical Calculation</span>
       </h3>
 
-      <div>
-        <button class="button-primary button-primary__loader"
-                :class="{'button-primary__loader_loading': loading}"
-                :disabled="loading" @click="emitMiner()">
-          <span class="button-primary__loader__label">
-            Calculate
-          </span>
-          <span
-            v-if="loading"
-            class="spinner-border spinner-border-sm loader-left"
-          ></span>
-        </button>
-      </div>
-
     </div>
 
     <div class="card-body">
@@ -99,6 +85,16 @@
               <span class="dashboard-calculator-form__dates__item__label">End Date</span>
               <el-date-picker v-model="endDate" size="large"></el-date-picker>
             </div>
+            <button class="button-primary button-primary__loader"
+                    :class="{'button-primary__loader_loading': loading}"
+                    :disabled="loading" @click="emitMiner()">
+            <span class="button-primary__loader__label">
+              Calculate
+            </span>
+            <span v-if="loading"
+                  class="spinner-border spinner-border-sm loader-left">
+            </span>
+            </button>
           </div>
         </div>
       </div>
@@ -198,18 +194,22 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.dashboard-calculator {
+  flex: 80%;
+}
 .dashboard-calculator-form {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   flex-wrap: wrap;
   padding-bottom: 15px;
-  gap: 20px;
+  gap: 5px;
 }
 
 .button-primary__loader {
   width: 140px;
-  height: 37px;
+  height: 40px;
   padding: 0;
+  margin-top: 12px;
   text-align: start;
   transition: .3s linear;
 }
@@ -226,8 +226,12 @@ export default defineComponent({
   margin-left: 5px;
 }
 
+.dashboard-calculator-form__item {
+  width: 300px;
+}
+
 .dashboard-calculator-form__item .label {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   color: rgba(94, 98, 120, 1);
   font-size: 14px;
   font-weight: 600;
@@ -235,7 +239,7 @@ export default defineComponent({
 }
 
 .dashboard-calculator-form__dates {
-  width: 600px;
+  width: 100%;
 
   .label {
     margin-bottom: 4px;
@@ -243,6 +247,7 @@ export default defineComponent({
 
   &__container {
     display: flex;
+    justify-content: space-between;
   }
 
   &__item {
@@ -265,7 +270,23 @@ export default defineComponent({
   }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1550px) {
+  .dashboard-calculator-form__item {
+    width: 200px;
+  }
+
+  .dashboard-calculator-form__dates {
+    width: 100%;
+    gap: 10px;
+
+    .el-input {
+      width: 150px;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 1200px) {
   .dashboard-calculator-form {
     display: block;
 
@@ -276,6 +297,7 @@ export default defineComponent({
 
   .dashboard-calculator-form__item {
     margin-bottom: 15px;
+    width: 100%;
   }
 
   .dashboard-calculator-form__dates {
@@ -283,6 +305,11 @@ export default defineComponent({
 
     &__container {
       display: block;
+    }
+
+    .button-primary {
+      margin-top: 20px;
+      margin-left: 0;
     }
 
     &__item {

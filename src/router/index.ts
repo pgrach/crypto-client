@@ -36,24 +36,32 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/app",
-    name: "App",
-    component: App,
+    path: "/dashboard",
+    name: "dashboard",
+    component: () => import("@/views/dashboard/Dashboard.vue"),
     meta: {
-      pageTitle: "AiDala | App",
+      pageTitle: "AiDala | Dashboard",
     },
   },
   {
-    path: "/dashboard",
-    redirect: "/dashboard",
+    path: "/access-form",
+    name: "access-form",
+    component: () => import("@/views/dashboard-access-form/DashboardAccessForm.vue"),
+    meta: {
+      pageTitle: "AiDala | Join Beta",
+    },
+  },
+  {
+    path: "/app",
+    redirect: "/app",
     component: () => import("@/layouts/default-layout/DefaultLayout.vue"),
     meta: {
       middleware: "auth",
     },
     children: [
       {
-        path: "/dashboard",
-        name: "dashboard",
+        path: "/app",
+        name: "app",
         component: () => import("@/views/dashboard/Dashboard.vue"),
         meta: {
           pageTitle: "Dashboard",

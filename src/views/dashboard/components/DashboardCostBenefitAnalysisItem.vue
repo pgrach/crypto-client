@@ -140,10 +140,11 @@ export default defineComponent({
     display: flex
     align-items: center
     margin-top: 8px
+    margin-right: 40px
     padding: 12px 12px
     box-sizing: border-box
     border: 1px #E1E3EA dotted
-    width: 100%
+    width: 60%
     height: 60px
 
     &__label

@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-4">
+  <div class="dashboard-chart-stats card mb-4">
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
@@ -9,8 +9,6 @@
         >
       </h3>
     </div>
-    <!--end::Header-->
-    <!--begin::Body-->
     <div class="card-body py-3">
       <div class="tab-content">
         <!--begin::Tap pane-->
@@ -230,6 +228,9 @@ export default defineComponent({
 </script>
 
 <style lang="sass">
+.dashboard-chart-stats
+  .table.gy-4 th, .table.gy-4 td
+    padding: 7px
 .dashboard-chart-stats-value
   width: 200px
 

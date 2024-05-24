@@ -149,14 +149,14 @@ export default defineComponent({
 
 <style lang="sass">
 .dashboard-cost-benefit-analysis
-  padding: 30px 20px
+  padding: 10px 20px
 
   &__title
     color: #7E8299
     font-size: 18px
     font-weight: 600
     line-height: 18px
-    margin-bottom: 30px
+    margin-bottom: 15px
 
   &__line
     border-top: 1px #E1E3EA dotted

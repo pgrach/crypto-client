@@ -1,7 +1,10 @@
 <template>
-  <div class="row g-2 g-xl-2">
 
-    <div>
+  <DashboardHeader></DashboardHeader>
+
+  <div class="dashboard">
+
+    <div class="dashboard-row">
       <DashboardCalculator
           widget-classes="card-xl-stretch"
           :height="330"
@@ -9,9 +12,7 @@
           @setMiner="setMiner"
           :loading="loading"
       ></DashboardCalculator>
-    </div>
 
-    <div v-show="isCalculated">
       <DashboardTradingAnalysis
           :time-mode="timeMode"
           :miner="miner"
@@ -22,49 +23,51 @@
       ></DashboardTradingAnalysis>
     </div>
 
-    <div v-show="isCalculated" class="col-xl-8">
-      <DashboardChart
-          widget-classes="card-xl-stretch"
-          :height="330"
-          :miner="miner"
-          :start-date="startDate"
-          :end-date="endDate"
-          :sell-mode="sellMode"
-          @emit-currency="setCurrency"
-          @emit-time-mode="setTimeMode"
-      ></DashboardChart>
-    </div>
-
-    <div v-show="isCalculated" class="col-xl-4 dashboard-stats">
-        <DashboardChartStats
+    <div>
+      <div class="dashboard-row" v-show="isCalculated">
+        <DashboardChart
+            :height="330"
             :miner="miner"
             :start-date="startDate"
             :end-date="endDate"
-            :time-mode="timeMode"
             :sell-mode="sellMode"
-            :currency="currency"
-        />
+            @emit-currency="setCurrency"
+            @emit-time-mode="setTimeMode"
+        ></DashboardChart>
 
-        <DashboardCostBenefitAnalysis
-            :miner="miner"
-            :start-date="startDate"
-            :end-date="endDate"
-            :time-mode="timeMode"
-            :sell-mode="sellMode"
-            :currency="currency"
-            class="mb-8"
-        />
+        <div>
+          <div class="dashboard-stats">
+            <DashboardChartStats
+                :miner="miner"
+                :start-date="startDate"
+                :end-date="endDate"
+                :time-mode="timeMode"
+                :sell-mode="sellMode"
+                :currency="currency"
+            />
+
+            <DashboardCostBenefitAnalysis
+                :miner="miner"
+                :start-date="startDate"
+                :end-date="endDate"
+                :time-mode="timeMode"
+                :sell-mode="sellMode"
+                :currency="currency"
+            />
+          </div>
+        </div>
+
+      </div>
     </div>
+
+    <DashboardMarketData></DashboardMarketData>
+
   </div>
-
 <!--  <div class="row g-5 g-xl-8">-->
 <!--    <div>-->
 <!--      <TradeHistory></TradeHistory>-->
 <!--    </div>-->
 <!--  </div>-->
-
-  <DashboardMarketData></DashboardMarketData>
-
 </template>
 
 <script lang="ts">
@@ -77,13 +80,14 @@ import DashboardCalculator from '@/views/dashboard/components/DashboardCalculato
 import moment from "moment/moment";
 import DashboardMarketData from '@/views/dashboard/components/DashboardMarketData.vue';
 import DashboardTradingAnalysis from '@/views/dashboard/components/DashboardTradingAnalysis.vue';
+import DashboardHeader from '@/views/dashboard/DashboardHeader.vue';
 
 export default defineComponent({
   name: "dashboard-main",
   components: {
     DashboardTradingAnalysis,
     DashboardMarketData,
-    TradeHistory,
+    DashboardHeader,
     DashboardCostBenefitAnalysis,
     DashboardChartStats,
     DashboardChart,
@@ -151,9 +155,37 @@ export default defineComponent({
 </script>
 
 <style>
+.dashboard {
+  margin: 0 auto;
+  max-width: 1800px;
+  width: 100%;
+  padding: 0 40px;
+}
 .dashboard-stats {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 500px;
+}
+.dashboard-row {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .dashboard {
+    padding: 0 10px;
+  }
+
+  .dashboard-row {
+    display: block;
+  }
+
+  .dashboard-stats {
+    width: 100%;
+    margin-top: 12px;
+  }
 }
 </style>

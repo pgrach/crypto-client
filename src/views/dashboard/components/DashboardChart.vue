@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="widgetClasses">
+  <div class="dashboard-chart card">
     <div class="dashboard-chart-card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
         <div class="card-label fw-bold fs-3 mb-1 mt-3">Financial overview</div>
@@ -462,10 +462,14 @@ export default defineComponent({
 </script>
 
 <style lang="sass">
+.dashboard-chart
+  display: block
+  width: 100%
+
 .dashboard-chart-card-header
   display: flex
   justify-content: space-between
-  padding: 0 2.25rem
+  padding: 0 1.25rem
   border-bottom: 1px solid var(--bs-card-border-color)
 
 .chart-filters
@@ -503,7 +507,7 @@ export default defineComponent({
   display: flex
 
 .chart-filters__container
-  padding: 0 2.25rem
+  padding: 0 1.25rem
   margin-top: 30px
 
 

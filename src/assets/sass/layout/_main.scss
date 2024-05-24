@@ -28,8 +28,8 @@ body {
 	// Wrapper
 	.wrapper {
 		transition: padding-left get($aside-config, transition-speed) ease;
-		padding-top: get($header-config, height, desktop);
-		padding-left: get($aside-config, width);
+		//padding-top: get($header-config, height, desktop);
+		//padding-left: get($aside-config, width);
 
 		// Aside default enabled, aside fixed and aside minimize modes
 		[data-kt-aside-minimize="on"] & {
@@ -49,10 +49,10 @@ body {
 	}
 
 	// Wrapper
-	.wrapper {
+	//.wrapper {
 		// Fixed header mode
-		.header-tablet-and-mobile-fixed & {
-			padding-top: get($header-config, height, tablet-and-mobile);
-		}
-	}
+		//.header-tablet-and-mobile-fixed & {
+		//	padding-top: get($header-config, height, tablet-and-mobile);
+		//}
+	//}
 }

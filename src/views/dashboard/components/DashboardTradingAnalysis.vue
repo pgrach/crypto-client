@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-xl-stretch dashboard-trading-analysis">
+  <div class="card dashboard-trading-analysis">
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
         <span class="card-label fw-bold fs-3 mb-1">Trading analysis (Basic)</span>
@@ -269,7 +269,6 @@ export default defineComponent({
 
 <style lang="sass">
 .dashboard-trading-analysis
-  padding-bottom: 15px
   width: 100%
 
   &__tabs
@@ -282,7 +281,7 @@ export default defineComponent({
     font-size: 16px
     font-weight: 600
     line-height: 16px
-    padding: 0 0 20px 0
+    padding: 0 0 10px 0
     cursor: pointer
 
     &_active
@@ -293,11 +292,11 @@ export default defineComponent({
     width: 100%
     height: 1px
     background: rgba(225, 227, 234, 1)
-    margin-bottom: 30px
+    margin-bottom: 10px
 
   &__option
     margin-bottom: 15px
-    padding: 30px 55px 30px 15px
+    padding: 10px 55px 10px 15px
     display: flex
     justify-content: space-between
     align-items: center
@@ -337,8 +336,6 @@ export default defineComponent({
         font-weight: 600
         line-height: 18px
         text-align: center
-
-
 
     &_active
       background: #EEF6FF
