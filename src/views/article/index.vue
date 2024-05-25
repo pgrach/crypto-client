@@ -62,7 +62,7 @@ const routeToArticle = (hash, view) => {
     </div>
 
     <div class="home-article__img-container">
-      <img class="home-article__img" src="../../assets/img/article-img.png" alt="Main Article Image">
+      <img class="home-article__img" :src="article?.imgMain" alt="Main Article Image">
     </div>
 
     <div class="home-article__content-container">
@@ -76,7 +76,7 @@ const routeToArticle = (hash, view) => {
       <div class="home-article__recommendations__articles">
 
         <div v-for="item in articles" class="home-article__recommendation" @click="routeToArticle(item.hash, refArticle)" :key="item.id">
-          <img class="home-article__recommendation__img" src="@/assets/img/blog-article.png" alt="Article Image">
+          <img class="home-article__recommendation__img" :src="item.img" alt="Article Image">
           <h2 class="home-article__recommendation__title">{{ item.title }}</h2>
         </div>
 

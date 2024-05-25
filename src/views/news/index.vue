@@ -75,7 +75,7 @@ const routeToHome = () => {
           :date="item.date"
         >
           <template v-slot:article-img>
-            <img class="home-blog-article__img" src="../../assets/img/blog-article.png" alt="Article Img">
+            <img class="home-blog-article__img" :src="item.img" alt="Article Img">
           </template>
           <template v-slot:author-img>
             <img class="home-blog-article__author__img" src="../../assets/img/blog-author-pavel.png" alt="Author">
