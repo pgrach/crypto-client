@@ -17,7 +17,7 @@ const props = defineProps({
     </RouterLink>
     <div class="home-blog-article__content">
       <div>
-        <RouterLink :to="`/articles/${props.id}`">
+        <RouterLink :to="`/articles/${props.hash}`">
           <h4 class="home-blog-article__title">{{ props.title }}</h4>
         </RouterLink>
         <div class="home-blog-article__description">{{ props.description }}</div>
