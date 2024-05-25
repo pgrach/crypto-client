@@ -2,8 +2,8 @@
   <div class="dashboard-header">
     <div class="dashboard-header__main">
       <img alt="Logo" src="/media/img/logo_aidala.svg" class="h-25px h-lg-25px cursor-pointer" @click="routeToHome">
-      <div class="dashboard-header__main__title cursor-pointer" @click="routeToHome">Aidala</div>
-      <div class="dashboard-header__main__tab">Dashboard</div>
+      <div class="dashboard-header__main__title mobile-none" @click="routeToHome">Aidala</div>
+      <div class="dashboard-header__main__tab mobile-none">Dashboard</div>
       <div class="dashboard-header__main__link" @click="routeToNews">Learn more about methodology</div>
     </div>
     <div class="dashboard-header__join">
@@ -96,6 +96,7 @@ export default defineComponent({
     line-height: 14.33px
     margin-left: 5px
     margin-right: 50px
+    cursor: pointer
 
   &__tab
     padding: 7px 14px
@@ -160,13 +161,14 @@ export default defineComponent({
   .dashboard-header
     padding: 5px
 
-    &__main__title
+    .mobile-none
       display: none
 
     &__main__tab
       font-size: 12px
       padding: 5px
       text-align: center
+
 
     &__main__link
       font-size: 12px
