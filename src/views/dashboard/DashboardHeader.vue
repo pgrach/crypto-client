@@ -4,7 +4,7 @@
       <img alt="Logo" src="/media/img/logo_aidala.svg" class="h-25px h-lg-25px cursor-pointer" @click="routeToHome">
       <div class="dashboard-header__main__title cursor-pointer" @click="routeToHome">Aidala</div>
       <div class="dashboard-header__main__tab">Dashboard</div>
-      <div class="dashboard-header__main__link">Learn more about methodology</div>
+      <div class="dashboard-header__main__link" @click="routeToNews">Learn more about methodology</div>
     </div>
     <div class="dashboard-header__join">
       <div class="dashboard-header__main__tab cursor-pointer" @click="showDialog">Join our beta list</div>
@@ -56,6 +56,10 @@ export default defineComponent({
       router.push({ path: '/' });
     }
 
+    const routeToNews = () => {
+      router.push({ path: '/news' });
+    }
+
     const showDialog = () => {
       dialogVisible.value = true;
     }
@@ -64,7 +68,8 @@ export default defineComponent({
       routeToHome,
       showDialog,
       dialogVisible,
-      routeToAccessForm
+      routeToAccessForm,
+      routeToNews
     }
   }
 });
@@ -107,6 +112,7 @@ export default defineComponent({
     font-weight: 600
     line-height: 16px
     margin-left: 20px
+    cursor: pointer
 
 .join-beta-dialog
   background: linear-gradient(112deg, #00D2FF 0%, #3A7BD5 100%)
