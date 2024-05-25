@@ -155,4 +155,19 @@ export default defineComponent({
 @media only screen and (max-width: 1200px)
   .dashboard-header
     padding: 10px 10px
+
+@media only screen and (max-width: 600px)
+  .dashboard-header
+    padding: 5px
+
+    &__main__title
+      display: none
+
+    &__main__tab
+      font-size: 12px
+      padding: 5px
+      text-align: center
+
+    &__main__link
+      font-size: 12px
 </style>
