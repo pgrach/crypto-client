@@ -126,7 +126,7 @@ const sendDemoEmail = () => {
     <h1 class="home-title">Welcome to <span class="home-title__name">AiDala</span></h1>
     <div class="home-description__container">
       <h2 class="home-description">
-        Your Financial Co-Pilot in Cryptoeconomics. Our platform is ally-equipping you with intelligent tools tailored for strategic decision-making.
+        Advanced Technology Engineered for Bitcoin Mining Operations
       </h2>
     </div>
 
@@ -146,7 +146,7 @@ const sendDemoEmail = () => {
 
       <div class="home-features-title-container">
         <h2 class="home-features-title">
-          Features for Crypto Mining companies
+          Features for Bitcoin Mining
         </h2>
       </div>
 
@@ -175,7 +175,7 @@ const sendDemoEmail = () => {
                     Mining Risk Assessment Package
                   </h3>
                   <p class="home-features-block-text-content">
-                    Conduct comprehensive risk assessments and strategize your financial planning with robust analytics and forecasting.
+                    Our system continuously analyzes every aspect of Bitcoin mining operations to reveal current and future financial performance metrics. This empowers our partners to make informed investment decisions based on precise data, while others rely on estimations..
                   </p>
                 </div>
               </div>
@@ -210,7 +210,7 @@ const sendDemoEmail = () => {
                   </h3>
                   <p class="home-features-block-text-content">
                     Test your strategies against historical data with AiDala's backtesting software.
-                    Gain confidence in your approach before risking real money in the market.
+                    Pinpoint opportunities with optimal risk-reward ratios
                   </p>
                 </div>
               </div>
@@ -256,7 +256,7 @@ const sendDemoEmail = () => {
                 Mining Risk Assessment Package
               </h3>
               <p class="home-features-block-text-content">
-                Conduct comprehensive risk assessments and strategize your financial planning with robust analytics and forecasting.
+                Our system continuously analyzes every aspect of Bitcoin mining operations to reveal current and future financial performance metrics. This empowers our partners to make informed investment decisions based on precise data, while others rely on estimations..
               </p>
             </div>
           </div>
@@ -287,7 +287,7 @@ const sendDemoEmail = () => {
               </h3>
               <p class="home-features-block-text-content">
                 Test your strategies against historical data with AiDala's backtesting software.
-                Gain confidence in your approach before risking real money in the market.
+                Pinpoint opportunities with optimal risk-reward ratios
               </p>
             </div>
           </div>
@@ -481,12 +481,12 @@ const sendDemoEmail = () => {
 
       <div class="home-join-title-container">
         <h2 class="home-join-title">
-          Join AiDala Today: Where Innovation Meets Your Trading Needs
+          Join AiDala Today
         </h2>
       </div>
       <div class="home-join-description-container">
         <h2 class="home-join-description">
-          Empower Your Trading Journey with AIDALA - Redefining the Future of Crypto Economics.
+          The AI-driven insights we offer are unparalleled in the industry. This significantly amplifies our partners' mining capabilities, putting them ahead while others remain in the dark
         </h2>
       </div>
       <div>
