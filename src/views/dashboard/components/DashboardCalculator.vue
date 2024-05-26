@@ -202,11 +202,10 @@ export default defineComponent({
   justify-content: space-between;
   flex-wrap: wrap;
   padding-bottom: 15px;
-  gap: 5px;
 }
 
 .button-primary__loader {
-  width: 140px;
+  width: 220px;
   height: 40px;
   padding: 0;
   margin-top: 12px;
@@ -219,7 +218,7 @@ export default defineComponent({
 }
 
 .button-primary__loader__label {
-  margin-left: 40px;
+  margin-left: calc(50% - 40px);
 }
 
 .loader-left {
@@ -227,22 +226,30 @@ export default defineComponent({
 }
 
 .dashboard-calculator-form__item {
-  width: 300px;
+  margin-top: 15px;
+  width: 220px;
 }
 
 .dashboard-calculator-form__item .label {
-  margin-bottom: 6px;
+  margin-bottom: 3px;
   color: rgba(94, 98, 120, 1);
   font-size: 14px;
   font-weight: 600;
   line-height: 14px;
+  height: 28px;
+  overflow: hidden;
 }
 
 .dashboard-calculator-form__dates {
   width: 100%;
 
+  .el-input {
+    width: 220px;
+  }
+
   .label {
-    margin-bottom: 4px;
+    margin-bottom: 5px;
+    height: auto;
   }
 
   &__container {
@@ -270,18 +277,39 @@ export default defineComponent({
   }
 }
 
-@media only screen and (max-width: 1550px) {
+@media only screen and (max-width: 1700px) {
   .dashboard-calculator-form__item {
-    width: 200px;
+    width: 180px;
   }
 
   .dashboard-calculator-form__dates {
     width: 100%;
-    gap: 10px;
+
+    .el-input {
+      width: 180px;
+    }
+  }
+
+  .button-primary__loader {
+    width: 180px;
+  }
+}
+
+@media only screen and (max-width: 1450px) {
+  .dashboard-calculator-form__item {
+    width: 150px;
+  }
+
+  .dashboard-calculator-form__dates {
+    width: 100%;
 
     .el-input {
       width: 150px;
     }
+  }
+
+  .button-primary__loader {
+    width: 150px;
   }
 }
 
@@ -314,12 +342,15 @@ export default defineComponent({
 
     &__item {
       margin-top: 15px;
-      margin-top: 15px;
 
       &:last-child {
         margin-left: 0;
       }
     }
+  }
+
+  .button-primary__loader {
+    width: 100%;
   }
 }
 </style>
