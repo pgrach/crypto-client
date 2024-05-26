@@ -187,7 +187,7 @@ export default defineComponent({
       response.forEach(item => {
         item.label = totalLabels[item.sell_mode]
       })
-      state.totals = response;
+      state.totals = response.sort((a, b) => b.total_profit_usd - a.total_profit_usd);
     }
 
     const formatCurrency = (item) => {
