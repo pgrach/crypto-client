@@ -20,79 +20,32 @@
 
       <div class="dashboard-trading-analysis__line"></div>
 
-      <div class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedDay}">
+      <div v-for="(item, index) in state.totals"
+           :key="index" class="dashboard-trading-analysis__option"
+           :class="{'dashboard-trading-analysis__option_active': sellMode === item.sell_mode }"
+           v-show="timeMode !== 'daily' || item.sell_mode === 'daily'"
+      >
         <div class="form-check form-check-custom form-check-success form-check-solid">
           <div class="dashboard-trading-analysis__option__check-line"></div>
-          <input class="form-check-input" type="checkbox" v-model="selectedDay"/>
+          <input class="form-check-input" type="checkbox" :checked="sellMode === item.sell_mode" @change="checkTotals(item.sell_mode)"/>
           <label class="form-check-label" for="">
-            Everyday
+            {{ item.label }}
           </label>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_rev_usd) }}</div>
-          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalDaily.total_rev_usd < 0}">Revenue</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(item.total_rev_usd) }}</div>
+          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': item.total_rev_usd < 0}">Revenue</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_cost_usd) }}</div>
-          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalDaily.total_cost_usd < 0}">Cost</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(item.total_cost_usd) }}</div>
+          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': item.total_cost_usd < 0}">Cost</div>
         </div>
 
         <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalDaily.total_profit_usd) }}</div>
-          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalDaily.total_profit_usd < 0}">Profit</div>
-        </div>
-      </div>
-
-      <div v-if="props.timeMode === 'monthly'" class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedWeek}" >
-        <div class="form-check form-check-custom form-check-success form-check-solid">
-          <div class="dashboard-trading-analysis__option__check-line"></div>
-          <input class="form-check-input" type="checkbox" v-model="selectedWeek"/>
-          <label class="form-check-label" for="">
-            Once a week
-          </label>
-        </div>
-
-        <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_rev_usd) }}</div>
-          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalWeekly.total_rev_usd < 0}">Revenue</div>
-        </div>
-
-        <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_cost_usd) }}</div>
-          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalWeekly.total_cost_usd < 0}">Cost</div>
-        </div>
-
-        <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalWeekly.total_profit_usd) }}</div>
-          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalWeekly.total_profit_usd < 0}">Profit</div>
-        </div>
-      </div>
-
-      <div v-if="props.timeMode === 'monthly'" class="dashboard-trading-analysis__option" :class="{'dashboard-trading-analysis__option_active': selectedMonth}" >
-        <div class="form-check form-check-custom form-check-success form-check-solid">
-          <div class="dashboard-trading-analysis__option__check-line"></div>
-          <input class="form-check-input" type="checkbox" v-model="selectedMonth"/>
-          <label class="form-check-label" for="">
-            Once a month
-          </label>
-        </div>
-
-
-        <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_rev_usd) }}</div>
-          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalMonthly.total_rev_usd < 0}">Revenue</div>
-        </div>
-
-        <div class="dashboard-trading-analysis__option__item">
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_cost_usd) }}</div>
-          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalMonthly.total_cost_usd < 0}">Cost</div>
-        </div>
-
-        <div class="dashboard-trading-analysis__option__item" >
-          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(totalMonthly.total_profit_usd) }}</div>
-          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': totalMonthly.total_profit_usd < 0}">Profit</div>
+          <div class="dashboard-trading-analysis__option__item__value">{{ formatCurrency(item.total_profit_usd) }}</div>
+          <div class="dashboard-trading-analysis__option__item__label" :class="{'dashboard-trading-analysis__option__item__label_negative': item.total_profit_usd < 0}">Profit</div>
         </div>
       </div>
 
@@ -101,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, ref, watch } from "vue";
+import { defineComponent, onBeforeMount, reactive, ref, watch } from "vue";
 import axios from 'axios';
 import moment from "moment";
 
@@ -116,14 +69,34 @@ export default defineComponent({
   },
   emits: ['emitSellMode'],
   setup(props, ctx) {
-    const selectedDay = ref(true);
-    const selectedWeek = ref(false);
-    const selectedMonth = ref(false);
-    const sellMode = ref('daily');
 
-    const totalDaily = ref({ total_rev_usd: 0, total_cost_usd: 0, total_profit_usd: 0 });
-    const totalWeekly = ref({ total_rev_usd: 0, total_cost_usd: 0, total_profit_usd: 0 });
-    const totalMonthly = ref({ total_rev_usd: 0, total_cost_usd: 0, total_profit_usd: 0 });
+    const state = reactive({
+      totals: [
+        {
+          sell_mode: "daily",
+          total_cost_usd: 0,
+          total_profit_usd: 0,
+          total_rev_usd: 0,
+          label: "Everyday"
+        },
+        {
+          sell_mode: "weekly",
+          total_cost_usd: 0,
+          total_profit_usd: 0,
+          total_rev_usd: 0,
+          label: "Once a week"
+        },
+        {
+          sell_mode: "monthly",
+          total_cost_usd: 0,
+          total_profit_usd: 0,
+          total_rev_usd: 0,
+          label: "Once a month"
+        },
+      ]
+    })
+
+    const sellMode = ref('daily');
 
     watch(
         () => props.currency,
@@ -153,44 +126,13 @@ export default defineComponent({
         () => props.timeMode,
         (newValue, oldValue) => {
           if (newValue as any === 'daily') {
-            selectedDay.value = true
-            selectedWeek.value = false
-            selectedMonth.value = false
+            sellMode.value = 'daily';
           }
           fetchSummaries();
         },
         { deep: true }
     )
 
-    watch(() => selectedDay.value,
-        (newValue, oldValue) => {
-          if (newValue === true) {
-            selectedWeek.value = false;
-            selectedMonth.value = false;
-            sellMode.value = 'daily';
-            ctx.emit('emitSellMode', 'daily');
-          }
-        })
-
-    watch(() => selectedWeek.value,
-        (newValue, oldValue) => {
-          if (newValue === true) {
-            selectedDay.value = false;
-            selectedMonth.value = false;
-            sellMode.value = 'weekly';
-            ctx.emit('emitSellMode', 'weekly');
-          }
-        })
-
-    watch(() => selectedMonth.value,
-        (newValue, oldValue) => {
-          if (newValue === true) {
-            selectedDay.value = false;
-            selectedWeek.value = false;
-            sellMode.value = 'monthly';
-            ctx.emit('emitSellMode', 'monthly');
-          }
-        })
 
     const fetchSummaries = () => {
       if (props.timeMode === "daily" && sellMode.value === "monthly") {
@@ -223,14 +165,29 @@ export default defineComponent({
       axios.post(`${host}${endpoint}`, body)
           .then(function (response) {
             const totals = response?.data?.data ? response.data.data : [];
-            totalDaily.value = totals.find(item => item.sell_mode === 'daily');
-            totalWeekly.value = totals.find(item => item.sell_mode === 'weekly');
-            totalMonthly.value = totals.find(item => item.sell_mode === 'monthly');
+            setStateTotals(totals);
           })
           .catch(function (error) {
             console.log('Chart Error: ', error);
             // setRandomChart();
           });
+    }
+
+    const checkTotals = (mode) => {
+      sellMode.value = mode;
+      ctx.emit('emitSellMode', mode);
+    }
+
+    const totalLabels = {
+      daily: 'Everyday',
+      weekly: 'Once a week',
+      monthly: 'Once a month'
+    }
+    const setStateTotals = (response) => {
+      response.forEach(item => {
+        item.label = totalLabels[item.sell_mode]
+      })
+      state.totals = response;
     }
 
     const formatCurrency = (item) => {
@@ -254,14 +211,11 @@ export default defineComponent({
     }
 
     return {
-      selectedDay,
-      selectedWeek,
-      selectedMonth,
       props,
-      totalDaily,
-      totalWeekly,
-      totalMonthly,
-      formatCurrency
+      formatCurrency,
+      state,
+      sellMode,
+      checkTotals
     };
   },
 });
