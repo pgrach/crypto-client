@@ -24,7 +24,7 @@
     </div>
 
     <div>
-      <div class="dashboard-row" v-show="isCalculated">
+      <div class="dashboard-row">
         <DashboardChart
             :height="330"
             :miner="miner"
