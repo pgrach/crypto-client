@@ -75,7 +75,7 @@ export const articles = [
         <img style="max-width: 500px; width: 100%;" src="/images/cost-benefit-2.png" alt="">
         <br/><br/>
         
-        <b>Cumulative Net Profit</b> is the total profit from mining after deducting operational costs (e.g., electricity). The actual profit amount can vary based on trading strategy, which we explore separately. Also, your approach to holding Bitcoin (a.k.a. "HODL" strategy) plays a crucial role—whether you choose to keep your profits in BTC or convert in USD. 
+        <b>Cumulative Net Profit</b> is the total profit from mining after deducting operational costs (e.g., electricity). The actual profit amount can vary based on trading strategy, <a href="https://aidala.uk/articles/trading-analysis-basic-explained">which we explore separately</a>. Also, your approach to holding Bitcoin (a.k.a. "HODL" strategy) plays a crucial role—whether you choose to keep your profits in BTC or convert in USD. 
         <b>CAPEX</b> (Capital Expenditure) refers to the initial costs of starting your mining operation, including the purchase price of hardware multiplied by the quantity bought.
           
         <br/><br/>
@@ -132,6 +132,54 @@ export const articles = [
         <br/><br/>
         Reach out with your thoughts, and if you're interested, we can offer real-time financial monitoring customised to your mining operation needs.
 
+`
+  },
+  {
+    "id": 3,
+    "hash": "trading-analysis-basic-explained",
+    "title": "Trading Analysis (Basic) Explained",
+    "img": "/images/article-img-3.png",
+    "imgMain": "/images/article-main-3.png",
+    "author": "Pavel Grachev",
+    "date": "27 MAY 2024",
+    "description": "Financial Strategies for Bitcoin Miners: Timing and Currency Choices",
+    "content": `
+        Whether you are a large-scale miner or a retail miner with just one machine, revenue recognition is a critical question. The nature of the mining business raises the issue of which currency to use for reporting revenues. 
+        <br/><br/>
+        In our calculator, we offer both options: USD and BTC. However, you might need some clarifications on how to use these options effectively.
+        <br/><br/>
+        <img style="max-width: 200px; width: 100%;" src="/images/trading-analysis-1.png" alt="">
+        <br/><br/>
+        While it may seem straightforward to think of revenues in BTC terms—since Bitcoin is the product your miners produce—it becomes more complicated when you need to pay your bills, which are usually in USD. Converting your costs into BTC can be a useful mental exercise or practical if you sell only enough bitcoins to cover your costs. But it can also be confusing. A useful parallel is an oil company calculating revenue in barrels of oil and converting costs into barrels. This approach can be insightful but not always practical in the fiat world.
+        
+        <br/><br/>
+        <img style="max-width: 500px; width: 100%;" src="/images/trading-analysis-2.png" alt="">
+        <br/><br/>
+        
+        
+        Alternatively, if you choose USD, there is a natural tendency to think of revenue based on the fair market value of Bitcoin at the time it is mined. However, the actual value in USD is realized when the mined Bitcoin is sold and converted to fiat currency. This is similar to oil, where the value is recognized when the oil is sold, not at the moment of extraction. Essentially, the key question is when miners sell their mined bitcoins.
+        <br/><br/>
+        No other mining calculators provide this line of thinking or propose alternatives for comparing scenarios, so we decided to make it ourselves. We introduced three simple strategies:
+        <br/><br/>
+        1) <b>Once a Month</b>: Using the conversion rate on the last date of the month.
+        2) <b>Once a Week</b>: Using the conversion rate on the last day of the week.
+        3) <b>Every Day</b>: Using the conversion rate on the last hour of the day.
+        <br/><br/>
+        <img style="max-width: 500px; width: 100%;" src="/images/trading-analysis-3.png" alt="">
+        <br/><br/>
+        
+        These strategies result in different revenue values, which influence most downstream financial metrics.
+        <br/><br/>
+        For example, consider mining with the Whatsminer M32 model in 2023 at 5.5 cents/kWh electricity cost. If you were selling BTC at the end of the month, your revenues would be different compared to selling weekly or daily. In fact, you would only be profitable if selling at the end of the month:
+        <br/><br/>
+        <img style="max-width: 700px; width: 100%;" src="/images/trading-analysis-4.png" alt="">
+        <br/><br/>
+        So I hope this simple basic example showed you the importance of timing and made it clearer how to think in terms of revenue in USD and in BTC. There is a lot more to cover and to add.
+        <br/><br/>
+        Future improvements will address questions: do you sell all bitcoins or only part? What if we only convert a portion to cover operating costs? How does it change reporting - adding realized and unrealized gains/losses? This is the issue we are examining for our advanced scenario, and we are excited to implement more specific cases based on your feedback.
+        <br/><br/>
+        Our ML team is working on algorithmic trading models. These models use real-time price and volume data to execute trades based on predefined criteria. Imagine you are not just picking a defined strategy between daily, weekly, or monthly selling, but you follow a trained model based on inputs you select. Or you follow investment strategies via third-party trading bots.
+        This is all part of our comprehensive <a href="https://aidala.uk/access-form">Business Continuity Software (Beta)</a> which we are happy to offer.
 `
   }
 ];

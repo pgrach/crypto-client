@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 
 import { articles } from "./articles";
 const router = useRouter();
@@ -36,6 +36,11 @@ const routeToArticle = (hash, view) => {
   view.scrollIntoView({ behavior: 'instant' });
   router.push({ path: `/articles/${hash}` });
 }
+
+const recommendedArticles = computed(() => {
+  const recommended = articles.filter(item => item.hash !== route.params.hash);
+  return recommended.slice(0, 2);
+})
 </script>
 
 <template>
@@ -75,7 +80,7 @@ const routeToArticle = (hash, view) => {
 
       <div class="home-article__recommendations__articles">
 
-        <div v-for="item in articles" class="home-article__recommendation" @click="routeToArticle(item.hash, refArticle)" :key="item.id">
+        <div v-for="item in recommendedArticles" class="home-article__recommendation" @click="routeToArticle(item.hash, refArticle)" :key="item.id">
           <img class="home-article__recommendation__img" :src="item.img" alt="Article Image">
           <h2 class="home-article__recommendation__title">{{ item.title }}</h2>
         </div>
