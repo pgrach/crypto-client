@@ -174,7 +174,7 @@ export default defineComponent({
   margin-top: 12px;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1100px) {
   .dashboard {
     padding: 0 10px;
   }

@@ -13,89 +13,65 @@
         <div class="dashboard-calculator-form__item">
           <div class="label">Model</div>
 
-          <select class="form-select" aria-label="Select miner name" v-model="miner" @change="setMinerData()">
-            <option v-for="item in miners" :value="item" :key="item.id">{{ item?.miner_name }}</option>
-          </select>
+          <el-select v-model="miner"  @change="setMinerData()" aria-label="Select miner name">
+            <el-option v-for="item in miners" :value="item" :label="item.miner_name" :key="item.id">{{ item?.miner_name }}</el-option>
+          </el-select>
 
         </div>
 
         <div class="dashboard-calculator-form__item">
           <div class="label">Quantity</div>
-          <Field
-              type="text"
-              class="form-control"
-              placeholder="Quantity"
-              name="Quantity"
-              v-model="quantity"
-          />
+
+          <el-input-number v-model="quantity" :min="1" :max="1000" placeholder="Quantity" />
         </div>
 
         <div class="dashboard-calculator-form__item">
           <div class="label">Hashrate (TH/s)</div>
-          <Field
-              type="text"
-              class="form-control"
-              placeholder="Hashrate (TH/s)"
-              name="Hashrate (TH/s)"
-              v-model="hashrate"
-          />
+
+          <el-input-number v-model="hashrate" :min="1" :max="250" placeholder="Hashrate (TH/s)" />
         </div>
 
         <div class="dashboard-calculator-form__item">
           <div class="label">Power (W)</div>
-          <Field
-              type="text"
-              class="form-control"
-              placeholder="Power (W)"
-              name="Power (W)"
-              v-model="power"
-          />
+
+          <el-input-number v-model="power" :min="1" :max="10000" placeholder="Power (W)" />
         </div>
 
         <div class="dashboard-calculator-form__item">
           <div class="label">Energy Cost (cents per kWh)</div>
-          <Field
-              type="text"
-              class="form-control"
-              placeholder="Energy Cost (cents per kWh)"
-              name="Energy Cost (cents per kWh)"
-              v-model="powerCost"
-          />
+
+          <el-input-number v-model="powerCost" :min="0" :max="15" :step="0.1" placeholder="Energy Cost (cents per kWh)" />
         </div>
 
         <div class="dashboard-calculator-form__item">
           <div class="label">Cost of hardware ($ per unit)</div>
-          <Field
-              type="text"
-              class="form-control"
-              placeholder="Cost of hardware ($)"
-              name="Cost of hardware ($)"
-              v-model="costOfHw"
-          />
+
+          <el-input-number v-model="costOfHw" :min="1" :max="10000" placeholder="Cost of hardware ($)" />
         </div>
 
-        <div class="dashboard-calculator-form__item dashboard-calculator-form__dates">
-          <div class="label">Mining Period</div>
-          <div class="dashboard-calculator-form__dates__container">
-            <div class="dashboard-calculator-form__dates__item">
-              <span class="dashboard-calculator-form__dates__item__label">Start Date</span>
-              <el-date-picker v-model="startDate" size="large"></el-date-picker>
-            </div>
-            <div class="dashboard-calculator-form__dates__item">
-              <span class="dashboard-calculator-form__dates__item__label">End Date</span>
-              <el-date-picker v-model="endDate" size="large"></el-date-picker>
-            </div>
-            <button class="button-primary button-primary__loader"
-                    :class="{'button-primary__loader_loading': loading}"
-                    :disabled="loading" @click="emitMiner()">
-            <span class="button-primary__loader__label">
-              Calculate
-            </span>
+        <div class="dashboard-calculator-form__item">
+          <div class="label">Start Date</div>
+          <el-date-picker v-model="startDate"></el-date-picker>
+        </div>
+
+        <div class="dashboard-calculator-form__item">
+          <div class="label">End Date</div>
+          <el-date-picker v-model="endDate"></el-date-picker>
+        </div>
+
+        <div class="dashboard-calculator-form__item">
+          <div class="label"></div>
+
+          <button class="button-primary button-primary__loader"
+                  :class="{'button-primary__loader_loading': loading}"
+                  :disabled="loading" @click="emitMiner()">
+              <span class="button-primary__loader__label">
+                Calculate
+              </span>
             <span v-if="loading"
                   class="spinner-border spinner-border-sm loader-left">
-            </span>
-            </button>
-          </div>
+              </span>
+          </button>
         </div>
       </div>
 
@@ -205,10 +181,9 @@ export default defineComponent({
 }
 
 .button-primary__loader {
-  width: 220px;
-  height: 40px;
+  width: 150px;
+  height: 32px;
   padding: 0;
-  margin-top: 12px;
   text-align: start;
   transition: .3s linear;
 }
@@ -218,7 +193,7 @@ export default defineComponent({
 }
 
 .button-primary__loader__label {
-  margin-left: calc(50% - 40px);
+  margin-left: calc(50% - 30px);
 }
 
 .loader-left {
@@ -240,81 +215,20 @@ export default defineComponent({
   overflow: hidden;
 }
 
-.dashboard-calculator-form__dates {
-  width: 100%;
-
-  .el-input {
-    width: 220px;
-  }
-
-  .label {
-    margin-bottom: 5px;
-    height: auto;
-  }
-
-  &__container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__item {
-    position: relative;
-    padding-top: 12px;
-
-    &:last-child {
-      margin-left: 12px;
-    }
-
-    &__label {
-      position: absolute;
-      top: -4px;
-      right: 0;
-      z-index: 2;
-      font-weight: bold;
-      color: #989494;
-      font-size: 11px;
-    }
-  }
-}
-
 @media only screen and (max-width: 1700px) {
   .dashboard-calculator-form__item {
     width: 180px;
   }
 
-  .dashboard-calculator-form__dates {
-    width: 100%;
+  .dashboard-calculator-form {
 
-    .el-input {
+    .el-date-editor.el-input, .el-date-editor.el-input__wrapper {
       width: 180px;
     }
   }
-
-  .button-primary__loader {
-    width: 180px;
-  }
 }
 
-@media only screen and (max-width: 1450px) {
-  .dashboard-calculator-form__item {
-    width: 150px;
-  }
-
-  .dashboard-calculator-form__dates {
-    width: 100%;
-
-    .el-input {
-      width: 150px;
-    }
-  }
-
-  .button-primary__loader {
-    width: 150px;
-  }
-}
-
-
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1100px) {
   .dashboard-calculator-form {
     display: block;
 
@@ -326,27 +240,6 @@ export default defineComponent({
   .dashboard-calculator-form__item {
     margin-bottom: 15px;
     width: 100%;
-  }
-
-  .dashboard-calculator-form__dates {
-    width: 100%;
-
-    &__container {
-      display: block;
-    }
-
-    .button-primary {
-      margin-top: 20px;
-      margin-left: 0;
-    }
-
-    &__item {
-      margin-top: 15px;
-
-      &:last-child {
-        margin-left: 0;
-      }
-    }
   }
 
   .button-primary__loader {
