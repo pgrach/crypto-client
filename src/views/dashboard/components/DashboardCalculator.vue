@@ -85,6 +85,7 @@ import { ErrorMessage, Field, Form as VForm } from 'vee-validate';
 import axios from 'axios';
 import moment from "moment";
 import { start } from '@popperjs/core';
+import { watchDebounced } from '@vueuse/core'
 
 export default defineComponent({
   name: "dashboard-calculator",
@@ -118,44 +119,44 @@ export default defineComponent({
       power.value = miner.value.power;
     }
 
-    watch(
+    watchDebounced(
         () => quantity,
         (newValue, oldValue) => {
           emitMiner();
         },
-        { deep: true }
+        { deep: true, debounce: 500, maxWait: 1000 }
     )
 
-    watch(
+    watchDebounced(
         () => hashrate,
         (newValue, oldValue) => {
           emitMiner();
         },
-        { deep: true }
+        { deep: true, debounce: 500, maxWait: 1000 }
     )
 
-    watch(
+    watchDebounced(
         () => power,
         (newValue, oldValue) => {
           emitMiner();
         },
-        { deep: true }
+        { deep: true, debounce: 500, maxWait: 1000 }
     )
 
-    watch(
+    watchDebounced(
         () => powerCost,
         (newValue, oldValue) => {
           emitMiner();
         },
-        { deep: true }
+        { deep: true, debounce: 500, maxWait: 1000 }
     )
 
-    watch(
-        () => powerCost,
+    watchDebounced(
+        () => costOfHw,
         (newValue, oldValue) => {
           emitMiner();
         },
-        { deep: true }
+        { deep: true, debounce: 500, maxWait: 1000 }
     )
 
 
