@@ -13,7 +13,7 @@
         <div class="dashboard-calculator-form__item">
           <div class="label">Model</div>
 
-          <el-select v-model="miner"  @change="setMinerData()" aria-label="Select miner name">
+          <el-select v-model="miner"  @change="setMinerData()" aria-label="Select miner name" value-key="id">
             <el-option v-for="item in miners" :value="item" :label="item.miner_name" :key="item.id">{{ item?.miner_name }}</el-option>
           </el-select>
 
@@ -80,7 +80,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, ref } from "vue";
+import { defineComponent, onBeforeMount, ref, watch } from "vue";
 import { ErrorMessage, Field, Form as VForm } from 'vee-validate';
 import axios from 'axios';
 import moment from "moment";
@@ -117,6 +117,47 @@ export default defineComponent({
       hashrate.value = miner.value.hashrate;
       power.value = miner.value.power;
     }
+
+    watch(
+        () => quantity,
+        (newValue, oldValue) => {
+          emitMiner();
+        },
+        { deep: true }
+    )
+
+    watch(
+        () => hashrate,
+        (newValue, oldValue) => {
+          emitMiner();
+        },
+        { deep: true }
+    )
+
+    watch(
+        () => power,
+        (newValue, oldValue) => {
+          emitMiner();
+        },
+        { deep: true }
+    )
+
+    watch(
+        () => powerCost,
+        (newValue, oldValue) => {
+          emitMiner();
+        },
+        { deep: true }
+    )
+
+    watch(
+        () => powerCost,
+        (newValue, oldValue) => {
+          emitMiner();
+        },
+        { deep: true }
+    )
+
 
     const emitMiner = () => {
       const minerData = {
