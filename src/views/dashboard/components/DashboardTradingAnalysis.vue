@@ -202,7 +202,7 @@ export default defineComponent({
           minimumFractionDigits: 6,
           maximumFractionDigits: 6
         });
-        return '₿' + formatter.format(item).substring(1);
+        return formatter.format(item).replace('$', '₿');
       } else {
         const formatter = new Intl.NumberFormat('en-US', {
           style: 'currency',
