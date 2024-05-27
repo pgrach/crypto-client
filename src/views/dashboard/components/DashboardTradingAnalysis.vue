@@ -134,11 +134,11 @@ export default defineComponent({
     )
 
     onMounted(() => {
-      fetchSummaries();
+      fetchSummaries(true);
     });
 
 
-    const fetchSummaries = () => {
+    const fetchSummaries = (chooseBestProfit = false) => {
       if (props.timeMode === "daily" && sellMode.value === "monthly") {
         return;
       }
@@ -170,6 +170,9 @@ export default defineComponent({
           .then(function (response) {
             const totals = response?.data?.data ? response.data.data : [];
             setStateTotals(totals);
+            if (chooseBestProfit) {
+              sellMode.value = state.totals[0].sell_mode;
+            }
           })
           .catch(function (error) {
             console.log('Chart Error: ', error);
