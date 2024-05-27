@@ -274,6 +274,14 @@ export default defineComponent({
       return found.label;
     }
 
+    const formatYAxis = (val) => {
+      return val.toLocaleString('en-US', {
+        maximumFractionDigits: 2,
+        notation: 'compact',
+        compactDisplay: 'short'
+      });
+    }
+
     const chartOptions = (): ApexOptions => {
       const labelColor = getCSSVariableValue("--bs-gray-500");
       const borderColor = getCSSVariableValue("--bs-gray-200");
@@ -349,7 +357,7 @@ export default defineComponent({
                 fontSize: "12px",
               },
               formatter: function (val) {
-                return val.toFixed(2);
+                return formatYAxis(val);
               },
             },
           },
@@ -368,7 +376,7 @@ export default defineComponent({
                 fontSize: "12px",
               },
               formatter: function (val) {
-                return val.toFixed(2);
+                return formatYAxis(val);
               },
             },
           },
@@ -387,7 +395,7 @@ export default defineComponent({
                 fontSize: "12px",
               },
               formatter: function (val) {
-                return val.toFixed(2);
+                return formatYAxis(val);
               },
             },
           },
