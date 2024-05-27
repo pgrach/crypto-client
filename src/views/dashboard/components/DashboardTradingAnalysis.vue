@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, reactive, ref, watch } from "vue";
+import { defineComponent, onBeforeMount, onMounted, reactive, ref, watch } from "vue";
 import axios from 'axios';
 import moment from "moment";
 
@@ -132,6 +132,10 @@ export default defineComponent({
         },
         { deep: true }
     )
+
+    onMounted(() => {
+      fetchSummaries();
+    });
 
 
     const fetchSummaries = () => {

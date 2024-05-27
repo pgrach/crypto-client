@@ -128,14 +128,14 @@ export default defineComponent({
   emits: ['setMiner'],
   setup(props, ctx) {
     const miners = ref([]);
-    const miner = ref({ id: 1, miner_name: 'Antminer S19 Pro+ Hyd 198TH/s', hashrate: 198, power: 5445 });
+    const miner = ref({ id: '4f75b5a5-4187-412f-ad50-0c2533cba001', miner_name: 'Whatsminer M32', hashrate: 62, power: 3348 });
     const quantity = ref(10);
-    const hashrate = ref(198);
-    const power = ref(5445);
+    const hashrate = ref(62);
+    const power = ref(3348);
     const powerCost = ref(6);
     const costOfHw = ref(2000);
-    const startDate = ref(moment('2019-01-01', 'YYYY-MM-DD').toDate());
-    const endDate = ref(moment(new Date()).subtract(1, 'days').format("YYYY-MM-DDTHH:mm:ss"));
+    const startDate = ref(moment('2023-01-01', 'YYYY-MM-DD').toDate());
+    const endDate = ref(moment('2024-01-01', 'YYYY-MM-DD').toDate());
 
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
@@ -165,9 +165,9 @@ export default defineComponent({
       axios.get(`${host}asics`)
           .then(function (response) {
             miners.value = response && response.data && response.data.items ? response.data.items : [];
-            const firstMiner = miners.value[0] ? miners.value[0] : {};
-            if (firstMiner.miner_name) {
-              miner.value = firstMiner;
+            const foundMiner = miners.value.find(item => item.miner_name === 'Whatsminer M32');
+            if (foundMiner.miner_name) {
+              miner.value = foundMiner;
               setMinerData();
             }
           })

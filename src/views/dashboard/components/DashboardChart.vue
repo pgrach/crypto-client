@@ -96,6 +96,10 @@ export default defineComponent({
 
     watch(() => currency, () => { fetchChart() }, { deep: true })
 
+    onMounted(() => {
+      fetchChart();
+    })
+
     const getDates = computed(() => {
       return moment(props.startDate).format('ll') + ' - ' + moment(props.endDate).format('ll');
     });
