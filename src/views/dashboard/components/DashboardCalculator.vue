@@ -22,31 +22,31 @@
         <div class="dashboard-calculator-form__item">
           <div class="label">Quantity</div>
 
-          <el-input-number v-model="quantity" :min="1" :max="1000" placeholder="Quantity" />
+          <el-input-number v-model="quantity" :min="1" placeholder="Quantity" />
         </div>
 
         <div class="dashboard-calculator-form__item">
           <div class="label">Hashrate (TH/s)</div>
 
-          <el-input-number v-model="hashrate" :min="1" :max="250" placeholder="Hashrate (TH/s)" />
+          <el-input-number v-model="hashrate" :min="1" placeholder="Hashrate (TH/s)" />
         </div>
 
         <div class="dashboard-calculator-form__item">
           <div class="label">Power (W)</div>
 
-          <el-input-number v-model="power" :min="1" :max="10000" placeholder="Power (W)" />
+          <el-input-number v-model="power" :min="1" placeholder="Power (W)" />
         </div>
 
         <div class="dashboard-calculator-form__item">
           <div class="label">Energy Cost (cents per kWh)</div>
 
-          <el-input-number v-model="powerCost" :min="0" :max="15" :step="0.1" placeholder="Energy Cost (cents per kWh)" />
+          <el-input-number v-model="powerCost" :min="0" :step="0.1" placeholder="Energy Cost (cents per kWh)" />
         </div>
 
         <div class="dashboard-calculator-form__item">
           <div class="label">Cost of hardware ($ per unit)</div>
 
-          <el-input-number v-model="costOfHw" :min="1" :max="10000" placeholder="Cost of hardware ($)" />
+          <el-input-number v-model="costOfHw" :min="1" placeholder="Cost of hardware ($)" />
         </div>
 
         <div class="dashboard-calculator-form__item">
