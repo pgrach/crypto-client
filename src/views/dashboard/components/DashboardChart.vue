@@ -478,6 +478,9 @@ export default defineComponent({
   display: block
   width: 100%
 
+  .apexcharts-toolbar
+    display: none
+
 .dashboard-chart-card-header
   display: flex
   justify-content: space-between
