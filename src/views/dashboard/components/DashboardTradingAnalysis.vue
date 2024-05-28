@@ -27,7 +27,7 @@
       >
         <div class="form-check form-check-custom form-check-success form-check-solid">
           <div class="dashboard-trading-analysis__option__check-line"></div>
-          <input class="form-check-input" type="checkbox" :checked="sellMode === item.sell_mode" @change="checkTotals(item.sell_mode)"/>
+          <input class="form-check-input" type="checkbox" :checked="sellMode === item.sell_mode" @change="setSellMode(item.sell_mode)"/>
           <label class="form-check-label" for="">
             {{ item.label }}
           </label>
@@ -129,7 +129,7 @@ export default defineComponent({
         () => props.timeMode,
         (newValue, oldValue) => {
           if (newValue as any === 'daily') {
-            sellMode.value = 'daily';
+            setSellMode('daily');
           }
           fetchSummaries();
         },
@@ -174,7 +174,7 @@ export default defineComponent({
             const totals = response?.data?.data ? response.data.data : [];
             setStateTotals(totals);
             if (chooseBestProfit) {
-              sellMode.value = state.totals[0].sell_mode;
+              setSellMode(state.totals[0].sell_mode);
             }
           })
           .catch(function (error) {
@@ -183,7 +183,7 @@ export default defineComponent({
           });
     }
 
-    const checkTotals = (mode) => {
+    const setSellMode = (mode) => {
       sellMode.value = mode;
       ctx.emit('emitSellMode', mode);
     }
@@ -231,7 +231,7 @@ export default defineComponent({
       formatCurrency,
       state,
       sellMode,
-      checkTotals
+      setSellMode
     };
   },
 });

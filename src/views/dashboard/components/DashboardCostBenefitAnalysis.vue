@@ -99,6 +99,14 @@ export default defineComponent({
         { deep: true }
     )
 
+    watch(
+        () => props.currency,
+        (newValue, oldValue) => {
+          fetchCostBenefitAnalysis();
+        },
+        { deep: true }
+    )
+
     const fetchCostBenefitAnalysis = () => {
       if (props.timeMode === "daily" && props.sellMode === "monthly") {
         return;
