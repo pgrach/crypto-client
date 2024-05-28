@@ -52,7 +52,7 @@
           <span
               class="dashboard-chart-stats__row__item__value"
           >
-            {{ formatCurrency(totalSummary.avgCostBtc) }}
+            {{ formatCurrency(totalSummary.avgCostBtc, true) }}
           </span>
         </div>
       </div>
