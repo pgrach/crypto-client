@@ -54,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/terms-privacy",
     name: "terms-privacy",
-    component: () => import("@/views/terms/terms.vue"),
+    component: () => import("@/views/terms/index.vue"),
     meta: {
       pageTitle: "AiDala | Terms Conditions & Privacy Policy",
     },

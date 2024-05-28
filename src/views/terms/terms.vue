@@ -1,33 +1,12 @@
 <script setup>
 import { useRouter } from 'vue-router';
-import DashboardHeader from "@/views/dashboard/DashboardHeader.vue";
-
-const router = useRouter();
-
-const goBack = () => {
-  router.go(-1)
-}
-
-const routeToHome = () => {
-  router.push({ path: "/" });
-}
-
-const routeToCalcualtor = () => {
-  router.push({ path: "/Calculator" });
-}
-
-const routeToAccessForm = () => {
-  router.push({ path: "/access-form" });
-}
 </script>
 
 <template>
-  <DashboardHeader></DashboardHeader>
-
   <div class="privacy-policy">
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bold fs-3 mb-1">Privacy Policy</span>
+        <div class="card-label fw-bold fs-3 mb-4 text-center">Privacy Policy</div>
       </h3>
 
       <p>
@@ -35,9 +14,8 @@ const routeToAccessForm = () => {
       </p>
 
     </div>
+
   </div>
-
-
 </template>
 
 <style lang="sass">

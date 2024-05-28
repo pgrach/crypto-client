@@ -145,9 +145,9 @@
       </div>
       <div class="d-flex flex-center flex-wrap px-5">
         <div class="d-flex fw-semibold text-primary fs-base">
-          <a href="#" class="px-5" target="_blank">Terms</a>
-          <a href="#" class="px-5" target="_blank">Plans</a>
-          <a href="#" class="px-5" target="_blank">Contact Us</a>
+          <div class="px-5 cursor-pointer" @click="routeToHome()">Home</div>
+          <div class="px-5 cursor-pointer" @click="routeToDashboard()">Dashboard</div>
+          <div class="px-5 cursor-pointer" @click="routeToTerms()">Terms & Privacy Policy</div>
         </div>
       </div>
     </div>
@@ -242,6 +242,18 @@ export default defineComponent({
       router.push({ path: '/dashboard' });
     }
 
+    const routeToTerms = () => {
+      router.push({ path: '/terms-privacy' });
+    }
+
+    const routeToHome = () => {
+      router.push({ path: "/" });
+    }
+
+    const routeToBeta = () => {
+      router.push({ path: "/access-form" });
+    }
+
     return {
       onSubmitBeta,
       joinBetaValidation,
@@ -250,7 +262,10 @@ export default defineComponent({
       performance,
       acceptPrivacy,
       acceptPrivacyValidation,
-      routeToDashboard
+      routeToDashboard,
+      routeToHome,
+      routeToBeta,
+      routeToTerms
     };
   },
 });
