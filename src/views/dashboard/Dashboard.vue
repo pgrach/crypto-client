@@ -141,7 +141,6 @@ export default defineComponent({
     }
 
     const setTotalsSummary = (val) => {
-      console.log(val, ' SET')
       totalSummary.value = val;
     }
 
