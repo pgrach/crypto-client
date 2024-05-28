@@ -77,6 +77,7 @@ export default defineComponent({
           total_cost_usd: 0,
           total_profit_usd: 0,
           total_rev_usd: 0,
+          avg_cost_per_btc: 0,
           label: "Everyday"
         },
         {
@@ -84,6 +85,7 @@ export default defineComponent({
           total_cost_usd: 0,
           total_profit_usd: 0,
           total_rev_usd: 0,
+          avg_cost_per_btc: 0,
           label: "Once a week"
         },
         {
@@ -91,6 +93,7 @@ export default defineComponent({
           total_cost_usd: 0,
           total_profit_usd: 0,
           total_rev_usd: 0,
+          avg_cost_per_btc: 0,
           label: "Once a month"
         },
       ]
