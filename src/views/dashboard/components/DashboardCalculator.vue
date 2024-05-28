@@ -109,8 +109,8 @@ export default defineComponent({
     const quantity = ref(10);
     const hashrate = ref(62);
     const power = ref(3348);
-    const powerCost = ref(6);
-    const costOfHw = ref(2000);
+    const powerCost = ref(5.5);
+    const costOfHw = ref(500);
     const startDate = ref(moment('2023-01-01', 'YYYY-MM-DD').toDate());
     const endDate = ref(moment('2024-01-01', 'YYYY-MM-DD').toDate());
 

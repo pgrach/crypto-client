@@ -99,11 +99,11 @@ export default defineComponent({
     const isCalculated = ref(false);
 
     const miner = ref({
-      power_cost: 6,
-      power: 5000,
-      hash_rate : 9380,
+      power_cost: 5.5,
+      power: 3348,
+      hash_rate : 62,
       quantity: 10,
-      cost_of_hw: 2000
+      cost_of_hw: 500
     });
 
     const timeMode = ref('monthly');
