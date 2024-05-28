@@ -51,6 +51,14 @@ const routes: Array<RouteRecordRaw> = [
       pageTitle: "AiDala | Join Beta",
     },
   },
+  {
+    path: "/terms-privacy",
+    name: "terms-privacy",
+    component: () => import("@/views/terms/terms.vue"),
+    meta: {
+      pageTitle: "AiDala | Terms Conditions & Privacy Policy",
+    },
+  },
   // {
   //   path: "/app",
   //   redirect: "/app",
