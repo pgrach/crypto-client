@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+  <div class="dashboard-access-form d-flex flex-column flex-lg-row flex-column-fluid">
     <div
         class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-1"
         :style="`background-image: url('${getAssetPath(
@@ -17,6 +17,9 @@
 
     <div class="d-flex flex-column flex-lg-row-fluid p-10 order-2 order-lg-2 w-100">
       <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+
+        <img class="dashboard-access-form__close" :src="getAssetPath('media/img/close.svg')" @click="routeToDashboard" />
+
         <div class="w-lg-500px p-10">
             <VForm
                 class="form w-100"
@@ -235,6 +238,10 @@ export default defineComponent({
       submitButton.value!.disabled = false;
     };
 
+    const routeToDashboard = () => {
+      router.push({ path: '/dashboard' });
+    }
+
     return {
       onSubmitBeta,
       joinBetaValidation,
@@ -242,20 +249,32 @@ export default defineComponent({
       getAssetPath,
       performance,
       acceptPrivacy,
-      acceptPrivacyValidation
+      acceptPrivacyValidation,
+      routeToDashboard
     };
   },
 });
 </script>
 
 <style lang="sass">
-.dashboard-access-form__accept
-  display: flex
-  align-items: center
+.dashboard-access-form
+  position: relative
 
-  &__privacy
-    margin-left: 5px
-    color: #3E97FF
-    font-size: 14px
-    font-weight: 600
+  &__close
+    position: absolute
+    top: 20px
+    right: 20px
+    cursor: pointer
+
+  &__accept
+    display: flex
+    align-items: center
+
+    &__privacy
+      margin-left: 5px
+      color: #3E97FF
+      font-size: 14px
+      font-weight: 600
+
+
 </style>
