@@ -1,21 +1,21 @@
 <template>
-  <KTIcon
+  <img
       v-if="props.state === 'up'"
-      icon-name="arrow-up"
-      icon-class="fs-3 text-success"
+      :src="getAssetPath('media/img/arrow-up.svg')"
   />
-  <KTIcon
+  <img
       v-else
-      icon-name="arrow-down"
-      icon-class="fs-3 text-danger"
+      :src="getAssetPath('media/img/arrow-down.svg')"
   />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { getAssetPath } from '@/core/helpers/assets';
 
 export default defineComponent({
   name: "dashboard-arrow",
+  methods: {getAssetPath},
   props: {
     state: String
   },

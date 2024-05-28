@@ -8,78 +8,52 @@
       </h3>
     </div>
     <div class="card-body py-3">
-      <div class="tab-content">
-        <!--begin::Tap pane-->
-        <div class="tab-pane fade active show" id="kt_table_widget_5_tab_1">
-          <!--begin::Table container-->
-          <div class="table-responsive">
-            <!--begin::Table-->
-            <table
-              class="table table-row-dashed table-row-gray-200 align-middle gs-0 gy-4"
-            >
-              <!--begin::Table head-->
-              <thead>
-                <tr class="border-0">
-                  <th class="p-0 min-w-150px"></th>
-                  <th class="p-0 min-w-140px"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Total Revenue</div>
-                  </td>
-                  <td class="text-end dashboard-chart-stats-value">
-                    <DashboardArrow :state="totalSummary.revenue >= 0 ? 'up' : 'down'"></DashboardArrow>
-                    <span
-                        class="fs-4 fw-bold dashboard-chart-stats-value__margin"
-                    >
-                      {{ formatCurrency(totalSummary.revenue) }}
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Total Costs </div>
-                  </td>
-                  <td class="text-end dashboard-chart-stats-value">
-                    <DashboardArrow :state="totalSummary.cost >= 0 ? 'up' : 'down'"></DashboardArrow>
-                    <span
-                        class="fs-4 fw-bold dashboard-chart-stats-value__margin"
-                    >
-                      {{ formatCurrency(totalSummary.cost) }}
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Cumulative Net Profit</div>
-                  </td>
-                  <td class="text-end dashboard-chart-stats-value">
-                    <DashboardArrow :state="totalSummary.profit >= 0 ? 'up' : 'down'"></DashboardArrow>
-                    <span
-                        class="fs-4 fw-bold dashboard-chart-stats-value__margin"
-                    >
-                      {{ formatCurrency(totalSummary.profit) }}
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="text-gray-600 fw-bold text-hover-primary mb-1 fs-6">Average Cost of Production per Bitcoin (USD)</div>
-                  </td>
-                  <td class="text-end dashboard-chart-stats-value">
-                    <DashboardArrow :state="totalSummary.avgCostBtc >= 0 ? 'up' : 'down'"></DashboardArrow>
-                    <span
-                        class="fs-4 fw-bold dashboard-chart-stats-value__margin"
-                    >
-                      {{ formatCurrency(totalSummary.avgCostBtc, true) }}
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+
+      <div class="dashboard-chart-stats__row">
+        <div class="dashboard-chart-stats__row__label">Total Revenue</div>
+        <div class="dashboard-chart-stats__row__item">
+          <DashboardArrow :state="totalSummary.revenue >= 0 ? 'up' : 'down'"></DashboardArrow>
+          <span
+              class="dashboard-chart-stats__row__item__value"
+          >
+            {{ formatCurrency(totalSummary.revenue) }}
+          </span>
+        </div>
+      </div>
+
+      <div class="dashboard-chart-stats__row">
+        <div class="dashboard-chart-stats__row__label">Total Costs</div>
+        <div class="dashboard-chart-stats__row__item">
+          <DashboardArrow :state="totalSummary.cost >= 0 ? 'up' : 'down'"></DashboardArrow>
+          <span
+              class="dashboard-chart-stats__row__item__value"
+          >
+            {{ formatCurrency(totalSummary.cost) }}
+          </span>
+        </div>
+      </div>
+
+      <div class="dashboard-chart-stats__row">
+        <div class="dashboard-chart-stats__row__label">Cumulative Net Profit</div>
+        <div class="dashboard-chart-stats__row__item">
+          <DashboardArrow :state="totalSummary.profit >= 0 ? 'up' : 'down'"></DashboardArrow>
+          <span
+              class="dashboard-chart-stats__row__item__value"
+          >
+            {{ formatCurrency(totalSummary.profit) }}
+          </span>
+        </div>
+      </div>
+
+      <div class="dashboard-chart-stats__row">
+        <div class="dashboard-chart-stats__row__label">Average Cost of Production per Bitcoin (USD)</div>
+        <div class="dashboard-chart-stats__row__item">
+          <DashboardArrow :state="totalSummary.avgCostBtc >= 0 ? 'up' : 'down'"></DashboardArrow>
+          <span
+              class="dashboard-chart-stats__row__item__value"
+          >
+            {{ formatCurrency(totalSummary.avgCostBtc) }}
+          </span>
         </div>
       </div>
     </div>
@@ -132,11 +106,27 @@ export default defineComponent({
 
 <style lang="sass">
 .dashboard-chart-stats
-  .table.gy-4 th, .table.gy-4 td
-    padding: 7px
-.dashboard-chart-stats-value
-  width: 200px
+  &__row
+    display: flex
+    justify-content: space-between
+    margin: 11px 0 0
+    padding-bottom: 11px
+    border-bottom: 1px solid rgba(82, 85, 93, 0.07)
 
-.dashboard-chart-stats-value__margin
-  margin-left: 5px
+    &:last-child
+      border-bottom: none
+
+    &__label
+      color: rgb(120, 130, 157)
+      font-weight: bold
+      font-size: 15px
+      max-width: 250px
+
+    &__item
+      color: rgb(7, 20, 55)
+      font-weight: bold
+      font-size: 15px
+
+      &__value
+        margin-left: 5px
 </style>
