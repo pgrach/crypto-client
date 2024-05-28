@@ -119,7 +119,7 @@
 
               <div class="dashboard-access-form__accept">
                 <el-checkbox v-model="acceptPrivacy" label="I Accept the" size="large" />
-                <div class="dashboard-access-form__accept__privacy">Privacy Policy</div>
+                <div class="dashboard-access-form__accept__privacy" @click="dialogVisible = true">Privacy Policy</div>
               </div>
 
               <div v-if="!acceptPrivacy && acceptPrivacyValidation" class="text-danger p-2 mb-2">
@@ -152,6 +152,13 @@
       </div>
     </div>
 
+    <el-dialog
+        v-model="dialogVisible"
+        width="600"
+    >
+      <DashboardTerms></DashboardTerms>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -162,19 +169,19 @@ import { ErrorMessage, Field, Form as VForm } from "vee-validate";
 import { useRouter } from "vue-router";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as Yup from "yup";
+import DashboardTerms from '@/views/terms/terms.vue';
 
 export default defineComponent({
   name: "dashboard-access-form",
   components: {
+    DashboardTerms,
     Field,
     VForm,
     ErrorMessage,
   },
   setup() {
     const router = useRouter();
-
     const submitButton = ref<HTMLButtonElement | null>(null);
-
     const joinBetaValidation = Yup.object().shape({
       name: Yup.string().min(4).required().label("Full Name"),
       email: Yup.string().email().required().label("Email"),
@@ -185,6 +192,7 @@ export default defineComponent({
     const performance = ref(29);
     const acceptPrivacy = ref(false);
     const acceptPrivacyValidation = ref(false);
+    const dialogVisible = ref(false);
 
     const onSubmitBeta = async (values: any) => {
       values = values as any;
@@ -265,7 +273,8 @@ export default defineComponent({
       routeToDashboard,
       routeToHome,
       routeToBeta,
-      routeToTerms
+      routeToTerms,
+      dialogVisible
     };
   },
 });
@@ -290,6 +299,7 @@ export default defineComponent({
       color: #3E97FF
       font-size: 14px
       font-weight: 600
+      cursor: pointer
 
 
 </style>

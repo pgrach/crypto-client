@@ -20,14 +20,6 @@ import { useRouter } from 'vue-router';
 
 <style lang="sass">
 .privacy-policy
-  margin: 20px auto
-  max-width: 1200px
-  width: 100%
-
-  border-radius: 10px
-  border: 1px solid rgba(26, 26, 26, 0.09)
-  padding: 20px
-  box-sizing: border-box
 
   p
     margin-top: 10px

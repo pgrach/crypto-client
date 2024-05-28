@@ -25,7 +25,10 @@ const routeToBeta = () => {
 <template>
   <DashboardHeader></DashboardHeader>
 
-  <DashboardTerms></DashboardTerms>
+  <div class="terms-privacy">
+    <DashboardTerms></DashboardTerms>
+  </div>
+
 
   <div class="d-flex flex-center flex-wrap px-5">
     <div class="d-flex fw-semibold text-primary fs-base">
@@ -35,3 +38,15 @@ const routeToBeta = () => {
     </div>
   </div>
 </template>
+
+<style lang="sass">
+.terms-privacy
+  margin: 20px auto
+  max-width: 1200px
+  width: 100%
+
+  border-radius: 10px
+  border: 1px solid rgba(26, 26, 26, 0.09)
+  padding: 20px
+  box-sizing: border-box
+</style>
