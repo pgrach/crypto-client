@@ -20,6 +20,7 @@
           :end-date="endDate"
           :currency="currency"
           @emit-sell-mode="setSellMode"
+          @emit-totals-summary="setTotalsSummary"
       ></DashboardTradingAnalysis>
     </div>
 
@@ -39,10 +40,7 @@
           <div class="dashboard-stats">
             <DashboardChartStats
                 :miner="miner"
-                :start-date="startDate"
-                :end-date="endDate"
-                :time-mode="timeMode"
-                :sell-mode="sellMode"
+                :total-summary="totalSummary"
                 :currency="currency"
             />
 
@@ -97,6 +95,12 @@ export default defineComponent({
 
     const loading = ref(false);
     const isCalculated = ref(false);
+    const totalSummary = ref({
+      revenue: 0,
+      cost: 0,
+      profit: 0,
+      avgCostBtc: 0
+    });
 
     const miner = ref({
       power_cost: 5.5,
@@ -136,6 +140,11 @@ export default defineComponent({
       currency.value = val;
     }
 
+    const setTotalsSummary = (val) => {
+      console.log(val, ' SET')
+      totalSummary.value = val;
+    }
+
     return {
       setMiner,
       miner,
@@ -145,10 +154,12 @@ export default defineComponent({
       sellMode,
       currency,
       setSellMode,
+      setTotalsSummary,
       setTimeMode,
       setCurrency,
       loading,
-      isCalculated
+      isCalculated,
+      totalSummary
     }
   }
 });

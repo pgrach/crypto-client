@@ -67,7 +67,7 @@ export default defineComponent({
     endDate: String,
     currency: String,
   },
-  emits: ['emitSellMode'],
+  emits: ['emitSellMode', 'emitTotalsSummary'],
   setup(props, ctx) {
 
     const state = reactive({
@@ -195,6 +195,12 @@ export default defineComponent({
         item.label = totalLabels[item.sell_mode]
       })
       state.totals = response.sort((a, b) => b.total_profit_usd - a.total_profit_usd);
+      ctx.emit('emitTotalsSummary', {
+        revenue: state.totals[0].total_rev_usd,
+        cost: state.totals[0].total_cost_usd,
+        profit: state.totals[0].total_profit_usd,
+        avgCostBtc: state.totals[0].avg_cost_per_btc
+      });
     }
 
     const formatCurrency = (item) => {
