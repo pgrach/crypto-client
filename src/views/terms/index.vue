@@ -42,7 +42,7 @@ const routeToBeta = () => {
 <style lang="sass">
 .terms-privacy
   margin: 20px auto
-  max-width: 1200px
+  max-width: 1000px
   width: 100%
 
   border-radius: 10px
