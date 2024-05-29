@@ -41,12 +41,10 @@ const routeToBeta = () => {
 
 <style lang="sass">
 .terms-privacy
-  margin: 20px auto
-  max-width: 1000px
+  margin: 20px 25px
   width: 100%
 
   border-radius: 10px
-  border: 1px solid rgba(26, 26, 26, 0.09)
   padding: 20px
   box-sizing: border-box
 </style>
