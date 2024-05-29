@@ -60,6 +60,10 @@ const routeToDashboard = () => {
     router.push({ name: "dashboard" });
 }
 
+const routetoAccessForm = () => {
+  router.push({ path: "/access-form" });
+}
+
 const routeToNews = () => {
   router.push({ path: "/news" });
 }
@@ -493,7 +497,7 @@ const sendDemoEmail = () => {
         <div class="home-join-btns-container">
           <div class="home-join-btns">
             <button class="home-btn" @click="routeToDashboard()">Start</button>
-            <button class="home-btn home-btn__outline" @click="routeToDashboard()">Connect</button>
+            <button class="home-btn home-btn__outline" @click="routetoAccessForm()">Join Beta</button>
           </div>
         </div>
       </div>
