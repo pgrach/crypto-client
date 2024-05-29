@@ -220,7 +220,7 @@ export default defineComponent({
         title: {
           text: capitalizeFirstLetter(activeOption.value),
           style: {
-            color: 'getCSSVariableValue("--bs-primary")',
+            color: getCSSVariableValue("--bs-primary"),
           },
         },
         labels: {
@@ -234,7 +234,7 @@ export default defineComponent({
         },
       },
       {
-        show: ((activeOption.value === 'revenue' && currency.value === 'USD') || (activeOption.value === 'revenue' && currency.value === 'BTC')),
+        show: true,
         opposite: true,
         title: {
           text: 'Difficulty',
@@ -252,30 +252,8 @@ export default defineComponent({
           },
         },
       },
-      {
-        show: ((activeOption.value === 'revenue' && currency.value === 'USD') || (activeOption.value === 'cost' && currency.value === 'BTC')),
-        opposite: true,
-        title: {
-          text: 'BTC',
-          style: {
-            color: btcColor,
-          },
-        },
-        labels: {
-          style: {
-            colors: labelColor,
-            fontSize: "12px",
-          },
-          formatter: function (val) {
-            return formatYAxis(val);
-          },
-        },
-      },
     ]);
-    const colors = ref([getCSSVariableValue("--bs-primary"), secondaryColor, btcColor]);
-
-    const baseColor = activeOption.value === 'cost' ? 'rgba(233, 181, 0, 1)' :
-        activeOption.value === 'profit' ? 'rgba(71, 190, 125, 1)' : getCSSVariableValue("--bs-primary");
+    const colors = ref([getCSSVariableValue("--bs-primary"), secondaryColor]);
 
     const setChart = (response) => {
       const data = [];
