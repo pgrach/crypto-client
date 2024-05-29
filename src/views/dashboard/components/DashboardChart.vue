@@ -183,6 +183,100 @@ export default defineComponent({
       }
     }
 
+    const getCategoryLabel = (time) => {
+      return moment(time).format("YYYY-MM-DDTHH:mm:ss")
+    }
+
+    const refreshChart = () => {
+      if (!chartRef.value) {
+        return;
+      }
+
+      chartRef.value.updateOptions(chartOptions());
+    };
+
+    const getChartLabel = (val) => {
+      const found = chartLabels.value.find(item => item.time === val);
+      return found.label;
+    }
+
+    const formatYAxis = (val) => {
+      return val.toLocaleString('en-US', {
+        maximumFractionDigits: 2,
+        notation: 'compact',
+        compactDisplay: 'short'
+      });
+    };
+
+    const labelColor = getCSSVariableValue("--bs-gray-500");
+    const borderColor = getCSSVariableValue("--bs-gray-200");
+    const secondaryColor = 'rgba(71 ,95 ,190 , 0.2)';
+    const btcColor = 'rgba(71,190,178,0.2)';
+    const halvingColor = 'rgba(190,71,111,0.2)';
+
+
+    const yaxis = ref([
+      {
+        title: {
+          text: capitalizeFirstLetter(activeOption.value),
+          style: {
+            color: 'getCSSVariableValue("--bs-primary")',
+          },
+        },
+        labels: {
+          style: {
+            colors: labelColor,
+            fontSize: "12px",
+          },
+          formatter: function (val) {
+            return formatYAxis(val);
+          },
+        },
+      },
+      {
+        show: ((activeOption.value === 'revenue' && currency.value === 'USD') || (activeOption.value === 'revenue' && currency.value === 'BTC')),
+        opposite: true,
+        title: {
+          text: 'Difficulty',
+          style: {
+            color: secondaryColor,
+          },
+        },
+        labels: {
+          style: {
+            colors: labelColor,
+            fontSize: "12px",
+          },
+          formatter: function (val) {
+            return formatYAxis(val);
+          },
+        },
+      },
+      {
+        show: ((activeOption.value === 'revenue' && currency.value === 'USD') || (activeOption.value === 'cost' && currency.value === 'BTC')),
+        opposite: true,
+        title: {
+          text: 'BTC',
+          style: {
+            color: btcColor,
+          },
+        },
+        labels: {
+          style: {
+            colors: labelColor,
+            fontSize: "12px",
+          },
+          formatter: function (val) {
+            return formatYAxis(val);
+          },
+        },
+      },
+    ]);
+    const colors = ref([getCSSVariableValue("--bs-primary"), secondaryColor, btcColor]);
+
+    const baseColor = activeOption.value === 'cost' ? 'rgba(233, 181, 0, 1)' :
+        activeOption.value === 'profit' ? 'rgba(71, 190, 125, 1)' : getCSSVariableValue("--bs-primary");
+
     const setChart = (response) => {
       const data = [];
       const difficultyData = [];
@@ -216,6 +310,65 @@ export default defineComponent({
           data: btcData,
           type: 'area'
         }];
+
+        yaxis.value = [
+          {
+            title: {
+              text: capitalizeFirstLetter(activeOption.value),
+              style: {
+                color: getCSSVariableValue("--bs-primary"),
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return formatYAxis(val);
+              },
+            },
+          },
+          {
+            show: true,
+            opposite: true,
+            title: {
+              text: 'Difficulty',
+              style: {
+                color: secondaryColor,
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return formatYAxis(val);
+              },
+            },
+          },
+          {
+            show: true,
+            opposite: true,
+            title: {
+              text: 'BTC',
+              style: {
+                color: btcColor,
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return formatYAxis(val);
+              },
+            },
+          },
+        ]
+        colors.value = [getCSSVariableValue("--bs-primary"), secondaryColor, btcColor];
       } else if (activeOption.value === 'cost' && currency.value === 'BTC') {
         series.value = [{
           name: capitalizeFirstLetter(activeOption.value),
@@ -227,6 +380,73 @@ export default defineComponent({
           data: btcData,
           type: 'area'
         }];
+
+        yaxis.value = [
+          {
+            title: {
+              text: capitalizeFirstLetter(activeOption.value),
+              style: {
+                color: 'rgba(233, 181, 0, 1)',
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return formatYAxis(val);
+              },
+            },
+          },
+          {
+            show: true,
+            opposite: true,
+            title: {
+              text: 'BTC',
+              style: {
+                color: btcColor,
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return formatYAxis(val);
+              },
+            },
+          },
+        ]
+        colors.value = ['rgba(233, 181, 0, 1)', secondaryColor];
+      } else if (activeOption.value === 'cost' && currency.value === 'USD') {
+        series.value = [{
+          name: capitalizeFirstLetter(activeOption.value),
+          data,
+          type: 'bar'
+        }];
+
+        yaxis.value = [
+          {
+            title: {
+              text: capitalizeFirstLetter(activeOption.value),
+              style: {
+                color: 'rgba(233, 181, 0, 1)',
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return formatYAxis(val);
+              },
+            },
+          },
+        ]
+        colors.value = ['rgba(233, 181, 0, 1)'];
       } else if (activeOption.value === 'revenue' && currency.value === 'BTC') {
         series.value = [{
           name: capitalizeFirstLetter(activeOption.value),
@@ -238,58 +458,80 @@ export default defineComponent({
           data: difficultyData,
           type: 'area'
         }];
+
+        yaxis.value = [
+          {
+            title: {
+              text: capitalizeFirstLetter(activeOption.value),
+              style: {
+                color: getCSSVariableValue("--bs-primary"),
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return formatYAxis(val);
+              },
+            },
+          },
+          {
+            show: true,
+            opposite: true,
+            title: {
+              text: 'Difficulty',
+              style: {
+                color: secondaryColor,
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return formatYAxis(val);
+              },
+            },
+          },
+        ];
+        colors.value = [getCSSVariableValue("--bs-primary"), secondaryColor];
       } else {
         series.value = [{
           name: capitalizeFirstLetter(activeOption.value),
           data
         }];
+
+        yaxis.value = [
+          {
+            title: {
+              text: capitalizeFirstLetter(activeOption.value),
+              style: {
+                color: 'rgba(71, 190, 125, 1)',
+              },
+            },
+            labels: {
+              style: {
+                colors: labelColor,
+                fontSize: "12px",
+              },
+              formatter: function (val) {
+                return formatYAxis(val);
+              },
+            },
+          }
+        ];
+
+        colors.value = ['rgba(71, 190, 125, 1)'];
       }
 
       Object.assign(chart.value, chartOptions());
       refreshChart();
     }
 
-    const getCategoryLabel = (time) => {
-      // if (timeMode.value === 'yearly') {
-      //   return moment(time).format("YYYY-MM-DDTHH:mm:ss")
-      // }
-      // if (timeMode.value === 'daily') {
-      //   return moment(time).format("HH:mm:ss")
-      // }
-      // return moment(time).format("DD/MM/YYYY")
-
-      return moment(time).format("YYYY-MM-DDTHH:mm:ss")
-    }
-
-    const refreshChart = () => {
-      if (!chartRef.value) {
-        return;
-      }
-
-      chartRef.value.updateOptions(chartOptions());
-    };
-
-    const getChartLabel = (val) => {
-      const found = chartLabels.value.find(item => item.time === val);
-      return found.label;
-    }
-
-    const formatYAxis = (val) => {
-      return val.toLocaleString('en-US', {
-        maximumFractionDigits: 2,
-        notation: 'compact',
-        compactDisplay: 'short'
-      });
-    }
-
     const chartOptions = (): ApexOptions => {
-      const labelColor = getCSSVariableValue("--bs-gray-500");
-      const borderColor = getCSSVariableValue("--bs-gray-200");
-      const baseColor = activeOption.value === 'cost' ? 'rgba(233, 181, 0, 1)' :
-                        activeOption.value === 'profit' ? 'rgba(71, 190, 125, 1)' : getCSSVariableValue("--bs-primary");
-      const secondaryColor = 'rgba(71 ,95 ,190 , 0.2)';
-      const tertiaryColor = 'rgba(71,190,178,0.2)';
-
       return {
         chart: {
           fontFamily: "inherit",
@@ -343,63 +585,7 @@ export default defineComponent({
             },
           },
         },
-        yaxis: [
-          {
-            title: {
-              text: capitalizeFirstLetter(activeOption.value),
-              style: {
-                color: baseColor,
-              },
-            },
-            labels: {
-              style: {
-                colors: labelColor,
-                fontSize: "12px",
-              },
-              formatter: function (val) {
-                return formatYAxis(val);
-              },
-            },
-          },
-          {
-            show: ((activeOption.value === 'revenue' && currency.value === 'USD') || (activeOption.value === 'revenue' && currency.value === 'BTC')),
-            opposite: true,
-            title: {
-              text: 'Difficulty',
-              style: {
-                color: secondaryColor,
-              },
-            },
-            labels: {
-              style: {
-                colors: labelColor,
-                fontSize: "12px",
-              },
-              formatter: function (val) {
-                return formatYAxis(val);
-              },
-            },
-          },
-          {
-            show: ((activeOption.value === 'revenue' && currency.value === 'USD') || (activeOption.value === 'cost' && currency.value === 'BTC')),
-            opposite: true,
-            title: {
-              text: 'BTC',
-              style: {
-                color: tertiaryColor,
-              },
-            },
-            labels: {
-              style: {
-                colors: labelColor,
-                fontSize: "12px",
-              },
-              formatter: function (val) {
-                return formatYAxis(val);
-              },
-            },
-          },
-        ],
+        yaxis: yaxis.value as any,
         fill: {
           opacity: 1,
         },
@@ -441,7 +627,7 @@ export default defineComponent({
             },
           },
         },
-        colors: [baseColor, secondaryColor, tertiaryColor],
+        colors: colors.value as any,
         grid: {
           borderColor: borderColor,
           strokeDashArray: 4,
