@@ -5,8 +5,6 @@
         <div class="card-label fw-bold fs-3 mb-4 text-center">Privacy Policy</div>
       </h3>
 
-        <p>Privacy Policy</p>
-
         <h4>1. Introduction</h4>
 
         <p>Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you use our website and services.</p>
