@@ -186,13 +186,12 @@ export default defineComponent({
     const setSellMode = (mode) => {
       sellMode.value = mode;
       ctx.emit('emitSellMode', mode);
+      setTotalsFromSellMode(mode);
+    }
+
+    const setTotalsFromSellMode = (mode) => {
       const foundTotal = state.totals.find(item => item.sell_mode === mode);
-      ctx.emit('emitTotalsSummary', {
-        revenue: foundTotal.total_rev_usd,
-        cost: foundTotal.total_cost_usd,
-        profit: foundTotal.total_profit_usd,
-        avgCostBtc: foundTotal.avg_cost_per_btc
-      });
+      setTotalsSummary(foundTotal);
     }
 
     const totalLabels = {
@@ -205,11 +204,15 @@ export default defineComponent({
         item.label = totalLabels[item.sell_mode]
       })
       state.totals = response.sort((a, b) => b.total_profit_usd - a.total_profit_usd);
+      setTotalsSummary(state.totals[0]);
+    }
+
+    const setTotalsSummary = (summary: any) => {
       ctx.emit('emitTotalsSummary', {
-        revenue: state.totals[0].total_rev_usd,
-        cost: state.totals[0].total_cost_usd,
-        profit: state.totals[0].total_profit_usd,
-        avgCostBtc: state.totals[0].avg_cost_per_btc
+        revenue: summary.total_rev_usd,
+        cost: summary.total_cost_usd,
+        profit: summary.total_profit_usd,
+        avgCostBtc: summary.avg_cost_per_btc
       });
     }
 
