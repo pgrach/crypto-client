@@ -117,13 +117,13 @@ export default defineComponent({
         { deep: true }
     )
 
-    watch(
-        () => sellMode,
-        (newValue, oldValue) => {
-          fetchSummaries();
-        },
-        { deep: true }
-    )
+    // watch(
+    //     () => sellMode,
+    //     (newValue, oldValue) => {
+    //       fetchSummaries();
+    //     },
+    //     { deep: true }
+    // )
 
     watch(
         () => props.timeMode,
@@ -186,6 +186,13 @@ export default defineComponent({
     const setSellMode = (mode) => {
       sellMode.value = mode;
       ctx.emit('emitSellMode', mode);
+      const foundTotal = state.totals.find(item => item.sell_mode === mode);
+      ctx.emit('emitTotalsSummary', {
+        revenue: foundTotal.total_rev_usd,
+        cost: foundTotal.total_cost_usd,
+        profit: foundTotal.total_profit_usd,
+        avgCostBtc: foundTotal.avg_cost_per_btc
+      });
     }
 
     const totalLabels = {
