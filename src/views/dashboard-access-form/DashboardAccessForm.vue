@@ -154,7 +154,7 @@
 
     <el-dialog
         v-model="dialogVisible"
-        width="650"
+        width="80%"
     >
       <DashboardTerms></DashboardTerms>
     </el-dialog>

@@ -51,7 +51,7 @@
 
 <style lang="sass">
 .privacy-policy
-  padding: 0px 10px 40px
+  padding: 0 10px 40px
 
   p
     margin-top: 10px
@@ -61,4 +61,9 @@
   h4
     margin-top: 15px
     font-weight: bold
+
+
+@media only screen and (max-width: 700px)
+  .privacy-policy
+    padding: 0
 </style>
