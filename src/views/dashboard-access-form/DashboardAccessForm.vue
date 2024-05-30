@@ -170,6 +170,7 @@ import { useRouter } from "vue-router";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as Yup from "yup";
 import DashboardTerms from '@/views/terms/terms.vue';
+import axios from 'axios';
 
 export default defineComponent({
   name: "dashboard-access-form",
@@ -208,9 +209,26 @@ export default defineComponent({
         // Activate indicator
         submitButton.value.setAttribute("data-kt-indicator", "on");
       }
+      const host = import.meta.env.VITE_APP_API_HOST;
+      const endpoint = 'send_demo_email';
 
-      console.log(values, ' FORM');
-      console.log(performance, ' PERFORMANCE');
+      const payload = {
+        name: values.name,
+        email_address: values.email,
+        company: values.company,
+        telegram: values.telegram,
+        performance: performance.value,
+        comments: values.comments
+      }
+
+      console.log(payload, ' COM')
+
+      // axios.post(`${host}${endpoint}`, payload)
+      //     .then(() => {
+      //     })
+      //     .catch(function (error) {
+      //       console.log('Sending Form Error: ', error);
+      //     });
 
       const errors = true;
 
