@@ -213,55 +213,46 @@ export default defineComponent({
       const endpoint = 'send_demo_email';
 
       const payload = {
-        name: values.name,
+        full_name: values.name,
         email_address: values.email,
-        company: values.company,
+        company_name: values.company,
         telegram: values.telegram,
-        performance: performance.value,
+        performance_in_mw: performance.value,
         comments: values.comments
       }
 
-      console.log(payload, ' COM')
-
-      // axios.post(`${host}${endpoint}`, payload)
-      //     .then(() => {
-      //     })
-      //     .catch(function (error) {
-      //       console.log('Sending Form Error: ', error);
-      //     });
-
-      const errors = true;
-
-      if (errors) {
-        Swal.fire({
-          text: "Successfully sent!",
-          icon: "success",
-          buttonsStyling: false,
-          confirmButtonText: "Ok, got it!",
-          heightAuto: false,
-          customClass: {
-            confirmButton: "btn fw-semibold btn-light-primary",
-          },
-        }).then(() => {
-          router.push({ path: '/'});
-        });
-      } else {
-        Swal.fire({
-          text: "Something went wrong!",
-          icon: "error",
-          buttonsStyling: false,
-          confirmButtonText: "Try again!",
-          heightAuto: false,
-          customClass: {
-            confirmButton: "btn fw-semibold btn-light-danger",
-          },
-        }).then(() => {});
-      }
-
-      //Deactivate indicator
-      submitButton.value?.removeAttribute("data-kt-indicator");
-      // eslint-disable-next-line
-      submitButton.value!.disabled = false;
+      axios.post(`${host}${endpoint}`, payload)
+          .then(() => {
+            Swal.fire({
+              text: "Successfully sent!",
+              icon: "success",
+              buttonsStyling: false,
+              confirmButtonText: "Ok, got it!",
+              heightAuto: false,
+              customClass: {
+                confirmButton: "btn fw-semibold btn-light-primary",
+              },
+            }).then(() => {
+              router.push({ path: '/'});
+            });
+          })
+          .catch(function (error) {
+            Swal.fire({
+              text: "Something went wrong!",
+              icon: "error",
+              buttonsStyling: false,
+              confirmButtonText: "Try again!",
+              heightAuto: false,
+              customClass: {
+                confirmButton: "btn fw-semibold btn-light-danger",
+              },
+            })
+          }).finally(() => {
+            //Deactivate indicator
+            submitButton.value?.removeAttribute("data-kt-indicator");
+            // eslint-disable-next-line
+            submitButton.value!.disabled = false;
+           });
     };
 
     const routeToDashboard = () => {
