@@ -1,8 +1,9 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { ref, onMounted, watch, computed } from "vue";
-
+import Footer from "@/views/components/footer/index.vue"
 import { articles } from "./articles";
+
 const router = useRouter();
 
 const article = ref();
@@ -88,17 +89,6 @@ const recommendedArticles = computed(() => {
       </div>
     </div>
 
-    <footer class="home-footer-container">
-      <div class="home-footer">
-        <div @click="routeToHome()" class="home-footer-link cursor-pointer">
-          AiDala.uk
-        </div>
-        <div class="home-footer-linkedin">
-          <a href="https://www.linkedin.com/company/aidala-inc/about/" target="_blank">
-            <img src="../../assets/img/linkedin_square.svg" alt="Linkedin Image">
-          </a>
-        </div>
-      </div>
-    </footer>
+    <Footer></Footer>
   </div>
 </template>

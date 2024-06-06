@@ -1,9 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
-import axios from 'axios';
+import Footer from "@/views/components/footer/index.vue"
 import HomeArticle from './components/HomeArticle.vue';
 import { articles } from '../article/articles';
+import Footer from "@/views/components/footer/index.vue";
 
 const burgerActive = ref(false)
 const email = ref('')
@@ -85,17 +86,6 @@ const routeToHome = () => {
       </div>
     </div>
 
-    <footer class="home-footer-container">
-      <div class="home-footer">
-        <div class="home-footer-link">
-          AiDala.uk
-        </div>
-        <div class="home-footer-linkedin">
-          <a href="https://www.linkedin.com/company/aidala-inc/about/" target="_blank">
-            <img src="../../assets/img/linkedin_square.svg" alt="Linkedin Image">
-          </a>
-        </div>
-      </div>
-    </footer>
+    <Footer></Footer>
   </div>
 </template>
