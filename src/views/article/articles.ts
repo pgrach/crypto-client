@@ -181,6 +181,42 @@ export const articles = [
         Our ML team is working on algorithmic trading models. These models use real-time price and volume data to execute trades based on predefined criteria. Imagine you are not just picking a defined strategy between daily, weekly, or monthly selling, but you follow a trained model based on inputs you select. Or you follow investment strategies via third-party trading bots.
         This is all part of our comprehensive <a href="https://aidala.uk/access-form">Business Continuity Software (Beta)</a> which we are happy to offer.
 `
+  },
+  {
+    "id": 4,
+    "hash": "video-demo-of-our-advanced-profitability-calculator",
+    "title": "Video Demo of Our Advanced Profitability Calculator",
+    "img": "/images/article-img-4.png",
+    "imgMain": "/images/article-main-4.png",
+    "author": "Pavel Grachev",
+    "date": "6 JUNE 2024",
+    "description": "We are excited to release the video demo of this new tool for the Bitcoin mining sector",
+    "content": `
+        We are excited to release the video demo of this new tool for the Bitcoin mining sector, the first step in our journey to help miners optimize their operations and maximize profits through detailed analysis and strategic insights.
+
+        <b>Why Our Calculator Stands Out</b>
+        Many calculators focus on speculative future projections, but we saw the need for a precise tool based on accurate historical Bitcoin data. Our calculator offers quick rough checks on model performance and practical applications, such as calculating opportunity costs during downtimes, without the hassle of manual calculations. Additionally, our unique feature of comparing different Bitcoin holding strategies provides valuable insights that other calculators lack.
+
+        <br/><br/>
+        <b>Key Features</b>
+        
+        <ul style="list-style-type: disc; padding-left: 20px; box-sizing: border-box">
+          <li><b>Historical Data Analysis:</b> Perform detailed calculations with exact data, supporting various popular mining models.</li>
+          <li><b>Trading Strategy Comparison:</b> Evaluate profitability based on different BTC selling strategies (monthly, weekly, daily).</li>
+          <li><b>Financial Overview:</b> Track revenue, costs, and profits over time, visualizing key events like Bitcoin halvening and changes in mining difficulty.</li>
+          <li><b>Mining Financial Summary:</b> Get snapshots of financial performance, like average production cost per Bitcoin.</li>
+          <li><b>HODLing Strategies:</b> Compare different Bitcoin holding strategies to understand their impact on returns.</li>
+        </ul>
+        
+        <br/><br/>
+        <b>Watch the Demo</b>
+        We invite you to watch our video demo to see the Advanced Profitability Calculator in action. Your feedback is crucial as we continue to develop and enhance this tool. We plan to open-source the calculator, and for more comprehensive software,
+        <a href="https://aidala.uk/access-form">reach out</a> — we are happy to integrate more interesting features.
+        <br/><br/>
+        <iframe width="100%" height="666" src="https://www.youtube.com/embed/QA1tQTc70fU" title="Demo_mining profitability calculator" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <br/><br/>
+        Thank you for being part of the Aidala community. We look forward to your insights and suggestions.
+`
   }
 ];
 
