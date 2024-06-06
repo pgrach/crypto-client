@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router';
 import Footer from "@/views/components/footer/index.vue"
 import HomeArticle from './components/HomeArticle.vue';
 import { articles } from '../article/articles';
-import Footer from "@/views/components/footer/index.vue";
 
 const burgerActive = ref(false)
 const email = ref('')
