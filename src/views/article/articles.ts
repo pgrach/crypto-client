@@ -194,12 +194,14 @@ export const articles = [
     "content": `
         We are excited to release the video demo of this new tool for the Bitcoin mining sector, the first step in our journey to help miners optimize their operations and maximize profits through detailed analysis and strategic insights.
 
+        <br/><br/>
         <b>Why Our Calculator Stands Out</b>
+        <br/><br/>
         Many calculators focus on speculative future projections, but we saw the need for a precise tool based on accurate historical Bitcoin data. Our calculator offers quick rough checks on model performance and practical applications, such as calculating opportunity costs during downtimes, without the hassle of manual calculations. Additionally, our unique feature of comparing different Bitcoin holding strategies provides valuable insights that other calculators lack.
-
+        
         <br/><br/>
         <b>Key Features</b>
-        
+        <br/><br/>
         <ul style="list-style-type: disc; padding-left: 20px; box-sizing: border-box">
           <li><b>Historical Data Analysis:</b> Perform detailed calculations with exact data, supporting various popular mining models.</li>
           <li><b>Trading Strategy Comparison:</b> Evaluate profitability based on different BTC selling strategies (monthly, weekly, daily).</li>
@@ -209,7 +211,11 @@ export const articles = [
         </ul>
         
         <br/><br/>
+        
         <b>Watch the Demo</b>
+        
+        <br/><br/>
+        
         We invite you to watch our video demo to see the Advanced Profitability Calculator in action. Your feedback is crucial as we continue to develop and enhance this tool. We plan to open-source the calculator, and for more comprehensive software,
         <a href="https://aidala.uk/access-form">reach out</a> — we are happy to integrate more interesting features.
         <br/><br/>
