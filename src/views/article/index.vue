@@ -40,6 +40,7 @@ const routeToArticle = (hash, view) => {
 
 const recommendedArticles = computed(() => {
   const recommended = articles.filter(item => item.hash !== route.params.hash);
+  // recommended.sort((a, b) => b.id - a.id);
   return recommended.slice(0, 3);
 })
 </script>
