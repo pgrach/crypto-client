@@ -2,164 +2,30 @@
 
   <DashboardHeader></DashboardHeader>
 
-  <div class="dashboard">
-
-    <div class="dashboard-row">
-      <DashboardCalculator
-          widget-classes="card-xl-stretch"
-          :height="330"
-          :miner="miner"
-          @setMiner="setMiner"
-          :loading="loading"
-      ></DashboardCalculator>
-
-      <DashboardTradingAnalysis
-          :time-mode="timeMode"
-          :miner="miner"
-          :start-date="startDate"
-          :end-date="endDate"
-          :currency="currency"
-          @emit-sell-mode="setSellMode"
-          @emit-totals-summary="setTotalsSummary"
-      ></DashboardTradingAnalysis>
-    </div>
-
-    <div>
-      <div class="dashboard-row">
-        <DashboardChart
-            :height="330"
-            :miner="miner"
-            :start-date="startDate"
-            :end-date="endDate"
-            :sell-mode="sellMode"
-            @emit-currency="setCurrency"
-            @emit-time-mode="setTimeMode"
-        ></DashboardChart>
-
-        <div>
-          <div class="dashboard-stats">
-            <DashboardChartStats
-                :miner="miner"
-                :total-summary="totalSummary"
-                :currency="currency"
-            />
-
-            <DashboardCostBenefitAnalysis
-                :miner="miner"
-                :start-date="startDate"
-                :end-date="endDate"
-                :time-mode="timeMode"
-                :sell-mode="sellMode"
-                :currency="currency"
-            />
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <DashboardMarketData></DashboardMarketData>
-
-  </div>
-<!--  <div class="row g-5 g-xl-8">-->
-<!--    <div>-->
-<!--      <TradeHistory></TradeHistory>-->
-<!--    </div>-->
-<!--  </div>-->
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
-import DashboardChart from '@/views/dashboard/components/DashboardChart.vue';
-import DashboardChartStats from '@/views/dashboard/components/DashboardChartStats.vue';
-import DashboardCostBenefitAnalysis from '@/views/dashboard/components/DashboardCostBenefitAnalysis.vue';
-import TradeHistory from '@/views/dashboard/components/TradeHistory.vue';
-import DashboardCalculator from '@/views/dashboard/components/DashboardCalculator.vue';
-import moment from "moment/moment";
-import DashboardMarketData from '@/views/dashboard/components/DashboardMarketData.vue';
-import DashboardTradingAnalysis from '@/views/dashboard/components/DashboardTradingAnalysis.vue';
+import { defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
+
 import DashboardHeader from '@/views/dashboard/DashboardHeader.vue';
 
 export default defineComponent({
   name: "dashboard-main",
   components: {
-    DashboardTradingAnalysis,
-    DashboardMarketData,
     DashboardHeader,
-    DashboardCostBenefitAnalysis,
-    DashboardChartStats,
-    DashboardChart,
-    DashboardCalculator
   },
   setup() {
+    const dashboard = document.querySelector('#dashboard');
 
-    const loading = ref(false);
-    const isCalculated = ref(false);
-    const totalSummary = ref({
-      revenue: 0,
-      cost: 0,
-      profit: 0,
-      avgCostBtc: 0
+    onMounted(() => {
+      (dashboard as any).style.display = 'block';
     });
 
-    const miner = ref({
-      power_cost: 5.5,
-      power: 3348,
-      hash_rate : 62,
-      quantity: 10,
-      cost_of_hw: 500
-    });
+    onBeforeUnmount(() => {
+      (dashboard as any).style.display = 'none';
+    })
 
-    const timeMode = ref('monthly');
-    const sellMode = ref('daily');
-    const currency = ref('BTC');
-
-    const startDate = ref(moment('2023-01-01', 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss"));
-    const endDate = ref(moment('2024-01-01', 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss"));
-
-    const setMiner = (val) => {
-      loading.value = true;
-      miner.value = val;
-      startDate.value = val.startDate;
-      endDate.value = val.endDate;
-      setTimeout(() => {
-        loading.value = false;
-        isCalculated.value = true;
-      }, 1500)
-    }
-
-    const setTimeMode = (val) => {
-      timeMode.value = val;
-    }
-
-    const setSellMode = (val) => {
-      sellMode.value = val;
-    }
-
-    const setCurrency = (val) => {
-      currency.value = val;
-    }
-
-    const setTotalsSummary = (val) => {
-      totalSummary.value = val;
-    }
-
-    return {
-      setMiner,
-      miner,
-      startDate,
-      endDate,
-      timeMode,
-      sellMode,
-      currency,
-      setSellMode,
-      setTotalsSummary,
-      setTimeMode,
-      setCurrency,
-      loading,
-      isCalculated,
-      totalSummary
-    }
+    return {}
   }
 });
 </script>

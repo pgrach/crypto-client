@@ -19,6 +19,8 @@ import { initInlineSvg } from "@/core/plugins/inline-svg";
 import { initVeeValidate } from "@/core/plugins/vee-validate";
 import { initKtIcon } from "@/core/plugins/keenthemes";
 
+import "aidala-btc-calculator/dist/aidala-btc-calculator.js";
+
 import "@/core/plugins/prismjs";
 
 const app = createApp(App);
@@ -42,3 +44,5 @@ app.directive("tooltip", (el) => {
 });
 
 app.mount("#app");
+
+(window as any).injectAidalaCalculator('#dashboard');

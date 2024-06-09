@@ -71,4 +71,7 @@ export default defineComponent({
 #app {
   display: contents;
 }
+#dashboard {
+  display: none;
+}
 </style>
