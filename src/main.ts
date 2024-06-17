@@ -19,7 +19,7 @@ import { initInlineSvg } from "@/core/plugins/inline-svg";
 import { initVeeValidate } from "@/core/plugins/vee-validate";
 import { initKtIcon } from "@/core/plugins/keenthemes";
 
-import "aidala-btc-calculator/dist/aidala-btc-calculator.js";
+import "aidala-btc-calculator";
 
 import "@/core/plugins/prismjs";
 
