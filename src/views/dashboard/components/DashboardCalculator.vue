@@ -13,9 +13,16 @@
         <div class="dashboard-calculator-form__item">
           <div class="label">Model</div>
 
-          <el-select v-model="miner"  @change="setMinerData()" aria-label="Select miner name" value-key="id">
-            <el-option v-for="item in miners" :value="item" :label="item.miner_name" :key="item.id">{{ item?.miner_name }}</el-option>
+          <el-select v-model="miner" @change="setMinerData()" aria-label="Select miner name" value-key="id"
+          :loading="loadingMiners"
+          :disabled="loadingMiners"
+          filterable  
+          :filter-method="filterMiners"
+          placeholder="Type to search..."
+          >
+            <el-option v-for="item in filteredMiners" :value="item" :label="item.miner_name" :key="item.id">{{ item?.miner_name }}</el-option>
           </el-select>
+          <p v-if="minerError" class="error-message">Failed to load miners. Please try again.</p>
 
         </div>
 
@@ -105,6 +112,7 @@ export default defineComponent({
   emits: ['setMiner'],
   setup(props, ctx) {
     const miners = ref([]);
+    const filteredMiners = ref([]);
     const miner = ref({ id: '4f75b5a5-4187-412f-ad50-0c2533cba001', miner_name: 'Whatsminer M32', hashrate: 62, power: 3348 });
     const quantity = ref(10);
     const hashrate = ref(62);
@@ -113,6 +121,7 @@ export default defineComponent({
     const costOfHw = ref(500);
     const startDate = ref(moment('2023-01-01', 'YYYY-MM-DD').toDate());
     const endDate = ref(moment('2024-01-01', 'YYYY-MM-DD').toDate());
+    const searchQuery = ref("");
 
     const setMinerData = () => {
       hashrate.value = miner.value.hashrate;
@@ -159,6 +168,15 @@ export default defineComponent({
         { deep: true, debounce: 500, maxWait: 1000 }
     )
 
+    const filterMiners = (query: string) => {
+      if (query === '') {
+        filteredMiners.value = miners.value;
+      } else {
+        filteredMiners.value = miners.value.filter(miner => 
+          miner.miner_name.toLowerCase().includes(query.toLowerCase())
+        );
+      }
+    };
 
     const emitMiner = () => {
       const minerData = {
@@ -179,12 +197,15 @@ export default defineComponent({
 
     const fetchFormData = () => {
       const host = import.meta.env.VITE_APP_API_HOST;
+      loadingMiners.value = true;
+      minerError.value = false;
 
       axios.get(`${host}asics`)
           .then(function (response) {
             miners.value = response && response.data && response.data.items ? response.data.items : [];
+            filteredMiners.value = miners.value; // Initialize filteredMiners
             const foundMiner = miners.value.find(item => item.miner_name === 'Whatsminer M32');
-            if (foundMiner.miner_name) {
+            if (foundMiner) {
               miner.value = foundMiner;
               setMinerData();
             }
@@ -205,6 +226,10 @@ export default defineComponent({
       endDate,
       emitMiner,
       miners,
+      loadingMiners,
+      minerError,
+      filteredMiners,
+      filterMiners,
       setMinerData
     };
   },
